@@ -60,8 +60,19 @@ app.use('/api', (req, res, next) => {
     req.headers.origin &&
     req.headers.origin !== `${req.protocol}://${req.headers.host}` &&
     !allowedOrigins.has(req.headers.origin)
-  )
+  ) {
+    // Não registrar cookies, credenciais ou o corpo da requisição.
+    console.warn(
+      '[origem bloqueada]',
+      JSON.stringify({
+        origin: req.headers.origin,
+        host: req.headers.host,
+        protocol: req.protocol,
+        allowedOrigins: [...allowedOrigins],
+      }),
+    );
     return res.status(403).json({ message: 'Origem não permitida.' });
+  }
   next();
 });
 function limit(prefix, max) {
