@@ -1,0 +1,17 @@
+{
+  "name": "Corte Ágil",
+  "image": "mcr.microsoft.com/devcontainers/java:1-21-bookworm",
+  "features": { "ghcr.io/devcontainers/features/node:1": { "version": "24" } },
+  "forwardPorts": [3000, 4200],
+  "postCreateCommand": "npm ci && npm run setup && npm run build",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "angular.ng-template",
+        "esbenp.prettier-vscode",
+        "vscjava.vscode-java-pack",
+        "vmware.vscode-boot-dev-pack"
+      ]
+    }
+  }
+}

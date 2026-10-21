@@ -49,12 +49,15 @@ src/app/
       totem.component.ts
       totem.component.html
 src/styles.scss                          # Tema Material e estilos responsivos
-server/
-  domain.mjs                             # Regras puras da fila
-  index.mjs                              # API, autenticação, SSE e SQLite
-  setup.mjs                              # Cria a senha e configuração inicial
-  domain.test.mjs
-  integration.test.mjs
+backend/src/main/java/br/edu/unifio/corteagil_backend/
+  entidades/                             # Mapeamento JPA das tabelas
+  repositorios/                          # Acesso aos dados com JpaRepository
+  servicos/                              # Regras da fila, autenticação e SSE
+  controladores/                         # Endpoints REST
+  dto/                                   # Entradas e respostas da API
+  configuracoes/                         # Banco e validação de origem
+  excecoes/                              # Tratamento de erros
+scripts/                                 # Preparação e inicialização
 ```
 
 **Módulo organiza; componente apresenta; serviço compartilha comportamento; servidor aplica regras e salva dados.**

@@ -7,7 +7,7 @@ Base: “Definição Incial do Projeto - CorteÁgil.pdf” e “CorteAgil - Espe
 | Requisito                                  | Implementação / situação                                                                           |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------- |
 | RF01 — Retirada pelo celular na rede local | `/cliente`, API acessível na LAN; restrição de alcance configurada no roteador/firewall            |
-| RF02 — Senha única                         | Sequência e token gerados no servidor dentro da transação SQLite                                   |
+| RF02 — Senha única                         | Sequência e token gerados no servidor dentro da transação JPA                                      |
 | RF03 — Inclusão na fila                    | Emissão já insere em `waiting`, com ordem global                                                   |
 | RF04 — Posição em tempo real               | SSE dispara consulta individual; posição e quantidade à frente calculadas no backend               |
 | RF05 — Número atual                        | Disponível ao cliente e no estado público                                                          |
@@ -39,20 +39,20 @@ Base: “Definição Incial do Projeto - CorteÁgil.pdf” e “CorteAgil - Espe
 
 ## Não funcionais
 
-| Grupo                                                | Cobertura e limites                                                                                           |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| RNF01, 06, 24 — Rede e implantação local             | Node único na LAN, assets locais e instruções Windows. Equipamentos e firewall precisam de configuração local |
-| RNF02, 03, 07 — Atualização, consistência e latência | SSE com reconexão, snapshot integral, banco central. Sem benchmark formal de latência                         |
-| RNF04, 05, 18 — Unicidade e concorrência             | Transações síncronas SQLite; testes de emissões e chamadas simultâneas                                        |
-| RNF08, 09, 10, 11, 12, 13 — Usabilidade e interfaces | Material, botões amplos, layout responsivo, painel dedicado, avisos textuais e etiquetas acessíveis           |
-| RNF14 — Impressora                                   | CSS para 80 mm e impressão pelo navegador; integração física/driver deve ser validada no equipamento          |
-| RNF15, 16 — Persistência e recuperação               | SQLite/WAL, fila e notificações persistidas, teste de reinício; instruções de backup manual                   |
-| RNF17 — Administração                                | Guard Angular mais autenticação e autorização no servidor; um usuário admin nesta versão                      |
-| RNF19, 23 — Escala e desempenho                      | Implementação voltada a uma loja/um processo; testes funcionais, sem ensaio de carga em produção              |
-| RNF20 — Manutenção                                   | Módulos por interface, shared, core, domínio puro e API separada                                              |
-| RNF21 — Notificações                                 | Eventos persistidos e deduplicados por limiar/ciclo de retorno; página fechada depende de push adicional      |
-| RNF22 — Privacidade                                  | Sem dados pessoais de cadastro; tokens não aparecem no estado público                                         |
-| RNF25 — Auditoria                                    | Até 2.000 eventos persistidos; últimos 100 exibidos à equipe                                                  |
+| Grupo                                                | Cobertura e limites                                                                                            |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| RNF01, 06, 24 — Rede e implantação local             | Spring Boot na LAN, assets locais e instruções Windows. Equipamentos e firewall precisam de configuração local |
+| RNF02, 03, 07 — Atualização, consistência e latência | SSE com reconexão, snapshot integral, banco central. Sem benchmark formal de latência                          |
+| RNF04, 05, 18 — Unicidade e concorrência             | Transações JPA com bloqueio pessimista; testes de emissões e chamadas simultâneas                              |
+| RNF08, 09, 10, 11, 12, 13 — Usabilidade e interfaces | Material, botões amplos, layout responsivo, painel dedicado, avisos textuais e etiquetas acessíveis            |
+| RNF14 — Impressora                                   | CSS para 80 mm e impressão pelo navegador; integração física/driver deve ser validada no equipamento           |
+| RNF15, 16 — Persistência e recuperação               | H2 em arquivo ou MySQL, fila e notificações persistidas, teste de reinício; instruções de backup manual        |
+| RNF17 — Administração                                | Guard Angular mais autenticação e autorização no servidor; um usuário admin nesta versão                       |
+| RNF19, 23 — Escala e desempenho                      | Implementação voltada a uma loja/um processo; testes funcionais, sem ensaio de carga em produção               |
+| RNF20 — Manutenção                                   | Módulos por interface, shared, core, domínio puro e API separada                                               |
+| RNF21 — Notificações                                 | Eventos persistidos e deduplicados por limiar/ciclo de retorno; página fechada depende de push adicional       |
+| RNF22 — Privacidade                                  | Sem dados pessoais de cadastro; tokens não aparecem no estado público                                          |
+| RNF25 — Auditoria                                    | Até 2.000 eventos persistidos; últimos 100 exibidos à equipe                                                   |
 
 ## Regras de negócio
 

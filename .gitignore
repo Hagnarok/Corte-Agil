@@ -162,3 +162,9 @@ Thumbs.db
 *.swp
 *.swo
 
+
+# Java / Spring Boot
+backend/target/
+*.class
+*.mv.db
+*.trace.db

@@ -6,3 +6,6 @@ coverage/
 data/
 package-lock.json
 README.md
+backend/target/
+backend/mvnw
+backend/mvnw.cmd

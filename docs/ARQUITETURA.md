@@ -2,7 +2,7 @@
 
 ## Fluxo principal
 
-O navegador executa Angular e Angular Material. O mesmo servidor entrega a versão compilada e os endpoints `/api`. Cada interface abre um canal SSE que recebe o estado público da fila a cada alteração. Não há pooling manual nem dependência de um serviço na nuvem.
+O navegador executa Angular e Angular Material. O mesmo servidor entrega a versão compilada e os endpoints `/api`. Cada interface abre um canal SSE que recebe o estado público da fila a cada alteração. Não há polling manual nem dependência de um serviço na nuvem.
 
 A interface do cliente, ao receber uma mudança, consulta sua senha pelo token secreto e obtém posição e notificações específicas. Os demais clientes não recebem esses tokens pelo SSE.
 
@@ -10,13 +10,19 @@ Em desenvolvimento, `ng serve` usa um proxy. Na versão compilada, tudo opera na
 
 ## Persistência e concorrência
 
-`server/domain.mjs` contém regras independentes de HTTP e banco. `server/index.mjs` abre SQLite com WAL e sincronização FULL. A fila é armazenada como um documento JSON em uma linha transacional, decisão simples para o escopo acadêmico e piloto local.
+O backend Spring Boot separa controladores, serviços, repositórios e entidades JPA.
+O banco padrão é H2 em arquivo; o perfil MySQL permite usar um servidor dedicado.
+A fila não é armazenada como documento JSON: senhas, controle da fila, notificações
+e auditoria possuem tabelas próprias.
 
-Cada mutação executa `BEGIN IMMEDIATE`, lê, aplica a regra, grava e confirma a transação. As operações são síncronas dentro do processo e não contêm awaits entre leitura e gravação. O SQLite serializa escritores. Falhas de regra geram rollback. O número sequencial faz parte do mesmo estado persistido, portanto emissões simultâneas e reinícios não reutilizam o identificador.
+Cada mutação bloqueia a linha de controle com `PESSIMISTIC_WRITE`, aplica as regras
+e confirma a transação. O próximo número e a ordem de chegada são atualizados na
+mesma transação. Tokens e números possuem restrições únicas. Falhas provocam rollback.
+Os eventos SSE são publicados após a confirmação no banco.
 
-**Implantação suportada:** uma instância do servidor Node para o banco. Não iniciar dois servidores apontando ao mesmo arquivo: as escritas seriam serializadas pelo SQLite, mas os canais SSE e as sessões em memória não seriam compartilhados. Para múltiplas instâncias seria necessário transporte compartilhado de eventos e armazenamento compartilhado de sessões.
-
-Esta implementação privilegia clareza. Para filas muito grandes, convém normalizar tickets, notificações e auditoria em tabelas, adicionar índices e definir retenção. Os testes cobrem concorrência funcional, não constituem benchmark de carga de supermercado.
+A implantação usa uma instância Spring Boot. Para múltiplas instâncias, seria
+necessário compartilhar transporte de eventos e sessões. Os testes de concorrência
+verificam integridade funcional e não representam um benchmark de carga.
 
 ## Estados
 
@@ -70,6 +76,10 @@ No painel, o horário da chamada determina o disparo sonoro. Repetir a chamada a
 
 ## Testes e manutenção
 
-`domain.test.mjs` testa regras com relógio controlado, sem aguardar 30 segundos de verdade. `integration.test.mjs` inicia a API em porta aleatória, usa um banco temporário e verifica sessões, SSE, emissões e chamadas simultâneas, proteção contra origem externa e recuperação após reinício. O diretório temporário é removido no final.
+`FilaIntegracaoTest` usa Spring Boot, MockMvc e H2 isolado. Verifica autenticação,
+origens encaminhadas pelo Codespaces, privacidade, emissão concorrente, chamada,
+confirmação, conclusão, ausência, retorno e pausa. Execute com `npm test`.
 
-Nunca substitua a validação de prazo no servidor pelo temporizador visual. O front ajusta o relógio com `serverTime` para mostrar a contagem; a autorização para ausência sempre é calculada pelo Node.
+O temporizador do Angular é apenas visual. A validação de prazo é realizada pelo
+serviço Java. O processo de atualização e migração do SQLite está documentado em
+[Como funciona](COMO_FUNCIONA.md).
