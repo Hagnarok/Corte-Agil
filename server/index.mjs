@@ -43,10 +43,12 @@ const allowedOrigins = new Set(
     .map((origin) => origin.trim())
     .filter(Boolean),
 );
-if (process.env.CODESPACE_NAME && process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN) {
+if (process.env.CODESPACE_NAME) {
+  // O encaminhamento do Codespaces reescreve Origin para HTTPS no host local.
+  allowedOrigins.add(`https://localhost:${Number(process.env.PORT) || 3000}`);
   for (const port of [Number(process.env.PORT) || 3000, 4200]) {
     allowedOrigins.add(
-      `https://${process.env.CODESPACE_NAME}-${port}.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`,
+      `https://${process.env.CODESPACE_NAME}-${port}.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN || 'app.github.dev'}`,
     );
   }
 }

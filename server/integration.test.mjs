@@ -75,6 +75,7 @@ test('API: autenticação, concorrência, SSE, persistência após reinício e p
     );
     for (const origin of [
       base,
+      'https://localhost:3000',
       'http://localhost:4200',
       'https://corte-test-3000.app.github.dev',
       'https://corte-test-4200.app.github.dev',
@@ -86,7 +87,11 @@ test('API: autenticação, concorrência, SSE, persistência após reinício e p
       });
       assert.equal(response.status, 401, `Origem válida deve chegar à autenticação: ${origin}`);
     }
-    for (const origin of ['https://evil.invalid', 'https://outro-3000.app.github.dev']) {
+    for (const origin of [
+      'https://evil.invalid',
+      'https://outro-3000.app.github.dev',
+      'https://localhost:9999',
+    ]) {
       const response = await fetch(base + '/api/logout', {
         method: 'POST',
         headers: {
