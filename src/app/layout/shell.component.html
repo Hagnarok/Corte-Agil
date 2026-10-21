@@ -1,1 +1,77 @@
-<div class="workspace"><aside class="sidebar" [class.open]="menu()"><a class="brand" routerLink="/funcionario"><span class="brand-icon"><mat-icon>bolt</mat-icon></span><span>Corte<span class="brand-light">Ágil</span><small>FILA INTELIGENTE</small></span></a><div class="store-label"><span class="store-icon"><mat-icon>storefront</mat-icon></span><div><strong>Açougue</strong><small>Gestão de atendimento</small></div></div><div class="nav-label">ESPAÇO DE TRABALHO</div><nav><a routerLink="/funcionario" routerLinkActive="active" (click)="menu.set(false)"><mat-icon>dashboard</mat-icon>Visão geral</a><a routerLink="/cliente" routerLinkActive="active" (click)="menu.set(false)"><mat-icon>confirmation_number</mat-icon>Área do cliente</a><a routerLink="/painel"><mat-icon>tv</mat-icon>Painel de chamadas<mat-icon class="nav-arrow">north_east</mat-icon></a><a routerLink="/totem"><mat-icon>touch_app</mat-icon>Totem de senhas<mat-icon class="nav-arrow">north_east</mat-icon></a></nav><div class="sidebar-tip"><mat-icon>eco</mat-icon><strong>Menos fila.<br>Mais tempo para você.</strong><p>Um atendimento organizado começa aqui.</p></div><div class="sidebar-bottom"><span class="dot" [class.offline]="!fila.connected()"></span>{{fila.connected()?'Servidor conectado':'Reconectando…'}}<small>CorteÁgil · v1.0</small></div></aside><div class="workspace-main"><header class="topbar"><button mat-icon-button class="menu-button" aria-label="Abrir menu" (click)="menu.set(!menu())"><mat-icon>menu</mat-icon></button><div class="breadcrumb">Workspace <span>/</span> <strong>{{router.url.includes('cliente')?'Área do cliente':'Gestão do açougue'}}</strong></div><span class="topbar-spacer"></span><span class="live"><span class="dot" [class.offline]="!fila.connected()"></span>{{fila.connected()?'Em tempo real':'Sem conexão'}}</span>@if(auth.logged()){<button mat-icon-button matTooltip="Sair da conta" aria-label="Sair" (click)="logout()"><mat-icon>logout</mat-icon></button><span class="avatar">AD</span>}@else{<a mat-button routerLink="/entrar">Funcionário</a>}</header>@if(!fila.connected()){<div class="connection-banner" role="alert">Conectando ao servidor local. As operações serão liberadas quando a conexão voltar.</div>}<main class="page"><router-outlet/></main><footer class="page-footer">CorteÁgil <span>Organização que faz a diferença.</span><small>Sistema de gestão de filas</small></footer></div></div>
+<div class="workspace">
+  <aside class="sidebar" [class.open]="menu()">
+    <a class="brand" routerLink="/funcionario"
+      ><span class="brand-icon"><mat-icon>bolt</mat-icon></span
+      ><span>Corte<span class="brand-light">Ágil</span><small>FILA INTELIGENTE</small></span></a
+    >
+    <div class="store-label">
+      <span class="store-icon"><mat-icon>storefront</mat-icon></span>
+      <div><strong>Açougue</strong><small>Gestão de atendimento</small></div>
+    </div>
+    <div class="nav-label">ESPAÇO DE TRABALHO</div>
+    <nav>
+      <a routerLink="/funcionario" routerLinkActive="active" (click)="menu.set(false)"
+        ><mat-icon>dashboard</mat-icon>Visão geral</a
+      ><a routerLink="/cliente" routerLinkActive="active" (click)="menu.set(false)"
+        ><mat-icon>confirmation_number</mat-icon>Área do cliente</a
+      ><a routerLink="/painel"
+        ><mat-icon>tv</mat-icon>Painel de chamadas<mat-icon class="nav-arrow"
+          >north_east</mat-icon
+        ></a
+      ><a routerLink="/totem"
+        ><mat-icon>touch_app</mat-icon>Totem de senhas<mat-icon class="nav-arrow"
+          >north_east</mat-icon
+        ></a
+      >
+    </nav>
+    <div class="sidebar-tip">
+      <mat-icon>eco</mat-icon><strong>Menos fila.<br />Mais tempo para você.</strong>
+      <p>Um atendimento organizado começa aqui.</p>
+    </div>
+    <div class="sidebar-bottom">
+      <span class="dot" [class.offline]="!fila.connected()"></span
+      >{{ fila.connected() ? 'Servidor conectado' : 'Reconectando…'
+      }}<small>CorteÁgil · v1.0</small>
+    </div>
+  </aside>
+  <div class="workspace-main">
+    <header class="topbar">
+      <button
+        mat-icon-button
+        class="menu-button"
+        aria-label="Abrir menu"
+        (click)="menu.set(!menu())"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="breadcrumb">
+        Workspace <span>/</span>
+        <strong>{{
+          router.url.includes('cliente') ? 'Área do cliente' : 'Gestão do açougue'
+        }}</strong>
+      </div>
+      <span class="topbar-spacer"></span
+      ><span class="live"
+        ><span class="dot" [class.offline]="!fila.connected()"></span
+        >{{ fila.connected() ? 'Em tempo real' : 'Sem conexão' }}</span
+      >
+      @if (auth.logged()) {
+        <button mat-icon-button matTooltip="Sair da conta" aria-label="Sair" (click)="logout()">
+          <mat-icon>logout</mat-icon></button
+        ><span class="avatar">AD</span>
+      } @else {
+        <a mat-button routerLink="/entrar">Funcionário</a>
+      }
+    </header>
+    @if (!fila.connected()) {
+      <div class="connection-banner" role="alert">
+        Conectando ao servidor local. As operações serão liberadas quando a conexão voltar.
+      </div>
+    }
+    <main class="page"><router-outlet /></main>
+    <footer class="page-footer">
+      CorteÁgil <span>Organização que faz a diferença.</span
+      ><small>Sistema de gestão de filas</small>
+    </footer>
+  </div>
+</div>

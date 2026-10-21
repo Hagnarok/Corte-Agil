@@ -149,10 +149,7 @@ Neste projeto as rotas filhas ficam no próprio módulo, reduzindo arquivos de c
 ```typescript
 @NgModule({
   declarations: [FuncionarioComponent, StatCardComponent, AtendimentoAtualComponent],
-  imports: [
-    SharedModule,
-    RouterModule.forChild([{ path: '', component: FuncionarioComponent }])
-  ]
+  imports: [SharedModule, RouterModule.forChild([{ path: '', component: FuncionarioComponent }])],
 })
 export class FuncionarioModule {}
 ```
@@ -181,7 +178,10 @@ O indicador não busca dados nem calcula a fila; apenas mostra os valores recebi
 @Component({
   selector: 'app-stat-card',
   standalone: false,
-  template: `<mat-card><h3>{{ label }}</h3><strong>{{ value }}</strong></mat-card>`
+  template: `<mat-card
+    ><h3>{{ label }}</h3>
+    <strong>{{ value }}</strong></mat-card
+  >`,
 })
 export class StatCardComponent {
   @Input() label = '';
@@ -192,9 +192,7 @@ export class StatCardComponent {
 No componente pai:
 
 ```html
-<app-stat-card
-  label="Aguardando"
-  [value]="fila.state().waiting.length" />
+<app-stat-card label="Aguardando" [value]="fila.state().waiting.length" />
 ```
 
 Evite fazer uma requisição de rede em cada card. O `FilaService` mantém o estado central, atualizado por SSE, e os componentes leem esse estado.
@@ -219,11 +217,22 @@ Depois:
 
 ## 8. Divisão sugerida para o grupo
 
-| Integrante | Responsabilidade principal | Arquivos |
-| --- | --- | --- |
-| Guilherme Perino Feitosa | Experiência do cliente e avisos | `features/cliente`, `alerta.service.ts` |
-| Gustavo Henrique de Araujo Alves | Servidor, autenticação e integração | `server`, `core/services`, `core/guards` |
-| Matheus Boletti Fortes | Operação do funcionário e indicadores | `features/funcionario` |
-| Luiz Felipe Gaspar Fernandes da Silva | Painel de TV, totem e impressão | `features/painel`, `features/totem` |
+| Integrante                            | Responsabilidade principal            | Arquivos                                 |
+| ------------------------------------- | ------------------------------------- | ---------------------------------------- |
+| Guilherme Perino Feitosa              | Experiência do cliente e avisos       | `features/cliente`, `alerta.service.ts`  |
+| Gustavo Henrique de Araujo Alves      | Servidor, autenticação e integração   | `server`, `core/services`, `core/guards` |
+| Matheus Boletti Fortes                | Operação do funcionário e indicadores | `features/funcionario`                   |
+| Luiz Felipe Gaspar Fernandes da Silva | Painel de TV, totem e impressão       | `features/painel`, `features/totem`      |
 
 Essa é uma sugestão de organização, sem atribuição de autoria do código. O grupo deve validar os fluxos em conjunto. Alterações no modelo da fila precisam ser combinadas antes, pois afetam as quatro interfaces.
+
+## 9. Formatação do código
+
+O projeto usa Prettier com duas posições de indentação e limite de linha de 100 caracteres. A configuração está em `.prettierrc.json`.
+
+```bash
+npm run format
+npm run format:check
+```
+
+O primeiro comando formata os arquivos; o segundo verifica se eles seguem o padrão. No VS Code/Codespaces, instale as extensões recomendadas. As configurações da pasta habilitam a formatação ao salvar. O `README.md` permanece vazio e está excluído do formatador enquanto essa for a orientação do projeto. Arquivos gerados, dados, dependências e lockfile também ficam fora da formatação.

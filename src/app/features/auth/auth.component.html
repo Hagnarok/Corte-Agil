@@ -1,1 +1,79 @@
-<div class="login-layout"><section class="login-story"><a class="brand inverse" routerLink="/cliente"><span class="brand-icon"><mat-icon>bolt</mat-icon></span><span>CorteÁgil<small>FILA INTELIGENTE</small></span></a><div class="story-content"><span class="eyebrow">ATENDIMENTO EM OUTRO RITMO</span><h1>O próximo da fila.<br>O melhor da<br><em>experiência.</em></h1><p>Organize os atendimentos do açougue e devolva aos seus clientes o tempo de fazer boas escolhas.</p><div class="story-tickets"><span class="mini-ticket faded">A021<small>Concluído</small></span><span class="mini-ticket featured">A022<small>É a sua vez!</small></span><span class="mini-ticket">A023<small>Próximo da fila</small></span></div><div class="story-caption"><mat-icon>check_circle</mat-icon>Uma fila. Todos os dispositivos conectados.</div></div><small>CorteÁgil · Gestão local, experiência conectada.</small></section><section class="login-form-area"><div class="login-form-box"><span class="label-pill"><mat-icon>lock_outline</mat-icon>ACESSO DA EQUIPE</span><h2>Bom atendimento<br>começa por aqui.</h2><p>Entre para gerenciar a fila do açougue.</p><form [formGroup]="form" (ngSubmit)="login()"><mat-form-field appearance="outline"><mat-label>Usuário</mat-label><mat-icon matPrefix>person_outline</mat-icon><input matInput formControlName="username" autocomplete="username" required></mat-form-field><mat-form-field appearance="outline"><mat-label>Senha</mat-label><mat-icon matPrefix>lock_outline</mat-icon><input matInput formControlName="password" [type]="hide()?'password':'text'" autocomplete="current-password" required><button mat-icon-button matSuffix type="button" [attr.aria-label]="hide()?'Mostrar senha':'Ocultar senha'" (click)="hide.set(!hide())"><mat-icon>{{hide()?'visibility_off':'visibility'}}</mat-icon></button></mat-form-field><button mat-flat-button class="full large-button" type="submit" [disabled]="form.invalid||busy()">{{busy()?'Entrando…':'Acessar painel'}}<mat-icon iconPositionEnd>arrow_forward</mat-icon></button></form><p class="login-help">Use a senha criada por <code>npm run setup</code> no computador servidor.</p><div class="login-divider"></div><a mat-stroked-button class="full" routerLink="/cliente"><mat-icon>confirmation_number</mat-icon>Sou cliente, quero uma senha</a><a class="text-link" routerLink="/painel">Abrir painel de chamadas <mat-icon>north_east</mat-icon></a></div><small class="login-footnote"><mat-icon>lan</mat-icon>Desenvolvido para funcionar na rede local.</small></section></div>
+<div class="login-layout">
+  <section class="login-story">
+    <a class="brand inverse" routerLink="/cliente"
+      ><span class="brand-icon"><mat-icon>bolt</mat-icon></span
+      ><span>CorteÁgil<small>FILA INTELIGENTE</small></span></a
+    >
+    <div class="story-content">
+      <span class="eyebrow">ATENDIMENTO EM OUTRO RITMO</span>
+      <h1>O próximo da fila.<br />O melhor da<br /><em>experiência.</em></h1>
+      <p>
+        Organize os atendimentos do açougue e devolva aos seus clientes o tempo de fazer boas
+        escolhas.
+      </p>
+      <div class="story-tickets">
+        <span class="mini-ticket faded">A021<small>Concluído</small></span
+        ><span class="mini-ticket featured">A022<small>É a sua vez!</small></span
+        ><span class="mini-ticket">A023<small>Próximo da fila</small></span>
+      </div>
+      <div class="story-caption">
+        <mat-icon>check_circle</mat-icon>Uma fila. Todos os dispositivos conectados.
+      </div>
+    </div>
+    <small>CorteÁgil · Gestão local, experiência conectada.</small>
+  </section>
+  <section class="login-form-area">
+    <div class="login-form-box">
+      <span class="label-pill"><mat-icon>lock_outline</mat-icon>ACESSO DA EQUIPE</span>
+      <h2>Bom atendimento<br />começa por aqui.</h2>
+      <p>Entre para gerenciar a fila do açougue.</p>
+      <form [formGroup]="form" (ngSubmit)="login()">
+        <mat-form-field appearance="outline"
+          ><mat-label>Usuário</mat-label><mat-icon matPrefix>person_outline</mat-icon
+          ><input
+            matInput
+            formControlName="username"
+            autocomplete="username"
+            required /></mat-form-field
+        ><mat-form-field appearance="outline"
+          ><mat-label>Senha</mat-label><mat-icon matPrefix>lock_outline</mat-icon
+          ><input
+            matInput
+            formControlName="password"
+            [type]="hide() ? 'password' : 'text'"
+            autocomplete="current-password"
+            required
+          /><button
+            mat-icon-button
+            matSuffix
+            type="button"
+            [attr.aria-label]="hide() ? 'Mostrar senha' : 'Ocultar senha'"
+            (click)="hide.set(!hide())"
+          >
+            <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button></mat-form-field
+        ><button
+          mat-flat-button
+          class="full large-button"
+          type="submit"
+          [disabled]="form.invalid || busy()"
+        >
+          {{ busy() ? 'Entrando…' : 'Acessar painel'
+          }}<mat-icon iconPositionEnd>arrow_forward</mat-icon>
+        </button>
+      </form>
+      <p class="login-help">
+        Use a senha criada por <code>npm run setup</code> no computador servidor.
+      </p>
+      <div class="login-divider"></div>
+      <a mat-stroked-button class="full" routerLink="/cliente"
+        ><mat-icon>confirmation_number</mat-icon>Sou cliente, quero uma senha</a
+      ><a class="text-link" routerLink="/painel"
+        >Abrir painel de chamadas <mat-icon>north_east</mat-icon></a
+      >
+    </div>
+    <small class="login-footnote"
+      ><mat-icon>lan</mat-icon>Desenvolvido para funcionar na rede local.</small
+    >
+  </section>
+</div>

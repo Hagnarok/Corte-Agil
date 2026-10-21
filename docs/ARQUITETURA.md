@@ -20,13 +20,13 @@ Esta implementação privilegia clareza. Para filas muito grandes, convém norma
 
 ## Estados
 
-| Estado | Tradução | Transição permitida |
-| --- | --- | --- |
-| `waiting` | Aguardando | `called` pela próxima chamada |
-| `called` | Chamando | `serving` pela confirmação ou `absent` após 30 segundos |
-| `serving` | Em atendimento | `done` pela conclusão |
-| `absent` | Ausente | `waiting` por retorno explícito ao final |
-| `done` | Concluído | Final; nova visita gera outra senha |
+| Estado    | Tradução       | Transição permitida                                     |
+| --------- | -------------- | ------------------------------------------------------- |
+| `waiting` | Aguardando     | `called` pela próxima chamada                           |
+| `called`  | Chamando       | `serving` pela confirmação ou `absent` após 30 segundos |
+| `serving` | Em atendimento | `done` pela conclusão                                   |
+| `absent`  | Ausente        | `waiting` por retorno explícito ao final                |
+| `done`    | Concluído      | Final; nova visita gera outra senha                     |
 
 Repetir chamada mantém `called`, registra evento e reinicia o prazo de 30 segundos. Existe um balcão operacional. O filtro por serviço não muda a ordem da chamada, que usa sempre a primeira senha de toda a fila.
 
@@ -34,23 +34,23 @@ Repetir chamada mantém `called`, registra evento e reinicia o prazo de 30 segun
 
 Todas as respostas são JSON, exceto SSE. Erros usam `{ "message": "..." }` e status 400, 401, 403, 404, 409 ou 429 conforme a situação.
 
-| Método e rota | Corpo | Acesso/efeito |
-| --- | --- | --- |
-| `GET /api/state` | — | Estado público, sem tokens ou avisos privados |
-| `GET /api/events` | — | Canal SSE com o mesmo estado público |
-| `POST /api/tickets` | `{service, origin}` | Emite senha; `origin` é `app` ou `totem` |
-| `GET /api/tickets/:token` | — | Senha individual, posição e avisos |
-| `POST /api/tickets/:token/return` | `{}` | Retorna uma senha ausente ao final |
-| `POST /api/login` | `{username, password}` | Cria sessão HttpOnly de 8 horas |
-| `GET /api/session` | — | Exige sessão válida |
-| `POST /api/logout` | `{}` | Encerra sessão |
-| `POST /api/queue/call` | `{}` | Funcionário: chama a próxima senha |
-| `POST /api/queue/start` | `{}` | Funcionário: confirma chegada |
-| `POST /api/queue/finish` | `{}` | Funcionário: conclui atendimento iniciado |
-| `POST /api/queue/recall` | `{}` | Funcionário: repete chamada |
-| `POST /api/queue/absent` | `{}` | Funcionário: ausência, somente após o prazo |
-| `POST /api/queue/pause` | `{}` | Funcionário: alterna pausa de novas entradas |
-| `GET /api/audit` | — | Funcionário: últimos 100 eventos |
+| Método e rota                     | Corpo                  | Acesso/efeito                                 |
+| --------------------------------- | ---------------------- | --------------------------------------------- |
+| `GET /api/state`                  | —                      | Estado público, sem tokens ou avisos privados |
+| `GET /api/events`                 | —                      | Canal SSE com o mesmo estado público          |
+| `POST /api/tickets`               | `{service, origin}`    | Emite senha; `origin` é `app` ou `totem`      |
+| `GET /api/tickets/:token`         | —                      | Senha individual, posição e avisos            |
+| `POST /api/tickets/:token/return` | `{}`                   | Retorna uma senha ausente ao final            |
+| `POST /api/login`                 | `{username, password}` | Cria sessão HttpOnly de 8 horas               |
+| `GET /api/session`                | —                      | Exige sessão válida                           |
+| `POST /api/logout`                | `{}`                   | Encerra sessão                                |
+| `POST /api/queue/call`            | `{}`                   | Funcionário: chama a próxima senha            |
+| `POST /api/queue/start`           | `{}`                   | Funcionário: confirma chegada                 |
+| `POST /api/queue/finish`          | `{}`                   | Funcionário: conclui atendimento iniciado     |
+| `POST /api/queue/recall`          | `{}`                   | Funcionário: repete chamada                   |
+| `POST /api/queue/absent`          | `{}`                   | Funcionário: ausência, somente após o prazo   |
+| `POST /api/queue/pause`           | `{}`                   | Funcionário: alterna pausa de novas entradas  |
+| `GET /api/audit`                  | —                      | Funcionário: últimos 100 eventos              |
 
 ## Notificações
 

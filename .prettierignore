@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.angular/
+out-tsc/
+coverage/
+data/
+package-lock.json
+README.md

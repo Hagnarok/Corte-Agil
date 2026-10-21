@@ -1,1 +1,159 @@
-<div class="page-heading"><div><div class="eyebrow">SEU TEMPO VALE MAIS</div><h1>Compras sem esperar<span class="heading-dot">.</span></h1><p>Retire sua senha, continue suas compras e acompanhe por aqui.</p></div><span class="label-pill"><mat-icon>storefront</mat-icon>AÇOUGUE · BALCÃO 01</span></div><div class="customer-grid"><mat-card class="customer-ticket-card">@if(ticket();as t){<span class="eyebrow">SUA SENHA</span><strong class="customer-number">{{t.label}}</strong><app-status-badge [status]="t.status"/><div class="ticket-divider"></div>@if(t.status==='waiting'){<h2>{{t.ahead===0?'Você é o próximo!':t.ahead===1?'Está quase na sua vez!':'Pode continuar suas compras.'}}</h2><p>{{t.ahead===0?'Fique próximo ao balcão e aguarde a chamada.':t.ahead<=2?'Volte ao açougue. Sua vez está chegando.':'Acompanhe os avisos para retornar ao açougue.'}}</p><div class="customer-metrics"><div><strong>{{t.ahead}}</strong><small>{{t.ahead===1?'senha à frente':'senhas à frente'}}</small></div><div><strong>~{{t.estimatedMinutes}}<em>min</em></strong><small>espera estimada</small></div></div>}@else if(t.status==='called'){<div class="customer-alert"><mat-icon>campaign</mat-icon><h2>É a sua vez!</h2><p>Apresente-se ao balcão 01.</p><strong>{{fila.remaining()}}s</strong></div>}@else if(t.status==='serving'){<h2>Bom atendimento!</h2><p>Sua senha está em atendimento no balcão 01.</p>}@else if(t.status==='absent'){<h2>Você perdeu a chamada.</h2><p>Sem problema. Você pode retornar ao final da fila mantendo a mesma senha.</p><button mat-flat-button class="full large-button" [disabled]="busy()||!fila.connected()||fila.state().paused" (click)="rejoin()">Quero retornar à fila</button>}@else{<h2>Obrigado pela visita!</h2><p>Seu atendimento foi concluído. Boas compras!</p><button mat-flat-button class="full" (click)="newTicket()">Retirar outra senha</button>}<p class="ticket-service"><mat-icon>restaurant</mat-icon>{{t.service}}</p>@if(t.returns){<p class="support-text">Senha retornada ao final da fila após ausência.</p>}<button mat-stroked-button class="full" (click)="notifications()"><mat-icon>notifications_active</mat-icon>{{notices()?'Avisos do navegador ativados':'Ativar avisos no navegador'}}</button><small class="customer-note">Mantenha esta página aberta para acompanhar os avisos.</small>}@else{<div class="issue-illustration"><mat-icon>confirmation_number</mat-icon><span>Uma senha.<br>Mais liberdade.</span></div><h2>Entre na fila do açougue</h2><p>Não precisamos do seu nome ou telefone. É só retirar uma senha.</p><mat-form-field appearance="outline" class="full"><mat-label>O que você precisa? (opcional)</mat-label><mat-select [(ngModel)]="service">@for(s of services;track s){<mat-option [value]="s">{{s}}</mat-option>}</mat-select></mat-form-field><button mat-flat-button class="full large-button" [disabled]="busy()||!fila.connected()||fila.state().paused" (click)="issue()"><mat-icon>add</mat-icon>{{busy()?'Gerando senha…':fila.state().paused?'Retirada pausada':'Retirar minha senha'}}</button><small class="customer-note"><mat-icon>verified_user</mat-icon>Sem cadastro. Simples assim.</small>}</mat-card><div class="customer-side"><mat-card class="customer-now"><span class="eyebrow">ACONTECENDO AGORA</span><div class="inline-title"><span class="dot"></span>Em atendimento</div><strong>{{fila.state().current?.label||'—'}}</strong><span>Balcão 01 · Açougue</span><div class="ticket-divider"></div><div class="section-title"><h3>Próximas senhas</h3><span>{{fila.state().waiting.length}} na fila</span></div><div class="customer-next">@for(t of fila.state().waiting.slice(0,3);track t.id){<span>{{t.label}}</span>}@empty{<p>Nenhuma senha aguardando.</p>}</div></mat-card><div class="how-it-works"><h3>É fácil aproveitar seu tempo.</h3><div><b>01</b><p><strong>Retire sua senha</strong><span>Escolha o serviço, se quiser.</span></p></div><div><b>02</b><p><strong>Continue suas compras</strong><span>Acompanhe sua posição nesta tela.</span></p></div><div><b>03</b><p><strong>Volte quando estiver perto</strong><span>Avisamos com 2 e 1 senhas à frente.</span></p></div></div></div></div>@if(ticket()?.notifications?.length){<mat-card class="notification-card"><h3><mat-icon>notifications_none</mat-icon>Seus avisos</h3>@for(n of ticket()!.notifications.slice().reverse();track n.id){<div class="notification-row"><span>{{n.text}}</span><small>{{n.at|date:'HH:mm'}}</small></div>}</mat-card>}
+<div class="page-heading">
+  <div>
+    <div class="eyebrow">SEU TEMPO VALE MAIS</div>
+    <h1>Compras sem esperar<span class="heading-dot">.</span></h1>
+    <p>Retire sua senha, continue suas compras e acompanhe por aqui.</p>
+  </div>
+  <span class="label-pill"><mat-icon>storefront</mat-icon>AÇOUGUE · BALCÃO 01</span>
+</div>
+<div class="customer-grid">
+  <mat-card class="customer-ticket-card">
+    @if (ticket(); as t) {
+      <span class="eyebrow">SUA SENHA</span><strong class="customer-number">{{ t.label }}</strong
+      ><app-status-badge [status]="t.status" />
+      <div class="ticket-divider"></div>
+      @if (t.status === 'waiting') {
+        <h2>
+          {{
+            t.ahead === 0
+              ? 'Você é o próximo!'
+              : t.ahead === 1
+                ? 'Está quase na sua vez!'
+                : 'Pode continuar suas compras.'
+          }}
+        </h2>
+        <p>
+          {{
+            t.ahead === 0
+              ? 'Fique próximo ao balcão e aguarde a chamada.'
+              : t.ahead <= 2
+                ? 'Volte ao açougue. Sua vez está chegando.'
+                : 'Acompanhe os avisos para retornar ao açougue.'
+          }}
+        </p>
+        <div class="customer-metrics">
+          <div>
+            <strong>{{ t.ahead }}</strong
+            ><small>{{ t.ahead === 1 ? 'senha à frente' : 'senhas à frente' }}</small>
+          </div>
+          <div>
+            <strong>~{{ t.estimatedMinutes }}<em>min</em></strong
+            ><small>espera estimada</small>
+          </div>
+        </div>
+      } @else if (t.status === 'called') {
+        <div class="customer-alert">
+          <mat-icon>campaign</mat-icon>
+          <h2>É a sua vez!</h2>
+          <p>Apresente-se ao balcão 01.</p>
+          <strong>{{ fila.remaining() }}s</strong>
+        </div>
+      } @else if (t.status === 'serving') {
+        <h2>Bom atendimento!</h2>
+        <p>Sua senha está em atendimento no balcão 01.</p>
+      } @else if (t.status === 'absent') {
+        <h2>Você perdeu a chamada.</h2>
+        <p>Sem problema. Você pode retornar ao final da fila mantendo a mesma senha.</p>
+        <button
+          mat-flat-button
+          class="full large-button"
+          [disabled]="busy() || !fila.connected() || fila.state().paused"
+          (click)="rejoin()"
+        >
+          Quero retornar à fila
+        </button>
+      } @else {
+        <h2>Obrigado pela visita!</h2>
+        <p>Seu atendimento foi concluído. Boas compras!</p>
+        <button mat-flat-button class="full" (click)="newTicket()">Retirar outra senha</button>
+      }
+      <p class="ticket-service"><mat-icon>restaurant</mat-icon>{{ t.service }}</p>
+      @if (t.returns) {
+        <p class="support-text">Senha retornada ao final da fila após ausência.</p>
+      }
+      <button mat-stroked-button class="full" (click)="notifications()">
+        <mat-icon>notifications_active</mat-icon
+        >{{ notices() ? 'Avisos do navegador ativados' : 'Ativar avisos no navegador' }}</button
+      ><small class="customer-note">Mantenha esta página aberta para acompanhar os avisos.</small>
+    } @else {
+      <div class="issue-illustration">
+        <mat-icon>confirmation_number</mat-icon><span>Uma senha.<br />Mais liberdade.</span>
+      </div>
+      <h2>Entre na fila do açougue</h2>
+      <p>Não precisamos do seu nome ou telefone. É só retirar uma senha.</p>
+      <mat-form-field appearance="outline" class="full"
+        ><mat-label>O que você precisa? (opcional)</mat-label
+        ><mat-select [(ngModel)]="service">
+          @for (s of services; track s) {
+            <mat-option [value]="s">{{ s }}</mat-option>
+          }
+        </mat-select></mat-form-field
+      ><button
+        mat-flat-button
+        class="full large-button"
+        [disabled]="busy() || !fila.connected() || fila.state().paused"
+        (click)="issue()"
+      >
+        <mat-icon>add</mat-icon
+        >{{
+          busy()
+            ? 'Gerando senha…'
+            : fila.state().paused
+              ? 'Retirada pausada'
+              : 'Retirar minha senha'
+        }}</button
+      ><small class="customer-note"
+        ><mat-icon>verified_user</mat-icon>Sem cadastro. Simples assim.</small
+      >
+    }
+  </mat-card>
+  <div class="customer-side">
+    <mat-card class="customer-now"
+      ><span class="eyebrow">ACONTECENDO AGORA</span>
+      <div class="inline-title"><span class="dot"></span>Em atendimento</div>
+      <strong>{{ fila.state().current?.label || '—' }}</strong
+      ><span>Balcão 01 · Açougue</span>
+      <div class="ticket-divider"></div>
+      <div class="section-title">
+        <h3>Próximas senhas</h3>
+        <span>{{ fila.state().waiting.length }} na fila</span>
+      </div>
+      <div class="customer-next">
+        @for (t of fila.state().waiting.slice(0, 3); track t.id) {
+          <span>{{ t.label }}</span>
+        } @empty {
+          <p>Nenhuma senha aguardando.</p>
+        }
+      </div></mat-card
+    >
+    <div class="how-it-works">
+      <h3>É fácil aproveitar seu tempo.</h3>
+      <div>
+        <b>01</b>
+        <p><strong>Retire sua senha</strong><span>Escolha o serviço, se quiser.</span></p>
+      </div>
+      <div>
+        <b>02</b>
+        <p><strong>Continue suas compras</strong><span>Acompanhe sua posição nesta tela.</span></p>
+      </div>
+      <div>
+        <b>03</b>
+        <p>
+          <strong>Volte quando estiver perto</strong
+          ><span>Avisamos com 2 e 1 senhas à frente.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+@if (ticket()?.notifications?.length) {
+  <mat-card class="notification-card"
+    ><h3><mat-icon>notifications_none</mat-icon>Seus avisos</h3>
+    @for (n of ticket()!.notifications.slice().reverse(); track n.id) {
+      <div class="notification-row">
+        <span>{{ n.text }}</span
+        ><small>{{ n.at | date: 'HH:mm' }}</small>
+      </div>
+    }
+  </mat-card>
+}

@@ -1,10 +1,147 @@
-<div class="page-heading"><div><div class="eyebrow">OPERAÇÃO DO AÇOUGUE</div><h1>Visão geral<span class="heading-dot">.</span></h1><p>Acompanhe a fila e faça cada atendimento fluir.</p></div><div class="heading-actions"><span class="date-label"><mat-icon>calendar_today</mat-icon>{{date}}</span><a mat-stroked-button routerLink="/painel" target="_blank"><mat-icon>open_in_new</mat-icon>Abrir painel TV</a></div></div>
-<div class="stats-grid">
-<app-stat-card label="Aguardando" [value]="fila.state().waiting.length" icon="groups" tone="mint" note="Clientes na fila agora" [live]="true"/>
-<app-stat-card label="Atendidos hoje" [value]="fila.state().stats.completed" icon="task_alt" tone="blue" note="Atendimentos concluídos"/>
-<app-stat-card label="Tempo médio" [value]="fila.state().stats.averageMinutes" suffix="min" icon="schedule" tone="amber" [note]="fila.state().stats.estimated?'Estimativa inicial de atendimento':'Média dos últimos atendimentos'"/>
-<app-stat-card label="Ausentes" [value]="fila.state().stats.absent" icon="person_off" tone="rose" note="Podem solicitar retorno à fila"/>
+<div class="page-heading">
+  <div>
+    <div class="eyebrow">OPERAÇÃO DO AÇOUGUE</div>
+    <h1>Visão geral<span class="heading-dot">.</span></h1>
+    <p>Acompanhe a fila e faça cada atendimento fluir.</p>
+  </div>
+  <div class="heading-actions">
+    <span class="date-label"><mat-icon>calendar_today</mat-icon>{{ date }}</span
+    ><a mat-stroked-button routerLink="/painel" target="_blank"
+      ><mat-icon>open_in_new</mat-icon>Abrir painel TV</a
+    >
+  </div>
 </div>
-<div class="operation-grid"><app-atendimento-atual/><div class="right-column"><mat-card class="next-card"><div class="section-title"><h2>Na sequência</h2><span class="muted">Próximas senhas</span></div><div class="next-tickets">@for(t of fila.state().waiting.slice(0,3);track t.id;let i=$index){<div [class.next-first]="i===0"><small>{{i===0?'PRÓXIMO':(i+1)+'º NA FILA'}}</small><strong>{{t.label}}</strong><span>{{t.service}}</span></div>}@empty{<div class="empty-inline"><mat-icon>hourglass_empty</mat-icon>Esperando novas senhas</div>}</div></mat-card><mat-card class="service-card"><div class="section-title"><h2>Serviços na fila</h2><span class="label-pill">ORGANIZAÇÃO</span></div><div class="service-counts">@for(s of counts();track s.name){<div><span class="service-count-icon"><mat-icon>{{s.icon}}</mat-icon></span><span>{{s.name}}</span><strong>{{s.count}}</strong></div>}</div><p class="support-text"><mat-icon>lightbulb_outline</mat-icon>Identifique pedidos semelhantes. A chamada segue a ordem da fila.</p></mat-card></div></div>
-<mat-card class="waiting-card"><div class="section-title"><div class="inline-title"><h2>Fila de espera</h2><span class="number-pill">{{fila.state().waiting.length}}</span></div><div class="table-actions"><button mat-button (click)="toggleHistory()"><mat-icon>history</mat-icon>Histórico</button><button mat-stroked-button [disabled]="fila.busy()||!fila.connected()" (click)="fila.run('pause')"><mat-icon>{{fila.state().paused?'play_arrow':'pause'}}</mat-icon>{{fila.state().paused?'Retomar senhas':'Pausar senhas'}}</button></div></div><div class="filter-bar">@for(type of ['Todos','Bife rápido','Peça inteira','Moído','Não informado','Outros cortes'];track type){<button [class.selected]="filter()===type" (click)="filter.set(type)">{{type}}</button>}<span class="filter-legend"><span class="dot"></span>Atualização automática</span></div>@if(fila.state().paused){<div class="paused-note"><mat-icon>pause_circle_outline</mat-icon>Novas senhas estão pausadas. Os atendimentos existentes continuam disponíveis.</div>}<app-queue-list [tickets]="filtered()"/></mat-card>
-@if(showHistory()){<mat-card class="history-card"><div class="section-title"><h2>Últimas atividades</h2><button mat-icon-button aria-label="Fechar histórico" (click)="showHistory.set(false)"><mat-icon>close</mat-icon></button></div>@for(e of history();track e.id){<div class="history-row"><span class="dot"></span><strong>{{e.label}}</strong><span>{{e.action}}</span><small>{{e.at|date:'dd/MM HH:mm:ss'}}</small></div>}@empty{<p class="support-text">Nenhuma atividade registrada.</p>}<small class="muted">Últimos 100 eventos. Abra novamente para atualizar.</small></mat-card>}
+<div class="stats-grid">
+  <app-stat-card
+    label="Aguardando"
+    [value]="fila.state().waiting.length"
+    icon="groups"
+    tone="cyan"
+    note="Clientes na fila agora"
+    [live]="true"
+  />
+  <app-stat-card
+    label="Atendidos hoje"
+    [value]="fila.state().stats.completed"
+    icon="task_alt"
+    tone="blue"
+    note="Atendimentos concluídos"
+  />
+  <app-stat-card
+    label="Tempo médio"
+    [value]="fila.state().stats.averageMinutes"
+    suffix="min"
+    icon="schedule"
+    tone="amber"
+    [note]="
+      fila.state().stats.estimated
+        ? 'Estimativa inicial de atendimento'
+        : 'Média dos últimos atendimentos'
+    "
+  />
+  <app-stat-card
+    label="Ausentes"
+    [value]="fila.state().stats.absent"
+    icon="person_off"
+    tone="rose"
+    note="Podem solicitar retorno à fila"
+  />
+</div>
+<div class="operation-grid">
+  <app-atendimento-atual />
+  <div class="right-column">
+    <mat-card class="next-card"
+      ><div class="section-title">
+        <h2>Na sequência</h2>
+        <span class="muted">Próximas senhas</span>
+      </div>
+      <div class="next-tickets">
+        @for (t of fila.state().waiting.slice(0, 3); track t.id; let i = $index) {
+          <div [class.next-first]="i === 0">
+            <small>{{ i === 0 ? 'PRÓXIMO' : i + 1 + 'º NA FILA' }}</small
+            ><strong>{{ t.label }}</strong
+            ><span>{{ t.service }}</span>
+          </div>
+        } @empty {
+          <div class="empty-inline"><mat-icon>hourglass_empty</mat-icon>Esperando novas senhas</div>
+        }
+      </div></mat-card
+    ><mat-card class="service-card"
+      ><div class="section-title">
+        <h2>Serviços na fila</h2>
+        <span class="label-pill">ORGANIZAÇÃO</span>
+      </div>
+      <div class="service-counts">
+        @for (s of counts(); track s.name) {
+          <div>
+            <span class="service-count-icon"
+              ><mat-icon>{{ s.icon }}</mat-icon></span
+            ><span>{{ s.name }}</span
+            ><strong>{{ s.count }}</strong>
+          </div>
+        }
+      </div>
+      <p class="support-text">
+        <mat-icon>lightbulb_outline</mat-icon>Identifique pedidos semelhantes. A chamada segue a
+        ordem da fila.
+      </p></mat-card
+    >
+  </div>
+</div>
+<mat-card class="waiting-card"
+  ><div class="section-title">
+    <div class="inline-title">
+      <h2>Fila de espera</h2>
+      <span class="number-pill">{{ fila.state().waiting.length }}</span>
+    </div>
+    <div class="table-actions">
+      <button mat-button (click)="toggleHistory()"><mat-icon>history</mat-icon>Histórico</button
+      ><button
+        mat-stroked-button
+        [disabled]="fila.busy() || !fila.connected()"
+        (click)="fila.run('pause')"
+      >
+        <mat-icon>{{ fila.state().paused ? 'play_arrow' : 'pause' }}</mat-icon
+        >{{ fila.state().paused ? 'Retomar senhas' : 'Pausar senhas' }}
+      </button>
+    </div>
+  </div>
+  <div class="filter-bar">
+    @for (
+      type of ['Todos', 'Bife rápido', 'Peça inteira', 'Moído', 'Não informado', 'Outros cortes'];
+      track type
+    ) {
+      <button [class.selected]="filter() === type" (click)="filter.set(type)">
+        {{ type }}
+      </button>
+    }
+    <span class="filter-legend"><span class="dot"></span>Atualização automática</span>
+  </div>
+  @if (fila.state().paused) {
+    <div class="paused-note">
+      <mat-icon>pause_circle_outline</mat-icon>Novas senhas estão pausadas. Os atendimentos
+      existentes continuam disponíveis.
+    </div>
+  }
+  <app-queue-list [tickets]="filtered()"
+/></mat-card>
+@if (showHistory()) {
+  <mat-card class="history-card"
+    ><div class="section-title">
+      <h2>Últimas atividades</h2>
+      <button mat-icon-button aria-label="Fechar histórico" (click)="showHistory.set(false)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    @for (e of history(); track e.id) {
+      <div class="history-row">
+        <span class="dot"></span><strong>{{ e.label }}</strong
+        ><span>{{ e.action }}</span
+        ><small>{{ e.at | date: 'dd/MM HH:mm:ss' }}</small>
+      </div>
+    } @empty {
+      <p class="support-text">Nenhuma atividade registrada.</p>
+    }
+    <small class="muted">Últimos 100 eventos. Abra novamente para atualizar.</small></mat-card
+  >
+}

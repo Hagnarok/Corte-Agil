@@ -1,1 +1,78 @@
-<div class="tv-screen"><header class="tv-header"><a class="brand inverse" routerLink="/cliente"><span class="brand-icon"><mat-icon>bolt</mat-icon></span><span>CorteÁgil<small>FILA INTELIGENTE</small></span></a><span class="tv-sector"><mat-icon>storefront</mat-icon>Açougue</span><div class="tv-clock">{{clock()|date:'HH:mm'}}<small>{{clock()|date:'EEEE, dd/MM'}}</small></div></header>@if(!fila.connected()){<div class="tv-offline" role="alert">Sem conexão com o servidor. Aguardando reconexão.</div>}<main class="tv-main"><section class="tv-current"><span class="tv-live"><span class="dot"></span>{{fila.state().current?.status==='called'?'CHAMANDO AGORA':'EM ATENDIMENTO'}}</span><strong class="tv-number">{{fila.state().current?.label||'—'}}</strong><div class="tv-counter"><span>BALCÃO</span><strong>01</strong><mat-icon>arrow_forward</mat-icon></div>@if(fila.state().current?.status==='called'){<div class="tv-countdown"><mat-icon>schedule</mat-icon>Apresente-se ao balcão <strong>{{fila.remaining()}}s</strong></div>}@else{<p>{{fila.state().current?'Estamos cuidando do seu pedido.':'Retire sua senha no celular ou no totem.'}}</p>}</section><aside class="tv-next"><span class="eyebrow">PREPARE-SE PARA O ATENDIMENTO</span><h2>Próximas senhas</h2>@for(t of fila.state().waiting.slice(0,3);track t.id;let i=$index){<div class="tv-next-row"><span>{{String(i+1).padStart(2,'0')}}</span><strong>{{t.label}}</strong><mat-icon>{{i===0?'arrow_forward':'more_horiz'}}</mat-icon></div>}@empty{<div class="tv-empty"><mat-icon>shopping_basket</mat-icon><p>Fila livre.<br>Seja o próximo!</p></div>}<div class="tv-queue-count"><mat-icon>groups</mat-icon>{{fila.state().waiting.length}} {{fila.state().waiting.length===1?'cliente aguardando':'clientes aguardando'}}</div></aside></main><footer class="tv-footer"><div><mat-icon>shopping_basket</mat-icon><span>Continue suas compras.<strong>A gente chama você.</strong></span></div><div class="tv-controls"><button mat-stroked-button (click)="alerts.enable()"><mat-icon>{{alerts.enabled()?'volume_up':'volume_off'}}</mat-icon>{{alerts.enabled()?'Som ativado · testar':'Ativar som'}}</button><button mat-icon-button aria-label="Tela cheia" (click)="fullscreen()"><mat-icon>fullscreen</mat-icon></button><a mat-icon-button routerLink="/funcionario" aria-label="Voltar à gestão"><mat-icon>settings</mat-icon></a></div></footer>@if(fullscreenError()){<p role="alert">{{fullscreenError()}}</p>}</div>
+<div class="tv-screen">
+  <header class="tv-header">
+    <a class="brand inverse" routerLink="/cliente"
+      ><span class="brand-icon"><mat-icon>bolt</mat-icon></span
+      ><span>CorteÁgil<small>FILA INTELIGENTE</small></span></a
+    ><span class="tv-sector"><mat-icon>storefront</mat-icon>Açougue</span>
+    <div class="tv-clock">
+      {{ clock() | date: 'HH:mm' }}<small>{{ clock() | date: 'EEEE, dd/MM' }}</small>
+    </div>
+  </header>
+  @if (!fila.connected()) {
+    <div class="tv-offline" role="alert">Sem conexão com o servidor. Aguardando reconexão.</div>
+  }
+  <main class="tv-main">
+    <section class="tv-current">
+      <span class="tv-live"
+        ><span class="dot"></span
+        >{{ fila.state().current?.status === 'called' ? 'CHAMANDO AGORA' : 'EM ATENDIMENTO' }}</span
+      ><strong class="tv-number">{{ fila.state().current?.label || '—' }}</strong>
+      <div class="tv-counter">
+        <span>BALCÃO</span><strong>01</strong><mat-icon>arrow_forward</mat-icon>
+      </div>
+      @if (fila.state().current?.status === 'called') {
+        <div class="tv-countdown">
+          <mat-icon>schedule</mat-icon>Apresente-se ao balcão
+          <strong>{{ fila.remaining() }}s</strong>
+        </div>
+      } @else {
+        <p>
+          {{
+            fila.state().current
+              ? 'Estamos cuidando do seu pedido.'
+              : 'Retire sua senha no celular ou no totem.'
+          }}
+        </p>
+      }
+    </section>
+    <aside class="tv-next">
+      <span class="eyebrow">PREPARE-SE PARA O ATENDIMENTO</span>
+      <h2>Próximas senhas</h2>
+      @for (t of fila.state().waiting.slice(0, 3); track t.id; let i = $index) {
+        <div class="tv-next-row">
+          <span>{{ String(i + 1).padStart(2, '0') }}</span
+          ><strong>{{ t.label }}</strong
+          ><mat-icon>{{ i === 0 ? 'arrow_forward' : 'more_horiz' }}</mat-icon>
+        </div>
+      } @empty {
+        <div class="tv-empty">
+          <mat-icon>shopping_basket</mat-icon>
+          <p>Fila livre.<br />Seja o próximo!</p>
+        </div>
+      }
+      <div class="tv-queue-count">
+        <mat-icon>groups</mat-icon>{{ fila.state().waiting.length }}
+        {{ fila.state().waiting.length === 1 ? 'cliente aguardando' : 'clientes aguardando' }}
+      </div>
+    </aside>
+  </main>
+  <footer class="tv-footer">
+    <div>
+      <mat-icon>shopping_basket</mat-icon
+      ><span>Continue suas compras.<strong>A gente chama você.</strong></span>
+    </div>
+    <div class="tv-controls">
+      <button mat-stroked-button (click)="alerts.enable()">
+        <mat-icon>{{ alerts.enabled() ? 'volume_up' : 'volume_off' }}</mat-icon
+        >{{ alerts.enabled() ? 'Som ativado · testar' : 'Ativar som' }}</button
+      ><button mat-icon-button aria-label="Tela cheia" (click)="fullscreen()">
+        <mat-icon>fullscreen</mat-icon></button
+      ><a mat-icon-button routerLink="/funcionario" aria-label="Voltar à gestão"
+        ><mat-icon>settings</mat-icon></a
+      >
+    </div>
+  </footer>
+  @if (fullscreenError()) {
+    <p role="alert">{{ fullscreenError() }}</p>
+  }
+</div>

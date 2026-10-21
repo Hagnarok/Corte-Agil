@@ -1,5 +1,30 @@
-@if(tickets.length){
-<div class="queue-table" [class.compact]="compact"><div class="queue-row table-head"><span>POSIÇÃO / SENHA</span><span>SERVIÇO SOLICITADO</span><span>ORIGEM</span><span>SITUAÇÃO</span></div>
-@for(t of tickets;track t.id;let i=$index){<div class="queue-row"><span class="ticket-cell"><small>{{i+1}}º</small><strong>{{t.label}}</strong></span><span class="service-cell"><span class="service-dot" [class.quick]="t.service==='Bife rápido'"></span>{{t.service}} @if(t.returns){<small class="returned">Retornou à fila</small>}</span><span class="origin"><mat-icon>{{t.origin==='totem'?'print':'smartphone'}}</mat-icon>{{t.origin==='totem'?'Totem':'Celular'}}</span><app-status-badge [status]="t.status"/></div>}
-</div>
-}@else{<div class="empty"><mat-icon>check_circle_outline</mat-icon><h3>Tudo em dia por aqui</h3><p>Novas senhas aparecerão nesta lista automaticamente.</p></div>}
+@if (tickets.length) {
+  <div class="queue-table" [class.compact]="compact">
+    <div class="queue-row table-head">
+      <span>POSIÇÃO / SENHA</span><span>SERVIÇO SOLICITADO</span><span>ORIGEM</span
+      ><span>SITUAÇÃO</span>
+    </div>
+    @for (t of tickets; track t.id; let i = $index) {
+      <div class="queue-row">
+        <span class="ticket-cell"
+          ><small>{{ i + 1 }}º</small><strong>{{ t.label }}</strong></span
+        ><span class="service-cell"
+          ><span class="service-dot" [class.quick]="t.service === 'Bife rápido'"></span
+          >{{ t.service }}
+          @if (t.returns) {
+            <small class="returned">Retornou à fila</small>
+          }</span
+        ><span class="origin"
+          ><mat-icon>{{ t.origin === 'totem' ? 'print' : 'smartphone' }}</mat-icon
+          >{{ t.origin === 'totem' ? 'Totem' : 'Celular' }}</span
+        ><app-status-badge [status]="t.status" />
+      </div>
+    }
+  </div>
+} @else {
+  <div class="empty">
+    <mat-icon>check_circle_outline</mat-icon>
+    <h3>Tudo em dia por aqui</h3>
+    <p>Novas senhas aparecerão nesta lista automaticamente.</p>
+  </div>
+}
