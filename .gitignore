@@ -147,3 +147,18 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# CorteÁgil - Angular and local application data
+.angular/
+out-tsc/
+data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# OS and editor temporary files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
