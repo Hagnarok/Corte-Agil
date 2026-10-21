@@ -36,11 +36,30 @@ app.use((req, res, next) => {
   if (req.path.startsWith('/api')) res.set('Cache-Control', 'no-store');
   next();
 });
+// Origens públicas explícitas: o proxy HTTPS do Codespaces chega ao Node via HTTP.
+const allowedOrigins = new Set(
+  (process.env.ALLOWED_ORIGINS || '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean),
+);
+if (process.env.CODESPACE_NAME && process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN) {
+  for (const port of [Number(process.env.PORT) || 3000, 4200]) {
+    allowedOrigins.add(
+      `https://${process.env.CODESPACE_NAME}-${port}.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`,
+    );
+  }
+}
+if (process.env.NODE_ENV !== 'production') {
+  allowedOrigins.add('http://localhost:4200');
+  allowedOrigins.add('http://127.0.0.1:4200');
+}
 app.use('/api', (req, res, next) => {
   if (
     req.method === 'POST' &&
     req.headers.origin &&
-    req.headers.origin !== `${req.protocol}://${req.headers.host}`
+    req.headers.origin !== `${req.protocol}://${req.headers.host}` &&
+    !allowedOrigins.has(req.headers.origin)
   )
     return res.status(403).json({ message: 'Origem não permitida.' });
   next();

@@ -360,3 +360,19 @@ Ordem recomendada de leitura para estudar o código:
 7. `src/styles.scss`: associe os componentes à aparência.
 
 Para comandos de criação de novos módulos e componentes, consulte `GUIA_MODULOS.md`. Para mapa da API e rastreabilidade dos PDFs, consulte `ARQUITETURA.md` e `REQUISITOS.md`.
+
+### Acesso por proxy e Codespaces
+
+O servidor reconhece as URLs das portas 3000 e 4200 do próprio Codespace usando
+`CODESPACE_NAME` e `GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN`. Isso permite acessar
+o site por HTTPS mesmo quando o proxy encaminha a conexão ao Node por HTTP.
+Origens de outros sites continuam bloqueadas.
+
+Para um domínio próprio ou outro proxy, configure na `.env` as origens públicas
+completas, separadas por vírgula, sem barra no final:
+
+```dotenv
+ALLOWED_ORIGINS=https://corte.exemplo.com.br
+```
+
+Reinicie o servidor após alterar essa configuração.

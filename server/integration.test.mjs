@@ -15,6 +15,9 @@ async function boot(dir) {
       DATA_DIR: dir,
       PORT: '0',
       HOST: '127.0.0.1',
+      CODESPACE_NAME: 'corte-test',
+      GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN: 'app.github.dev',
+      ALLOWED_ORIGINS: 'https://corte.example.com',
     },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
@@ -70,6 +73,30 @@ test('API: autenticação, concorrência, SSE, persistência após reinício e p
       ).status,
       401,
     );
+    for (const origin of [
+      base,
+      'http://localhost:4200',
+      'https://corte-test-3000.app.github.dev',
+      'https://corte-test-4200.app.github.dev',
+      'https://corte.example.com',
+    ]) {
+      const response = await fetch(base + '/api/logout', {
+        method: 'POST',
+        headers: { Origin: origin },
+      });
+      assert.equal(response.status, 401, `Origem válida deve chegar à autenticação: ${origin}`);
+    }
+    for (const origin of ['https://evil.invalid', 'https://outro-3000.app.github.dev']) {
+      const response = await fetch(base + '/api/logout', {
+        method: 'POST',
+        headers: {
+          Origin: origin,
+          'X-Forwarded-Host': 'evil.invalid',
+          'X-Forwarded-Proto': 'https',
+        },
+      });
+      assert.equal(response.status, 403);
+    }
     const login = await fetch(base + '/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
