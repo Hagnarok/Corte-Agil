@@ -1,0 +1,20 @@
+<article class="ticket-receipt" [class.wide]="largura === 80" aria-label="Cupom de senha">
+  <div class="ticket-brand">CorteÁgil</div>
+  <div class="ticket-counter">AÇOUGUE · BALCÃO 01</div>
+  <strong class="ticket-number" [class.long]="senha.label.length > 6">{{ senha.label }}</strong>
+  @if (senha.service !== 'Não informado') {
+    <div class="ticket-service">{{ senha.service }}</div>
+  }
+  @if (mostrarQr && qr) {
+    <img
+      class="ticket-qr"
+      [src]="qr"
+      alt="QR Code para acompanhar esta senha"
+      width="112"
+      height="112"
+    />
+    <div class="ticket-qr-hint">Acompanhe pelo celular</div>
+  }
+  <div class="ticket-time">{{ senha.time | date: 'dd/MM/yyyy HH:mm' }}</div>
+  <div class="ticket-footer">Aguarde a chamada da sua senha.</div>
+</article>

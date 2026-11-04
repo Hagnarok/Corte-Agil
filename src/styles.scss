@@ -1724,51 +1724,24 @@ nav a .nav-arrow {
 .kiosk-footer .mat-mdc-button {
   font-size: 11px;
 }
-.receipt {
-  background: #fff;
-  padding: 25px 38px;
-  margin: 25px 0;
-  max-width: 330px;
-  align-items: center;
-  border-style: dashed !important;
-  border-radius: 2px !important;
+.receipt-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
 }
-.receipt-brand {
-  font-size: 22px;
-  font-weight: 750;
-  margin-bottom: 13px;
-  color: #273c3c;
-}
-.receipt > span {
-  font-size: 10px;
-  letter-spacing: 0.4px;
-  color: #7f9797;
-}
-.receipt > strong {
-  font-size: 70px;
-  letter-spacing: -4px;
-  font-weight: 650;
-  margin: 7px 0 12px;
-  color: #263d3d;
-}
-.receipt img {
-  margin: 15px 0 3px;
+.receipt-options mat-form-field {
+  width: 230px;
   max-width: 100%;
-  object-fit: contain;
 }
-.receipt small {
-  font-size: 9px;
-  color: #849d9d;
-  line-height: 1.9;
-}
-.receipt-dashed {
-  width: 100%;
-  border-bottom: 1px dashed #c3d7d7;
-  margin: 18px 0;
-}
-.receipt p {
-  font-size: 9px;
-  color: #8ea3a3;
+.receipt-preview {
+  background: #fff;
+  padding: 12px;
+  margin: 8px auto 24px;
+  border: 1px dashed var(--line);
+  width: fit-content;
+  max-width: 100%;
 }
 .receipt-actions {
   display: flex;
@@ -2505,58 +2478,6 @@ nav a .nav-arrow {
   * {
     scroll-behavior: auto !important;
     transition: none !important;
-  }
-}
-@media print {
-  @page {
-    size: 80mm 155mm;
-    margin: 4mm;
-  }
-  body {
-    background: #fff !important;
-  }
-  body * {
-    visibility: hidden !important;
-  }
-  #print-ticket,
-  #print-ticket * {
-    visibility: visible !important;
-    color: #000 !important;
-    background: #fff !important;
-  }
-  #print-ticket {
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
-    width: 72mm !important;
-    max-width: 72mm !important;
-    margin: 0 !important;
-    padding: 3mm !important;
-    border: none !important;
-    box-shadow: none !important;
-    break-inside: avoid !important;
-  }
-  .receipt > strong {
-    font-size: 58px !important;
-  }
-  .receipt img {
-    width: 40mm !important;
-    height: 40mm !important;
-  }
-  .receipt small,
-  .receipt p,
-  .receipt > span {
-    font-size: 10px !important;
-  }
-  .kiosk,
-  .kiosk-main {
-    min-height: 0 !important;
-    padding: 0 !important;
-  }
-  .kiosk-header,
-  .kiosk-footer,
-  .receipt-actions {
-    display: none !important;
   }
 }
 

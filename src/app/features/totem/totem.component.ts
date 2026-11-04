@@ -1,6 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject, signal } from '@angular/core';
 import QRCode from 'qrcode';
 import { FilaService } from '../../core/services/fila.service';
+import { CupomImpressaoService } from './cupom-impressao.service';
+import { LarguraCupom, SenhaCupom } from './components/cupom-layout';
 import { SERVICOS } from '../../core/models/fila.model';
 @Component({
   selector: 'app-totem',
@@ -12,12 +14,12 @@ export class TotemComponent {
   readonly services = SERVICOS;
   service = 'Não informado';
   readonly busy = signal(false);
-  readonly receipt = signal<{
-    label: string;
-    url: string;
-    time: number;
-    service: string;
-  } | null>(null);
+  private readonly impressao = inject(CupomImpressaoService);
+  @ViewChild('cupom', { read: ElementRef }) private cupom?: ElementRef<HTMLElement>;
+  readonly receipt = signal<SenhaCupom | null>(null);
+  readonly printing = signal(false);
+  largura: LarguraCupom = localStorage.getItem('corteagil-papel') === '80' ? 80 : 58;
+  mostrarQr = localStorage.getItem('corteagil-imprimir-qr') !== 'false';
   readonly qr = signal('');
   readonly printError = signal('');
   async issue() {
@@ -34,8 +36,8 @@ export class TotemComponent {
       });
       this.qr.set(
         await QRCode.toDataURL(url, {
-          width: 240,
-          margin: 2,
+          width: 512,
+          margin: 4,
           errorCorrectionLevel: 'M',
         }),
       );
@@ -45,12 +47,21 @@ export class TotemComponent {
       this.busy.set(false);
     }
   }
-  print() {
-    if (!this.qr()) return;
+  salvarImpressao() {
+    localStorage.setItem('corteagil-papel', String(this.largura));
+    localStorage.setItem('corteagil-imprimir-qr', String(this.mostrarQr));
+  }
+  async print() {
+    const cupom = this.cupom?.nativeElement.querySelector<HTMLElement>('.ticket-receipt');
+    if (!cupom || !this.qr() || this.printing()) return;
+    this.printError.set('');
+    this.printing.set(true);
     try {
-      window.print();
+      await this.impressao.imprimir(cupom, this.largura);
     } catch {
       this.printError.set('Não foi possível abrir a impressão. Verifique a impressora.');
+    } finally {
+      this.printing.set(false);
     }
   }
   next() {
