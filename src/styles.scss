@@ -2510,3 +2510,20 @@ app-atendimento-atual > .current-card {
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
+
+.customer-ticket-card > .customer-notice {
+  width: 100%;
+  margin: 12px 0;
+  padding: 12px;
+  border-radius: 8px;
+  background: #e4f4f4;
+  color: #005252;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.customer-ticket-card > .customer-note {
+  color: #526d6d;
+  font-size: 12px;
+  line-height: 1.5;
+}

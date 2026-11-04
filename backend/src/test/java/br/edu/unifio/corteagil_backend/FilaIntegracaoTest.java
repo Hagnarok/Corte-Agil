@@ -5,8 +5,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import br.edu.unifio.corteagil_backend.dto.EmissaoRequest;
+import br.edu.unifio.corteagil_backend.entidades.Aviso;
 import br.edu.unifio.corteagil_backend.entidades.EstadoFila;
 import br.edu.unifio.corteagil_backend.repositorios.*;
+import br.edu.unifio.corteagil_backend.servicos.EventosServico;
 import br.edu.unifio.corteagil_backend.servicos.FilaServico;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.*;
@@ -30,6 +32,7 @@ class FilaIntegracaoTest {
   @Autowired MockMvc mvc;
   @Autowired ObjectMapper mapper;
   @Autowired FilaServico queue;
+  @Autowired EventosServico events;
   @Autowired SenhaRepositorio tickets;
   @Autowired FilaRepositorio queues;
   @Autowired AuditoriaRepositorio audits;
@@ -145,6 +148,52 @@ class FilaIntegracaoTest {
       assertThat(tickets.count()).isEqualTo(20);
     } finally {
       pool.shutdownNow();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private List<Aviso> avisos(String token) {
+    return (List<Aviso>) queue.ticket(token).get("notifications");
+  }
+
+  @Test
+  void avisosDeProximidadeChamadaAusenciaERetorno() {
+    queue.issue(new EmissaoRequest("Moído", "app"));
+    queue.issue(new EmissaoRequest("Moído", "totem"));
+    String token = queue.issue(new EmissaoRequest("Moído", "app")).get("token");
+    queue.issue(new EmissaoRequest("Moído", "app"));
+    assertThat(avisos(token)).extracting(a -> a.getKind()).containsExactly("ahead-2");
+    for (String action : List.of("call", "start", "finish")) queue.action(action);
+    assertThat(avisos(token)).extracting(a -> a.getKind()).containsExactly("ahead-2", "ahead-1");
+    queue.action("pause");
+    queue.action("pause");
+    assertThat(avisos(token)).hasSize(2);
+    for (String action : List.of("call", "start", "finish")) queue.action(action);
+    var chamada = queue.action("call");
+    queue.action("recall");
+    var senha = tickets.findById(chamada.id()).orElseThrow();
+    senha.setDeadline(System.currentTimeMillis() - 1);
+    tickets.save(senha);
+    queue.action("absent");
+    queue.rejoin(token);
+    assertThat(avisos(token))
+        .extracting(a -> a.getKind())
+        .containsExactly("ahead-2", "ahead-1", "called", "called", "absent", "returned", "ahead-1");
+    assertThat(avisos(token)).extracting(a -> a.getId()).doesNotHaveDuplicates();
+    for (String action : List.of("call", "start", "finish", "call", "start", "finish"))
+      queue.action(action);
+    assertThat(avisos(token).get(avisos(token).size() - 1).getKind()).isEqualTo("done");
+  }
+
+  @Test
+  void sseEnviaAlteracoesSemExporTokenPrivado() throws Exception {
+    try {
+      var result = mvc.perform(get("/api/events")).andExpect(request().asyncStarted()).andReturn();
+      String token = queue.issue(new EmissaoRequest("Moído", "app")).get("token");
+      String response = result.getResponse().getContentAsString();
+      assertThat(response).contains("data:", "A001").doesNotContain(token, "notifications");
+    } finally {
+      events.close();
     }
   }
 }

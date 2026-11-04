@@ -19,7 +19,6 @@ export class TotemComponent {
   readonly receipt = signal<SenhaCupom | null>(null);
   readonly printing = signal(false);
   largura: LarguraCupom = localStorage.getItem('corteagil-papel') === '80' ? 80 : 58;
-  mostrarQr = localStorage.getItem('corteagil-imprimir-qr') !== 'false';
   readonly qr = signal('');
   readonly printError = signal('');
   async issue() {
@@ -49,7 +48,6 @@ export class TotemComponent {
   }
   salvarImpressao() {
     localStorage.setItem('corteagil-papel', String(this.largura));
-    localStorage.setItem('corteagil-imprimir-qr', String(this.mostrarQr));
   }
   async print() {
     const cupom = this.cupom?.nativeElement.querySelector<HTMLElement>('.ticket-receipt');

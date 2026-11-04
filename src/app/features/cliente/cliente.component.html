@@ -71,10 +71,25 @@
       @if (t.returns) {
         <p class="support-text">Senha retornada ao final da fila após ausência.</p>
       }
-      <button mat-stroked-button class="full" (click)="notifications()">
-        <mat-icon>notifications_active</mat-icon
-        >{{ notices() ? 'Avisos do navegador ativados' : 'Ativar avisos no navegador' }}</button
-      ><small class="customer-note">Mantenha esta página aberta para acompanhar os avisos.</small>
+      @if (latestNotice(); as aviso) {
+        <p class="customer-notice" role="status" aria-live="polite">{{ aviso.text }}</p>
+      }
+      <button
+        mat-stroked-button
+        class="full"
+        [disabled]="notificationsBusy()"
+        (click)="notifications()"
+      >
+        <mat-icon>notifications_active</mat-icon>
+        {{
+          notificationsBusy()
+            ? 'Ativando avisos…'
+            : alerts.enabled() && alerts.systemEnabled()
+              ? 'Testar som e notificações'
+              : 'Ativar som e notificações'
+        }}
+      </button>
+      <small class="customer-note" role="status">{{ notificationHint() }}</small>
     } @else {
       <div class="issue-illustration">
         <mat-icon>confirmation_number</mat-icon><span>Uma senha.<br />Mais liberdade.</span>

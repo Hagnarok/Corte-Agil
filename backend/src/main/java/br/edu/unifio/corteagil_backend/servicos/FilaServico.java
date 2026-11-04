@@ -11,6 +11,7 @@ import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @Service
 @RequiredArgsConstructor
@@ -91,6 +92,10 @@ public class FilaServico {
             });
     events.broadcast(snapshot());
     return result;
+  }
+
+  public synchronized SseEmitter subscribe() {
+    return events.connect(snapshot());
   }
 
   public record Context(EstadoFila state, List<Senha> all, long now) {}

@@ -1,24 +1,33 @@
-import { Component, inject, signal, effect, untracked } from '@angular/core';
+import { Component, inject, signal, effect, untracked, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FilaService } from '../../core/services/fila.service';
-import { MinhaSenha, SERVICOS } from '../../core/models/fila.model';
+import { Aviso, MinhaSenha, SERVICOS } from '../../core/models/fila.model';
+import { AvisosClienteService } from '../../core/services/avisos-cliente.service';
 import { AlertaService } from '../../core/services/alerta.service';
 @Component({
   selector: 'app-cliente',
   standalone: false,
   templateUrl: './cliente.component.html',
 })
-export class ClienteComponent {
+export class ClienteComponent implements OnDestroy {
   readonly fila = inject(FilaService);
   readonly alerts = inject(AlertaService);
   readonly route = inject(ActivatedRoute);
   readonly ticket = signal<MinhaSenha | null>(null);
   readonly busy = signal(false);
-  readonly notices = signal(false);
+  readonly notificationsBusy = signal(false);
+  readonly notificationHint = signal(
+    'Ative o som e os avisos para saber quando sua vez estiver chegando.',
+  );
+  readonly latestNotice = signal<Aviso | null>(null);
+  private readonly avisos = inject(AvisosClienteService);
   readonly services = SERVICOS;
   service = 'Não informado';
   private token = '';
-  private lastNotice = '';
+  private destroyed = false;
+  private readonly poll = setInterval(() => {
+    if (this.token && document.visibilityState === 'visible') void this.refresh();
+  }, 15000);
   private refreshing = false;
   private refreshAgain = false;
   constructor() {
@@ -35,24 +44,31 @@ export class ClienteComponent {
     });
   }
   async refresh() {
+    if (!this.token || this.destroyed) return;
     if (this.refreshing) {
       this.refreshAgain = true;
       return;
     }
     this.refreshing = true;
+    const token = this.token;
     try {
-      const t = await this.fila.ticket(this.token);
+      const t = await this.fila.ticket(token);
+      if (this.destroyed || token !== this.token) return;
       this.ticket.set(t);
-      const n = t.notifications.at(-1);
-      if (n && n.id !== this.lastNotice) {
-        if (this.lastNotice || t.status === 'called' || t.status === 'absent') {
-          this.fila.api.message(n.text);
-          this.alerts.notify('CorteÁgil · ' + t.label, n.text);
-        }
-        this.lastNotice = n.id;
+      const novos = this.avisos.novos(token, t.notifications);
+      const aviso = novos.at(-1);
+      if (aviso) {
+        this.latestNotice.set(aviso);
+        this.fila.api.message(aviso.text);
+        void this.alerts.notify(
+          'CorteÁgil · ' + t.label,
+          aviso.text,
+          location.origin + '/cliente#senha=' + token,
+          'corteagil-' + t.id,
+        );
       }
     } catch (e) {
-      this.fila.api.error(e);
+      if (!this.destroyed && token === this.token) this.fila.api.error(e);
     } finally {
       this.refreshing = false;
       if (this.refreshAgain) {
@@ -88,20 +104,44 @@ export class ClienteComponent {
     }
   }
   async notifications() {
-    const permission = await this.alerts.permission();
-    this.notices.set(permission === 'granted');
-    this.fila.api.message(
-      permission === 'granted'
-        ? 'Notificações ativadas enquanto esta página estiver aberta.'
-        : permission === 'insecure'
-          ? 'No endereço HTTP da rede local, acompanhe os avisos nesta tela. Notificações do navegador exigem HTTPS.'
-          : 'Notificações indisponíveis ou não autorizadas. Os avisos continuam nesta tela.',
-    );
+    if (this.notificationsBusy()) return;
+    this.notificationsBusy.set(true);
+    try {
+      // As duas permissões começam no clique, antes de qualquer espera assíncrona.
+      const permission = this.alerts.permission();
+      await this.alerts.enable(false);
+      const result = await permission;
+      const delivered = await this.alerts.notify(
+        'CorteÁgil · avisos ativados',
+        'Você será avisado quando sua vez estiver chegando.',
+        location.origin + '/cliente#senha=' + this.token,
+        'corteagil-teste',
+      );
+      const sound = this.alerts.enabled() ? 'Som ativado. ' : 'Som indisponível. ';
+      this.notificationHint.set(
+        sound +
+          (delivered
+            ? 'Avisos do navegador ativados. Mantenha esta página aberta.'
+            : result === 'denied'
+              ? 'Notificações bloqueadas. Libere a permissão nas configurações do site; os avisos continuam nesta tela.'
+              : result === 'insecure'
+                ? 'Os avisos do navegador precisam de HTTPS. Acompanhe também os avisos nesta tela.'
+                : 'Avisos do navegador indisponíveis. Acompanhe os avisos nesta tela.'),
+      );
+      this.fila.api.message(this.notificationHint());
+    } finally {
+      this.notificationsBusy.set(false);
+    }
   }
   newTicket() {
     this.token = '';
     this.ticket.set(null);
+    this.latestNotice.set(null);
     localStorage.removeItem('corteagil-ticket');
     history.replaceState(null, '', location.pathname);
+  }
+  ngOnDestroy() {
+    this.destroyed = true;
+    clearInterval(this.poll);
   }
 }

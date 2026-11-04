@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 @RequiredArgsConstructor
 public class FilaControlador {
   private final FilaServico queue;
-  private final EventosServico events;
   private final AutenticacaoServico auth;
 
   @GetMapping("/state")
@@ -25,7 +24,7 @@ public class FilaControlador {
 
   @GetMapping(value = "/events", produces = "text/event-stream")
   public SseEmitter events() {
-    return events.connect(queue.snapshot());
+    return queue.subscribe();
   }
 
   @PostMapping("/tickets")

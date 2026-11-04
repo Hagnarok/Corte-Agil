@@ -11,5 +11,4 @@ export class CupomSenhaComponent {
   @Input({ required: true }) senha!: SenhaCupom;
   @Input() qr = '';
   @Input() largura: LarguraCupom = 58;
-  @Input() mostrarQr = true;
 }

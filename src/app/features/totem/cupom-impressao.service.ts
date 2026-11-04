@@ -7,6 +7,9 @@ export class CupomImpressaoService {
   private readonly document = inject(DOCUMENT);
 
   async imprimir(cupom: HTMLElement, largura: LarguraCupom): Promise<void> {
+    if (!cupom.querySelector('img.ticket-qr[src]')) {
+      throw new Error('Aguarde o QR Code para imprimir a senha.');
+    }
     const frame = this.document.createElement('iframe');
     frame.title = 'Impressão da senha';
     frame.setAttribute('aria-hidden', 'true');

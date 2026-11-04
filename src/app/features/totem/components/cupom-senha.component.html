@@ -5,7 +5,7 @@
   @if (senha.service !== 'Não informado') {
     <div class="ticket-service">{{ senha.service }}</div>
   }
-  @if (mostrarQr && qr) {
+  @if (qr) {
     <img
       class="ticket-qr"
       [src]="qr"

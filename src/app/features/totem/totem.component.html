@@ -21,22 +21,9 @@
             <mat-option [value]="80">80 mm</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>QR Code no cupom</mat-label>
-          <mat-select [(ngModel)]="mostrarQr" (ngModelChange)="salvarImpressao()">
-            <mat-option [value]="true">Com QR Code</mat-option>
-            <mat-option [value]="false">Sem QR Code · menos papel</mat-option>
-          </mat-select>
-        </mat-form-field>
       </div>
       <div class="receipt-preview">
-        <app-cupom-senha
-          #cupom
-          [senha]="r"
-          [qr]="qr()"
-          [largura]="largura"
-          [mostrarQr]="mostrarQr"
-        />
+        <app-cupom-senha #cupom [senha]="r" [qr]="qr()" [largura]="largura" />
       </div>
       <div class="receipt-actions">
         <button

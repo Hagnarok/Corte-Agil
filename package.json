@@ -11,7 +11,7 @@
     "start": "node --env-file-if-exists=.env scripts/start.mjs",
     "dev": "ng serve --host 0.0.0.0 --proxy-config proxy.conf.json",
     "build": "ng build",
-    "test": "node scripts/maven.mjs test",
+    "test": "node --test scripts/notificacoes-sw.test.mjs && node scripts/maven.mjs test",
     "check": "npm test && npm run build",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
