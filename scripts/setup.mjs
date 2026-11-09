@@ -3,7 +3,14 @@ import { randomBytes } from 'node:crypto';
 if (existsSync('.env')) console.log('O arquivo .env já existe. A senha foi preservada.');
 else {
   const password = randomBytes(12).toString('base64url');
-  writeFileSync('.env', `PORT=3000\nHOST=0.0.0.0\nADMIN_PASSWORD=${password}\n`, { mode: 0o600 });
+  const publicUrl = process.env.CODESPACE_NAME
+    ? `https://${process.env.CODESPACE_NAME}-3000.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN || 'app.github.dev'}`
+    : 'http://localhost:3000';
+  writeFileSync(
+    '.env',
+    `PORT=3000\nHOST=0.0.0.0\nADMIN_PASSWORD=${password}\nPUBLIC_BASE_URL=${publicUrl}\n`,
+    { mode: 0o600 },
+  );
   console.log(
     `Configuração criada.\nUsuário: admin\nSenha: ${password}\nGuarde a senha. Ela também está no arquivo .env.`,
   );

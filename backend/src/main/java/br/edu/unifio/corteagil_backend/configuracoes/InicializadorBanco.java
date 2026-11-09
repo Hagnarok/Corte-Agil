@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+@org.springframework.core.annotation.Order(10)
 @Component
 @RequiredArgsConstructor
 public class InicializadorBanco implements ApplicationRunner {

@@ -5,7 +5,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PaginaControlador {
-  @GetMapping({"/", "/entrar", "/funcionario", "/cliente", "/painel", "/totem"})
+  @GetMapping({
+    "/",
+    "/entrar",
+    "/funcionario",
+    "/cliente",
+    "/painel",
+    "/totem",
+    "/cadastros",
+    "/recuperar-senha"
+  })
   public String page() {
     return "forward:/index.html";
   }

@@ -1,0 +1,10 @@
+node_modules
+.angular
+dist
+backend/target
+.git
+.env
+.env.*
+data
+*.log
+docs

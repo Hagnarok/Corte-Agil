@@ -22,8 +22,12 @@ public class FilaServico {
   private final TransactionTemplate transactions;
   private final EventosServico events;
   private final ObjectMapper mapper;
-  private static final List<String> SERVICES =
-      List.of("Não informado", "Bife rápido", "Peça inteira", "Moído", "Outros cortes");
+  private final ServicoRepositorio servicos;
+  private final BalcaoRepositorio balcoes;
+  private final org.springframework.beans.factory.ObjectProvider<
+          jakarta.servlet.http.HttpServletRequest>
+      requests;
+  private final AutenticacaoServico auth;
   private static final ZoneId ZONE = ZoneId.of("America/Sao_Paulo");
 
   private RegraNegocioException fail(String text) {
@@ -57,9 +61,22 @@ public class FilaServico {
   }
 
   private void audit(String action, Senha t, long now) {
-    audits.save(
+    var event =
         new EventoAuditoria(
-            UUID.randomUUID().toString(), action, t == null ? "Fila" : t.getLabel(), now));
+            UUID.randomUUID().toString(), action, t == null ? "Fila" : t.getLabel(), now);
+    event.setResponsavelNome("Cliente / Totem");
+    try {
+      var req = requests.getIfAvailable();
+      if (req != null && req.getSession(false) != null) {
+        var u = auth.atual(req);
+        event.setResponsavel(u);
+        event.setResponsavelNome(u.getUsername());
+        if (t != null && (action.equals("Senha chamada") || action.equals("Atendimento iniciado")))
+          t.setAtendente(u);
+      }
+    } catch (IllegalStateException | RegraNegocioException ignored) {
+    }
+    audits.save(event);
   }
 
   private void updateNotices(List<Senha> all, long now) {
@@ -104,7 +121,7 @@ public class FilaServico {
     return mutate(
         c -> {
           if (c.state.isPaused()) throw fail("A retirada de senhas está pausada.");
-          if (!SERVICES.contains(req.service()))
+          if (servicos.findByNome(req.service()).filter(s -> s.isAtivo()).isEmpty())
             throw new RegraNegocioException("Serviço inválido.", 400);
           var t = new Senha();
           t.setId(UUID.randomUUID().toString());
@@ -112,6 +129,12 @@ public class FilaServico {
           c.state.setSequence(c.state.getSequence() + 1);
           t.setLabel("A" + String.format("%03d", c.state.getSequence()));
           t.setService(req.service());
+          t.setServico(servicos.findByNome(req.service()).orElseThrow());
+          t.setBalcao(
+              balcoes.findAll().stream()
+                  .filter(b -> b.isAtivo())
+                  .findFirst()
+                  .orElseThrow(() -> fail("Cadastre um balcão ativo antes de emitir senhas.")));
           t.setOrigin(req.origin());
           t.setStatus("waiting");
           t.setCreatedAt(c.now);
@@ -267,5 +290,68 @@ public class FilaServico {
 
   public List<EventoAuditoria> audit() {
     return audits.findTop100ByOrderByAtDesc();
+  }
+
+  public Object listarSenhas(String q, String status, int page, int size) {
+    if (page < 0
+        || size < 1
+        || size > 50
+        || q.length() > 100
+        || !List.of("", "waiting", "called", "serving", "done", "absent").contains(status))
+      throw new RegraNegocioException("Pesquisa ou paginação inválida.", 400);
+    var list =
+        tickets.findAll().stream()
+            .filter(
+                t ->
+                    (status.isBlank() || t.getStatus().equals(status))
+                        && (t.getLabel() + " " + t.getService())
+                            .toLowerCase()
+                            .contains(q.toLowerCase()))
+            .sorted(Comparator.comparingLong(Senha::getCreatedAt).reversed())
+            .toList();
+    return Map.of(
+        "items",
+        list.stream().skip((long) page * size).limit(size).map(SenhaResposta::of).toList(),
+        "total",
+        list.size());
+  }
+
+  public SenhaResposta editarSenha(String id, String nomeServico) {
+    return mutate(
+        c -> {
+          var t =
+              c.all.stream()
+                  .filter(s -> s.getId().equals(id))
+                  .findFirst()
+                  .orElseThrow(() -> new RegraNegocioException("Senha não encontrada.", 404));
+          if (!t.getStatus().equals("waiting"))
+            throw fail("Só é possível editar senhas aguardando.");
+          var s =
+              servicos
+                  .findByNome(nomeServico)
+                  .filter(x -> x.isAtivo())
+                  .orElseThrow(() -> new RegraNegocioException("Serviço inválido.", 400));
+          t.setServico(s);
+          t.setService(s.getNome());
+          audit("Serviço da senha alterado", t, c.now);
+          return SenhaResposta.of(t);
+        });
+  }
+
+  public void excluirSenha(String id) {
+    mutate(
+        c -> {
+          var t =
+              c.all.stream()
+                  .filter(s -> s.getId().equals(id))
+                  .findFirst()
+                  .orElseThrow(() -> new RegraNegocioException("Senha não encontrada.", 404));
+          if (!t.getStatus().equals("waiting"))
+            throw fail("Atendimentos iniciados e históricos não podem ser excluídos.");
+          audit("Senha cancelada", t, c.now);
+          c.all.remove(t);
+          tickets.delete(t);
+          return null;
+        });
   }
 }

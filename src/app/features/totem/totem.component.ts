@@ -1,9 +1,9 @@
+import { CatalogoService } from '../../core/services/catalogo.service';
 import { Component, ElementRef, ViewChild, inject, signal } from '@angular/core';
 import QRCode from 'qrcode';
 import { FilaService } from '../../core/services/fila.service';
 import { CupomImpressaoService } from './cupom-impressao.service';
 import { LarguraCupom, SenhaCupom } from './components/cupom-layout';
-import { SERVICOS } from '../../core/models/fila.model';
 @Component({
   selector: 'app-totem',
   standalone: false,
@@ -11,7 +11,7 @@ import { SERVICOS } from '../../core/models/fila.model';
 })
 export class TotemComponent {
   readonly fila = inject(FilaService);
-  readonly services = SERVICOS;
+  readonly services = inject(CatalogoService).services;
   service = 'Não informado';
   readonly busy = signal(false);
   private readonly impressao = inject(CupomImpressaoService);

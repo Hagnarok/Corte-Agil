@@ -18,6 +18,9 @@ public class Senha {
   @Column(nullable = false, unique = true)
   private String label;
 
+  @ManyToOne @com.fasterxml.jackson.annotation.JsonIgnore private Servico servico;
+  @ManyToOne @com.fasterxml.jackson.annotation.JsonIgnore private Balcao balcao;
+  @ManyToOne @com.fasterxml.jackson.annotation.JsonIgnore private Usuario atendente;
   private String service;
   private String origin;
   private String status;

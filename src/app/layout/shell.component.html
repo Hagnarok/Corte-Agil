@@ -10,6 +10,11 @@
     </div>
     <div class="nav-label">ESPAÇO DE TRABALHO</div>
     <nav>
+      @if (auth.perfil() === 'ADMIN') {
+        <a routerLink="/cadastros" routerLinkActive="active" (click)="menu.set(false)"
+          ><mat-icon>settings</mat-icon>Cadastros</a
+        >
+      }
       <a routerLink="/funcionario" routerLinkActive="active" (click)="menu.set(false)"
         ><mat-icon>dashboard</mat-icon>Visão geral</a
       ><a routerLink="/cliente" routerLinkActive="active" (click)="menu.set(false)"
@@ -58,7 +63,9 @@
       @if (auth.logged()) {
         <button mat-icon-button matTooltip="Sair da conta" aria-label="Sair" (click)="logout()">
           <mat-icon>logout</mat-icon></button
-        ><span class="avatar">AD</span>
+        ><span class="avatar" [matTooltip]="auth.username() + ' · ' + auth.perfil()">{{
+          auth.username().slice(0, 2).toUpperCase()
+        }}</span>
       } @else {
         <a mat-button routerLink="/entrar">Funcionário</a>
       }

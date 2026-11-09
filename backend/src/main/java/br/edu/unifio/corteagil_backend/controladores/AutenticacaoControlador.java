@@ -23,7 +23,8 @@ public class AutenticacaoControlador {
   @GetMapping("/session")
   public Object session(HttpServletRequest req) {
     auth.require(req);
-    return Map.of("username", "admin");
+    var u = auth.atual(req);
+    return Map.of("username", u.getUsername(), "perfil", u.getPerfil());
   }
 
   @PostMapping("/logout")

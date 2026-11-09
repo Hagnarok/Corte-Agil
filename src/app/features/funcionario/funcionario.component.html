@@ -107,10 +107,7 @@
     </div>
   </div>
   <div class="filter-bar">
-    @for (
-      type of ['Todos', 'Bife rápido', 'Peça inteira', 'Moído', 'Não informado', 'Outros cortes'];
-      track type
-    ) {
+    @for (type of filters(); track type) {
       <button [class.selected]="filter() === type" (click)="filter.set(type)">
         {{ type }}
       </button>
@@ -136,7 +133,7 @@
     @for (e of history(); track e.id) {
       <div class="history-row">
         <span class="dot"></span><strong>{{ e.label }}</strong
-        ><span>{{ e.action }}</span
+        ><span>{{ e.action }} · {{ e.responsavelNome || 'Registro anterior' }}</span
         ><small>{{ e.at | date: 'dd/MM HH:mm:ss' }}</small>
       </div>
     } @empty {

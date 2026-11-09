@@ -5,6 +5,7 @@ import pt from '@angular/common/locales/pt';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { ShellComponent } from './layout/shell.component';
+import { adminGuard } from './core/guards/admin.guard';
 import { authGuard } from './core/guards/auth.guard';
 registerLocaleData(pt);
 @Component({
@@ -19,6 +20,11 @@ export class AppComponent {}
     BrowserModule,
     SharedModule,
     RouterModule.forRoot([
+      {
+        path: 'recuperar-senha',
+        loadChildren: () =>
+          import('./features/recuperacao/recuperacao.module').then((m) => m.RecuperacaoModule),
+      },
       {
         path: 'entrar',
         loadChildren: () => import('./features/auth/auth.module').then((m) => m.AuthModule),
@@ -35,6 +41,12 @@ export class AppComponent {}
         path: '',
         component: ShellComponent,
         children: [
+          {
+            path: 'cadastros',
+            canActivate: [adminGuard],
+            loadChildren: () =>
+              import('./features/cadastros/cadastros.module').then((m) => m.CadastrosModule),
+          },
           {
             path: 'funcionario',
             canActivate: [authGuard],

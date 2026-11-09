@@ -4,10 +4,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ApiService {
   private snack = inject(MatSnackBar);
   async request<T>(path: string, body?: unknown): Promise<T> {
+    return this.send<T>(body === undefined ? 'GET' : 'POST', path, body);
+  }
+  async send<T>(method: string, path: string, body?: unknown): Promise<T> {
     let response: Response;
     try {
       response = await fetch('/api' + path, {
-        method: body === undefined ? 'GET' : 'POST',
+        method,
         credentials: 'same-origin',
         headers: body === undefined ? {} : { 'Content-Type': 'application/json' },
         body: body === undefined ? undefined : JSON.stringify(body),

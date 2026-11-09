@@ -39,6 +39,7 @@ export interface EstadoFila {
   serverTime: number;
 }
 export interface Evento {
+  responsavelNome?: string;
   id: string;
   action: string;
   label: string;

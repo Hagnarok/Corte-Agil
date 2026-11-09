@@ -51,7 +51,7 @@ public class FiltroApi extends OncePerRequestFilter {
     res.setHeader("Referrer-Policy", "no-referrer");
     if (req.getRequestURI().startsWith("/api/")) {
       res.setHeader("Cache-Control", "no-store");
-      if (req.getMethod().equals("POST")) {
+      if (List.of("POST", "PUT", "DELETE", "PATCH").contains(req.getMethod())) {
         String origin = req.getHeader("Origin");
         String own = req.getScheme() + "://" + req.getHeader("Host");
         if (origin != null && !origin.equals(own) && !origins.contains(origin)) {
@@ -61,7 +61,7 @@ public class FiltroApi extends OncePerRequestFilter {
         long now = System.currentTimeMillis();
         String path = req.getRequestURI();
         int max =
-            path.equals("/api/login")
+            (path.equals("/api/login") || path.startsWith("/api/password-reset"))
                 ? 8
                 : path.equals("/api/tickets") ? 60 : path.endsWith("/return") ? 20 : 300;
         String key = req.getRemoteAddr() + ":" + path;

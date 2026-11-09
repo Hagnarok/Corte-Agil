@@ -1,0 +1,190 @@
+<div class="page-heading">
+  <div>
+    <h1>Cadastros</h1>
+    <p>Serviços, balcões, equipe e senhas do atendimento.</p>
+  </div>
+</div>
+<mat-card class="admin-card">
+  <div class="admin-tools">
+    <mat-form-field
+      ><mat-label>Cadastro</mat-label
+      ><mat-select [(ngModel)]="tipo" (selectionChange)="change()"
+        ><mat-option value="servicos">Serviços</mat-option
+        ><mat-option value="balcoes">Balcões</mat-option
+        ><mat-option value="usuarios">Usuários</mat-option
+        ><mat-option value="senhas">Senhas</mat-option></mat-select
+      ></mat-form-field
+    >
+    <mat-form-field
+      ><mat-label>Pesquisar</mat-label
+      ><input matInput [(ngModel)]="q" maxlength="100" (keyup.enter)="page = 0; load()"
+    /></mat-form-field>
+    @if (senhaMode) {
+      <mat-form-field
+        ><mat-label>Situação</mat-label
+        ><mat-select [(ngModel)]="status" (selectionChange)="change()"
+          ><mat-option value="">Todas</mat-option><mat-option value="waiting">Aguardando</mat-option
+          ><mat-option value="called">Chamada</mat-option
+          ><mat-option value="serving">Atendimento</mat-option
+          ><mat-option value="done">Concluída</mat-option
+          ><mat-option value="absent">Ausente</mat-option></mat-select
+        ></mat-form-field
+      >
+    }
+    @if (!senhaMode) {
+      <mat-form-field
+        ><mat-label>Situação</mat-label
+        ><mat-select [(ngModel)]="ativo" (selectionChange)="change()"
+          ><mat-option value="">Todas</mat-option><mat-option value="true">Ativos</mat-option
+          ><mat-option value="false">Inativos</mat-option></mat-select
+        ></mat-form-field
+      >
+    }
+    <button mat-stroked-button (click)="page = 0; load()" [disabled]="busy()">Pesquisar</button>
+    @if (!senhaMode) {
+      <button mat-flat-button (click)="open()">Novo cadastro</button>
+    } @else {
+      <a mat-flat-button routerLink="/totem">Emitir senha</a>
+    }
+  </div>
+  @if (editing()) {
+    <form class="admin-editor" [formGroup]="form" (ngSubmit)="save()">
+      <h2>{{ id ? 'Editar' : 'Novo' }} cadastro</h2>
+      @if (senhaMode) {
+        <mat-form-field
+          ><mat-label>Serviço</mat-label
+          ><mat-select formControlName="nome">
+            @for (s of catalogo.services(); track s) {
+              <mat-option [value]="s">{{ s }}</mat-option>
+            }
+          </mat-select></mat-form-field
+        >
+      } @else {
+        <mat-form-field
+          ><mat-label>{{ tipo === 'usuarios' ? 'Usuário de acesso' : 'Nome' }}</mat-label
+          ><input matInput formControlName="nome" maxlength="80" /><mat-error
+            >Informe um nome de até 80 caracteres.</mat-error
+          ></mat-form-field
+        >
+      }
+      @if (tipo === 'usuarios') {
+        <mat-form-field
+          ><mat-label>E-mail para recuperação</mat-label
+          ><input matInput formControlName="email" type="email" maxlength="150" /><mat-error
+            >Informe um e-mail válido.</mat-error
+          ></mat-form-field
+        >
+        <mat-form-field
+          ><mat-label>{{ id ? 'Nova senha (opcional)' : 'Senha' }}</mat-label
+          ><input
+            matInput
+            type="password"
+            formControlName="senha"
+            maxlength="72"
+            autocomplete="new-password"
+          /><mat-error>Use de 10 a 72 caracteres.</mat-error></mat-form-field
+        >
+        <mat-form-field
+          ><mat-label>Perfil</mat-label
+          ><mat-select formControlName="perfil"
+            ><mat-option value="ADMIN">Administrador</mat-option
+            ><mat-option value="ATENDENTE">Atendente</mat-option></mat-select
+          ></mat-form-field
+        >
+      }
+      @if (!senhaMode) {
+        <mat-form-field
+          ><mat-label>Situação</mat-label
+          ><mat-select formControlName="ativo"
+            ><mat-option [value]="true">Ativo</mat-option
+            ><mat-option [value]="false">Inativo</mat-option></mat-select
+          ></mat-form-field
+        >
+      }
+      <div>
+        <button mat-flat-button type="submit" [disabled]="form.invalid || busy()">Salvar</button
+        ><button mat-button type="button" (click)="editing.set(false)">Cancelar</button>
+      </div>
+    </form>
+  }
+  @if (resetLink()) {
+    <div class="admin-reset" role="status">
+      <strong>Link válido por 15 minutos. Entregue apenas ao titular da conta.</strong
+      ><input
+        readonly
+        [value]="resetLink()"
+        aria-label="Link de redefinição"
+        (click)="$any($event.target).select()"
+      /><button mat-button (click)="resetLink.set('')">Fechar</button>
+    </div>
+  }
+  <div class="admin-table">
+    <table>
+      <thead>
+        <tr>
+          <th>{{ senhaMode ? 'Senha' : 'Nome' }}</th>
+          <th>Detalhes</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of items(); track row.id) {
+          <tr>
+            <td>{{ row.nome || row.username || row.label }}</td>
+            <td>
+              @if (senhaMode) {
+                {{ row.service }} · <app-status-badge [status]="row.status || 'waiting'" />
+              } @else {
+                {{
+                  tipo === 'usuarios'
+                    ? (row.perfil === 'ADMIN' ? 'Administrador' : 'Atendente') +
+                      ' · ' +
+                      (row.ativo ? 'Ativo' : 'Inativo') +
+                      ' · ' +
+                      (row.email || 'Sem e-mail')
+                    : row.ativo
+                      ? 'Ativo'
+                      : 'Inativo'
+                }}
+              }
+            </td>
+            <td>
+              <button
+                mat-button
+                (click)="open(row)"
+                [disabled]="busy() || (senhaMode && row.status !== 'waiting')"
+              >
+                Editar</button
+              ><button
+                mat-button
+                (click)="remove(row)"
+                [disabled]="busy() || (senhaMode && row.status !== 'waiting')"
+              >
+                Excluir
+              </button>
+              @if (tipo === 'usuarios') {
+                <button mat-button (click)="reset(row)">Redefinir senha</button>
+              }
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="3">Nenhum registro encontrado.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="admin-pagination">
+    <button mat-button (click)="page = page - 1; load()" [disabled]="page === 0 || busy()">
+      Anterior</button
+    ><span>Página {{ page + 1 }} · {{ total() }} registros</span
+    ><button
+      mat-button
+      (click)="page = page + 1; load()"
+      [disabled]="(page + 1) * size >= total() || busy()"
+    >
+      Próxima
+    </button>
+  </div>
+</mat-card>

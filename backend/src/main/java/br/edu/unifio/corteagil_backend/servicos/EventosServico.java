@@ -25,7 +25,15 @@ public class EventosServico {
       client.send(event);
     } catch (IOException | IllegalStateException e) {
       clients.remove(client);
+      completar(client);
+    }
+  }
+
+  private void completar(SseEmitter client) {
+    try {
       client.complete();
+    } catch (IllegalStateException ignored) {
+      /* A conexão já foi encerrada pelo servidor. */
     }
   }
 
@@ -40,7 +48,7 @@ public class EventosServico {
 
   @jakarta.annotation.PreDestroy
   public void close() {
-    for (var client : clients) client.complete();
+    for (var client : clients) completar(client);
     clients.clear();
   }
 }

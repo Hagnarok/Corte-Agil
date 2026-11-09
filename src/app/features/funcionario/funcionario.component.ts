@@ -1,4 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
+import { CatalogoService } from '../../core/services/catalogo.service';
 import { FilaService } from '../../core/services/fila.service';
 import { Evento } from '../../core/models/fila.model';
 @Component({
@@ -8,6 +9,14 @@ import { Evento } from '../../core/models/fila.model';
 })
 export class FuncionarioComponent {
   readonly fila = inject(FilaService);
+  readonly catalogo = inject(CatalogoService);
+  readonly filters = computed(() => [
+    ...new Set([
+      'Todos',
+      ...this.catalogo.services(),
+      ...this.fila.state().waiting.map((t) => t.service),
+    ]),
+  ]);
   readonly filter = signal('Todos');
   readonly history = signal<Evento[]>([]);
   readonly showHistory = signal(false);
@@ -23,23 +32,11 @@ export class FuncionarioComponent {
   );
   readonly counts = computed(() => {
     const list = this.fila.state().waiting;
-    return [
-      {
-        name: 'Bife rápido',
-        icon: 'bolt',
-        count: list.filter((t) => t.service === 'Bife rápido').length,
-      },
-      {
-        name: 'Peça inteira',
-        icon: 'restaurant',
-        count: list.filter((t) => t.service === 'Peça inteira').length,
-      },
-      {
-        name: 'Moído',
-        icon: 'grain',
-        count: list.filter((t) => t.service === 'Moído').length,
-      },
-    ];
+    return [...new Set(list.map((t) => t.service))].map((name) => ({
+      name,
+      icon: name === 'Moído' ? 'grain' : name === 'Bife rápido' ? 'bolt' : 'restaurant',
+      count: list.filter((t) => t.service === name).length,
+    }));
   });
   async toggleHistory() {
     this.showHistory.set(!this.showHistory());

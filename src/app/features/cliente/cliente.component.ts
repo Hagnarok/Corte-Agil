@@ -1,7 +1,8 @@
+import { CatalogoService } from '../../core/services/catalogo.service';
 import { Component, inject, signal, effect, untracked, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FilaService } from '../../core/services/fila.service';
-import { Aviso, MinhaSenha, SERVICOS } from '../../core/models/fila.model';
+import { Aviso, MinhaSenha } from '../../core/models/fila.model';
 import { AvisosClienteService } from '../../core/services/avisos-cliente.service';
 import { AlertaService } from '../../core/services/alerta.service';
 @Component({
@@ -21,7 +22,7 @@ export class ClienteComponent implements OnDestroy {
   );
   readonly latestNotice = signal<Aviso | null>(null);
   private readonly avisos = inject(AvisosClienteService);
-  readonly services = SERVICOS;
+  readonly services = inject(CatalogoService).services;
   service = 'Não informado';
   private token = '';
   private destroyed = false;
