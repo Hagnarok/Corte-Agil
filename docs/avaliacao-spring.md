@@ -20,7 +20,7 @@ Esta atividade acrescenta critérios à entrega de interface anterior. A confer�
 | Funcionalidade específica do PI               | emissão, chamada, chegada, conclusão, ausência e retorno da fila               |
 | Postman com respostas, variáveis e exportação | postman/projeto-integrador.postman_collection.json                             |
 | README, endpoints e diagrama                  | README.md, documentacao-api.md e arquitetura.md                                |
-| Nomes completos e IDs acadêmicos              | Pendente de informação pelo grupo; completar a tabela do README                |
+| Nomes completos e IDs acadêmicos              | Nomes completos e IDs dos quatro integrantes na tabela do README               |
 
 ## Base utilizada e adaptação
 
