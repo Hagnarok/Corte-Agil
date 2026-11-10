@@ -89,7 +89,7 @@ docker run --rm -p 3000:3000 --env-file .env -v corte-agil-data:/app/data corte-
 
 Na hospedagem compatível com Docker/Java, conecte este repositório e use o Dockerfile. Configure `PORT`, `ADMIN_PASSWORD`, `PUBLIC_BASE_URL` e `ALLOWED_ORIGINS` com a URL HTTPS real. Use disco persistente em `/app/data` para H2 ou um MySQL externo com backup. Sem persistência, os dados serão perdidos em uma recriação do container. Mantenha uma única instância para a fila e suas conexões SSE. O proxy deve permitir conexões SSE longas sem buffering. A verificação HTTP é `GET /api/state`.
 
-Ainda é necessário criar o serviço na conta de hospedagem, informar as variáveis protegidas e conferir a URL pública. Ter o Dockerfile e o código no GitHub não significa que a aplicação já esteja publicada.
+A aplicação foi publicada em https://corte-agil-rose.vercel.app. O acesso da equipe fica em `/entrar`, com usuário `admin` e a senha configurada pelo responsável na primeira inicialização. As credenciais de avaliação devem ser entregues pelo AVA, sem publicação neste repositório. A publicação atual usa envio de código pela API da Vercel; a integração GitHub–Vercel ainda precisa ser habilitada para que novos pushes gerem deploy automaticamente.
 
 As notificações dependem de HTTPS (localhost é aceito), permissão do usuário e suporte do navegador. O service worker permite exibir avisos nos navegadores compatíveis; o transporte é SSE/polling enquanto a aplicação está aberta, sem Web Push para navegador encerrado. No iPhone, a permissão pode exigir instalar o site na tela inicial. Confirme também a saída física nas impressoras 58 e 80 mm: a prévia de impressão não substitui o teste do equipamento.
 

@@ -97,6 +97,6 @@ Declare a rota filha no módulo gerado e adicione um `loadChildren` em `app.modu
 | Auditoria                            | Data, ação e usuário responsável; histórico visível na operação                                        |
 | Testes de negócio                    | Fila, avisos, concorrência, perfis, CRUD, vínculos e recuperação                                       |
 | Git e documentação                   | Repositório GitHub, este diagrama e manual separado; README vazio                                      |
-| Publicação cloud                     | Dockerfile preparado; falta ativar hospedagem com persistência e validar a URL pública                 |
+| Publicação cloud                     | Publicado em https://corte-agil-rose.vercel.app, com PostgreSQL Neon e sessões persistidas no banco    |
 
-A implantação real, o envio SMTP real e os equipamentos físicos dependem do ambiente de uso. A execução local automatizada não confirma esses três pontos.
+A publicação foi validada no navegador: login, sessão após recarga, CRUD no PostgreSQL, emissão e conclusão do atendimento, atualização do cliente e layout mobile. O envio SMTP e os equipamentos físicos ainda dependem de configuração e testes no ambiente de uso.
