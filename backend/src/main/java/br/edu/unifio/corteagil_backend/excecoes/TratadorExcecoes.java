@@ -1,6 +1,7 @@
 package br.edu.unifio.corteagil_backend.excecoes;
 
 import java.util.Map;
+import java.util.TreeMap;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +14,50 @@ public class TratadorExcecoes {
     return ResponseEntity.status(e.getStatus()).body(Map.of("message", e.getMessage()));
   }
 
-  @ExceptionHandler({
-    MethodArgumentNotValidException.class,
-    org.springframework.http.converter.HttpMessageNotReadableException.class
-  })
-  ResponseEntity<?> invalid(Exception e) {
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  ResponseEntity<?> invalid(MethodArgumentNotValidException e) {
+    var campos = new TreeMap<String, String>();
+    for (var erro : e.getBindingResult().getFieldErrors())
+      campos.putIfAbsent(erro.getField(), erro.getDefaultMessage());
+    String mensagem =
+        campos.isEmpty()
+            ? "Dados inválidos. Confira os campos enviados."
+            : "Dados inválidos. " + String.join(" ", campos.values());
+    return ResponseEntity.badRequest().body(Map.of("message", mensagem, "errors", campos));
+  }
+
+  @ExceptionHandler(org.springframework.http.converter.HttpMessageNotReadableException.class)
+  ResponseEntity<?> jsonInvalido(Exception e) {
     return ResponseEntity.badRequest()
-        .body(Map.of("message", "Dados inválidos. Confira os campos enviados."));
+        .body(Map.of("message", "Corpo ausente ou JSON inválido. Envie um objeto JSON válido."));
+  }
+
+  @ExceptionHandler(org.springframework.web.bind.MissingServletRequestParameterException.class)
+  ResponseEntity<?> parametroAusente(
+      org.springframework.web.bind.MissingServletRequestParameterException e) {
+    String mensagem = "Informe o parâmetro obrigatório '" + e.getParameterName() + "'.";
+    return ResponseEntity.badRequest()
+        .body(Map.of("message", mensagem, "errors", Map.of(e.getParameterName(), mensagem)));
+  }
+
+  @ExceptionHandler(org.springframework.web.HttpMediaTypeNotSupportedException.class)
+  ResponseEntity<?> formatoIncompativel(Exception e) {
+    return ResponseEntity.status(415)
+        .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+        .body(
+            Map.of(
+                "message",
+                "Formato de conteúdo não suportado. Envie JSON com Content-Type: application/json."));
+  }
+
+  @ExceptionHandler(org.springframework.web.HttpMediaTypeNotAcceptableException.class)
+  ResponseEntity<?> respostaIncompativel(Exception e) {
+    return ResponseEntity.status(406)
+        .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+        .body(
+            Map.of(
+                "message",
+                "Formato de resposta não disponível. Utilize Accept: application/json."));
   }
 
   @ExceptionHandler(org.springframework.dao.DataIntegrityViolationException.class)
@@ -31,10 +69,16 @@ public class TratadorExcecoes {
                 "Registro duplicado ou vinculado a um histórico. Desative-o em vez de excluir."));
   }
 
-  @ExceptionHandler({
-    org.springframework.web.method.annotation.MethodArgumentTypeMismatchException.class,
-    jakarta.validation.ConstraintViolationException.class
-  })
+  @ExceptionHandler(
+      org.springframework.web.method.annotation.MethodArgumentTypeMismatchException.class)
+  ResponseEntity<?> tipoDoParametro(
+      org.springframework.web.method.annotation.MethodArgumentTypeMismatchException e) {
+    String mensagem = "O parâmetro '" + e.getName() + "' possui um valor inválido.";
+    return ResponseEntity.badRequest()
+        .body(Map.of("message", mensagem, "errors", Map.of(e.getName(), mensagem)));
+  }
+
+  @ExceptionHandler(jakarta.validation.ConstraintViolationException.class)
   ResponseEntity<?> parametro(Exception e) {
     return ResponseEntity.badRequest().body(Map.of("message", "Parâmetros inválidos."));
   }

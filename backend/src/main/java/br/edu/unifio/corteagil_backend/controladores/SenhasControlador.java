@@ -14,7 +14,10 @@ public class SenhasControlador {
   private final FilaServico fila;
   private final AutenticacaoServico auth;
 
-  public record Editar(@NotBlank @Size(max = 80) String service) {}
+  public record Editar(
+      @NotBlank(message = "Informe o serviço.")
+          @Size(max = 80, message = "O serviço deve ter até 80 caracteres.")
+          String service) {}
 
   @GetMapping
   public Object listar(

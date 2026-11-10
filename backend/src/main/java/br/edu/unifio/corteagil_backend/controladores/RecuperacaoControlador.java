@@ -14,10 +14,19 @@ public class RecuperacaoControlador {
   private final RecuperacaoServico servico;
   private final AutenticacaoServico auth;
 
-  public record Solicitar(@NotBlank @Email @Size(max = 150) String email) {}
+  public record Solicitar(
+      @NotBlank(message = "Informe o e-mail.")
+          @Email(message = "Informe um e-mail válido.")
+          @Size(max = 150, message = "O e-mail deve ter até 150 caracteres.")
+          String email) {}
 
   public record Redefinir(
-      @NotBlank @Size(max = 200) String token, @NotBlank @Size(min = 10, max = 72) String senha) {}
+      @NotBlank(message = "Informe o token de redefinição.")
+          @Size(max = 200, message = "Token de redefinição inválido.")
+          String token,
+      @NotBlank(message = "Informe a nova senha.")
+          @Size(min = 10, max = 72, message = "A nova senha deve ter entre 10 e 72 caracteres.")
+          String senha) {}
 
   @PostMapping("/api/password-reset/request")
   public Object pedir(@Valid @RequestBody Solicitar d) {

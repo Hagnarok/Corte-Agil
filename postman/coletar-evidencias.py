@@ -1,5 +1,5 @@
 """Executa a coleção contra um banco local de avaliação e salva respostas reais."""
-import argparse, base64, datetime, json, pathlib, uuid
+import argparse, base64, json, pathlib, uuid
 from urllib import request, error, parse
 
 parser = argparse.ArgumentParser()
@@ -19,7 +19,7 @@ def resolve(value):
         value = value.replace('{{' + key + '}}', str(val))
     return value
 
-def run(name, method, path, expected=200, data=None, role='admin', capture=None):
+def run(name, method, path, expected=200, data=None, role='admin', capture=None, content_type='application/json', extra_headers=None, checks=None):
     prefix = 'admin' if role == 'admin' else 'atendente'
     auth = {'type': 'noauth'} if role is None else {'type': 'basic', 'basic': [
         {'key': 'username', 'value': '{{' + prefix + 'Usuario}}', 'type': 'string'},
@@ -28,13 +28,14 @@ def run(name, method, path, expected=200, data=None, role='admin', capture=None)
         auth = {'type': 'basic', 'basic': [{'key': 'username', 'value': 'inexistente', 'type': 'string'},
                                         {'key': 'password', 'value': 'incorreta', 'type': 'string'}]}
     req = {'method': method, 'auth': auth, 'header': [], 'url': '{{baseUrl}}' + path}
-    headers = {}
+    headers = dict(extra_headers or {})
+    req['header'].extend({'key': k, 'value': v} for k, v in headers.items())
     body = None
     if data is not None:
-        raw = json.dumps(data, ensure_ascii=False)
+        raw = data if isinstance(data, str) else json.dumps(data, ensure_ascii=False)
         req['body'] = {'mode': 'raw', 'raw': raw, 'options': {'raw': {'language': 'json'}}}
-        req['header'].append({'key': 'Content-Type', 'value': 'application/json'})
-        headers['Content-Type'] = 'application/json'
+        req['header'].append({'key': 'Content-Type', 'value': content_type})
+        headers['Content-Type'] = content_type
         body = resolve(raw).encode()
     if role is not None:
         user, password = ('inexistente', 'incorreta') if role == 'invalid' else (variables[prefix + 'Usuario'], variables[prefix + 'Senha'])
@@ -50,11 +51,25 @@ def run(name, method, path, expected=200, data=None, role='admin', capture=None)
         raise SystemExit(f'{name}: esperado {expected}; recebido {status}: {text}')
     payload = json.loads(text) if text else None
     events = ['pm.test("HTTP ' + str(expected) + '", function () { pm.response.to.have.status(' + str(expected) + '); });']
+    if expected >= 400:
+        if not isinstance(payload, dict) or not isinstance(payload.get('message'), str) or not payload['message'].strip():
+            raise SystemExit(name + ': resposta de erro sem mensagem compreensível')
+        events += ['pm.test("Mensagem de erro preenchida", function () { pm.expect(pm.response.json().message).to.be.a("string").and.not.empty; });']
+    if capture or checks:
+        events += ['const dados = pm.response.json();']
     if capture:
         for variable, key in capture.items():
             variables[variable] = payload[key]
-        events += ['const dados = pm.response.json();']
         events += ['pm.collectionVariables.set(' + json.dumps(variable) + ', dados[' + json.dumps(key) + ']);' for variable, key in capture.items()]
+    for field, value in (checks or {}).items():
+        actual = payload
+        expression = 'dados'
+        for key in field.split('.'):
+            actual = actual[key]
+            expression += '[' + json.dumps(key) + ']'
+        if actual != value:
+            raise SystemExit(name + ': conteúdo inesperado em ' + field)
+        events += ['pm.test(' + json.dumps('Conferir ' + field) + ', function () { pm.expect(' + expression + ').to.eql(' + json.dumps(value, ensure_ascii=False) + '); });']
     item = {'name': name, 'request': req, 'event': [{'listen': 'test', 'script': {'type': 'text/javascript', 'exec': events}}],
             'response': [{'name': name + ' — ' + str(status), 'originalRequest': req, 'status': result.reason, 'code': status,
                           '_postman_previewlanguage': 'json', 'header': [{'key': k, 'value': v} for k, v in result.headers.items() if k.lower() not in ('set-cookie', 'authorization')],
@@ -125,8 +140,15 @@ run('55 — Rejeitar situação inválida', 'GET', '/api/consultas/senhas-por-si
 run('56 — Recurso inexistente', 'GET', '/api/admin/servicos/inexistente', 404)
 run('57 — Excluir serviço sem vínculo', 'DELETE', '/api/admin/servicos/{{servicoId}}', 204)
 run('58 — Excluir categoria sem vínculo', 'DELETE', '/api/admin/categorias/{{categoriaId}}', 204)
+run('59 — Listar serviços com administrador', 'GET', '/api/admin/servicos')
+run('60 — Rejeitar consulta sem parâmetro obrigatório', 'GET', '/api/consultas/senhas-por-situacao', 400, role='atendente', checks={'errors.status': "Informe o parâmetro obrigatório 'status'."})
+run('61 — Rejeitar Content-Type incompatível', 'POST', '/api/admin/categorias', 415, {'nome': 'Formato incorreto', 'ativo': True}, content_type='text/plain', checks={'message': 'Formato de conteúdo não suportado. Envie JSON com Content-Type: application/json.'})
+run('62 — Identificar cada campo inválido', 'POST', '/api/admin/usuarios', 400, {'nome': ' ', 'email': 'email-invalido', 'senha': 'x' * 73, 'perfil': 'OUTRO', 'ativo': True}, checks={'errors.nome': 'Informe o nome.', 'errors.email': 'Informe um e-mail válido.', 'errors.senha': 'A senha deve ter até 72 caracteres.', 'errors.perfil': 'O perfil deve ser ADMIN ou ATENDENTE.'})
+run('63 — Rejeitar JSON malformado', 'POST', '/api/admin/categorias', 400, '{', checks={'message': 'Corpo ausente ou JSON inválido. Envie um objeto JSON válido.'})
+run('64 — Identificar parâmetro com tipo inválido', 'GET', '/api/admin/servicos?page=texto', 400, checks={'errors.page': "O parâmetro 'page' possui um valor inválido."})
+run('65 — Rejeitar formato de resposta não disponível', 'GET', '/api/admin/servicos', 406, extra_headers={'Accept': 'application/xml'}, checks={'message': 'Formato de resposta não disponível. Utilize Accept: application/json.'})
 collection = {'info': {'name': 'Corte Ágil — Projeto Integrador', 'schema': 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json',
-                      'description': 'Requisições e respostas reais de uma execução local com MySQL. Contas exclusivamente didáticas do perfil avaliacao. Execute na ordem. Os scripts atualizam IDs e verificam o código HTTP. Os exemplos em response correspondem ao recurso Save Response do Postman.'},
+                      'description': 'Requisições e respostas reais de uma execução local com MySQL. Contas exclusivamente didáticas do perfil avaliacao. Execute na ordem. Os scripts atualizam IDs, verificam o código HTTP e conferem mensagens e campos inválidos. Os exemplos em response correspondem ao recurso Save Response do Postman.'},
               'variable': [{'key': k, 'value': str(v), 'type': 'string'} for k, v in variables.items()], 'item': items}
 out = pathlib.Path(args.saida)
 out.parent.mkdir(parents=True, exist_ok=True)

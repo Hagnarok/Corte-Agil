@@ -178,4 +178,85 @@ class ApiAvaliacaoTest {
                 .content("{\"nome\":\"Valido\",\"ativo\":true,\"categoriaId\":\"inexistente\"}"))
         .andExpect(status().isNotFound());
   }
+
+  @Test
+  void parametroObrigatorioAusenteETipoInvalidoRetornam400() throws Exception {
+    mvc.perform(get("/api/consultas/senhas-por-situacao").header("Authorization", atendente()))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.message").value(org.hamcrest.Matchers.containsString("status")))
+        .andExpect(jsonPath("$.errors.status").exists());
+    mvc.perform(get("/api/admin/servicos").param("page", "texto").header("Authorization", admin()))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.message").value(org.hamcrest.Matchers.containsString("page")))
+        .andExpect(jsonPath("$.errors.page").exists());
+  }
+
+  @Test
+  void formatoDeConteudoIncompativelRetorna415() throws Exception {
+    mvc.perform(
+            post("/api/admin/categorias")
+                .header("Authorization", admin())
+                .contentType("text/plain")
+                .content("{\"nome\":\"Cortes\",\"ativo\":true}"))
+        .andExpect(status().isUnsupportedMediaType())
+        .andExpect(content().contentTypeCompatibleWith("application/json"))
+        .andExpect(
+            jsonPath("$.message").value(org.hamcrest.Matchers.containsString("application/json")));
+  }
+
+  @Test
+  void validacaoIdentificaCamposSemExporValoresEnviados() throws Exception {
+    String senha = "Privada-" + "x".repeat(73);
+    String resposta =
+        mvc.perform(
+                post("/api/admin/usuarios")
+                    .header("Authorization", admin())
+                    .contentType("application/json")
+                    .content(
+                        mapper.writeValueAsString(
+                            Map.of(
+                                "nome",
+                                " ",
+                                "email",
+                                "email-invalido",
+                                "senha",
+                                senha,
+                                "perfil",
+                                "OUTRO",
+                                "ativo",
+                                true))))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.errors.nome").value("Informe o nome."))
+            .andExpect(jsonPath("$.errors.email").value("Informe um e-mail válido."))
+            .andExpect(jsonPath("$.errors.senha").exists())
+            .andExpect(jsonPath("$.errors.perfil").value("O perfil deve ser ADMIN ou ATENDENTE."))
+            .andExpect(
+                jsonPath("$.message")
+                    .value(org.hamcrest.Matchers.containsString("Informe o nome.")))
+            .andReturn()
+            .getResponse()
+            .getContentAsString(java.nio.charset.StandardCharsets.UTF_8);
+    assertThat(resposta).doesNotContain(senha, "email-invalido", "OUTRO");
+  }
+
+  @Test
+  void corpoAusenteOuJsonMalformadoRetornam400() throws Exception {
+    for (String corpo : List.of("", "{"))
+      mvc.perform(
+              post("/api/admin/categorias")
+                  .header("Authorization", admin())
+                  .contentType("application/json")
+                  .content(corpo))
+          .andExpect(status().isBadRequest())
+          .andExpect(jsonPath("$.message").value(org.hamcrest.Matchers.containsString("JSON")));
+  }
+
+  @Test
+  void formatoDeRespostaIncompativelRetorna406() throws Exception {
+    mvc.perform(
+            get("/api/admin/servicos").header("Authorization", admin()).accept("application/xml"))
+        .andExpect(status().isNotAcceptable())
+        .andExpect(content().contentTypeCompatibleWith("application/json"))
+        .andExpect(jsonPath("$.message").value(org.hamcrest.Matchers.containsString("Accept")));
+  }
 }

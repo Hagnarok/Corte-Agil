@@ -262,19 +262,22 @@ As operações da fila usam transações e bloqueio do estado para preservar a o
 
 Use o banco de avaliação sem senha de atendimento ativa e com a emissão liberada. A coleção cria dados de teste, exercita os vínculos e conclui um atendimento; o histórico concluído permanece no banco. Os IDs são atualizados durante a execução, permitindo reproduzir a sequência.
 
-| Requisições | O que demonstram                                                                                  |
-| ----------- | ------------------------------------------------------------------------------------------------- |
-| 01–05       | Falta de autenticação, credenciais inválidas, dois perfis válidos e acesso administrativo negado  |
-| 06–17       | Categoria e serviço, relacionamento, consulta por categoria, validação, duplicidade e integridade |
-| 18–23       | CRUD de balcão e confirmação de exclusão                                                          |
-| 24–30       | CRUD de usuário e validação de e-mail                                                             |
-| 31–37       | Emissão, consulta, edição e exclusão de senha enquanto aguarda                                    |
-| 38–52       | Atendimento completo, consulta por situação, pausa e conflitos de regras                          |
-| 53–58       | Indicadores, auditoria, erros de consulta e exclusão dos cadastros de teste sem vínculo           |
+| Requisições | O que demonstram                                                                                      |
+| ----------- | ----------------------------------------------------------------------------------------------------- |
+| 01–05       | Falta de autenticação, credenciais inválidas, dois perfis válidos e acesso administrativo negado      |
+| 06–17       | Categoria e serviço, relacionamento, consulta por categoria, validação, duplicidade e integridade     |
+| 18–23       | CRUD de balcão e confirmação de exclusão                                                              |
+| 24–30       | CRUD de usuário e validação de e-mail                                                                 |
+| 31–37       | Emissão, consulta, edição e exclusão de senha enquanto aguarda                                        |
+| 38–52       | Atendimento completo, consulta por situação, pausa e conflitos de regras                              |
+| 53–58       | Indicadores, auditoria, erros de consulta e exclusão dos cadastros de teste sem vínculo               |
+| 59–65       | Listagem de serviços, parâmetros obrigatórios, campos inválidos, JSON e formatos de conteúdo/resposta |
+
+As requisições 60 e 61 demonstram o tratamento de parâmetro obrigatório ausente (400) e Content-Type incompatível (415). As seguintes conferem mensagens por campo, JSON malformado, paginação inválida e formato de resposta incompatível (406). O campo `message` resume o problema; `errors`, quando presente, relaciona os nomes dos campos às orientações de correção.
 
 ### Respostas salvas e exportação
 
-A coleção contém **58 requisições com respostas reais salvas em `response`**, capturadas em um MySQL 8.4.13. Elas aparecem como exemplos no Postman. As variáveis necessárias estão incluídas no JSON.
+A coleção contém **65 requisições com respostas reais salvas em `response`**, capturadas em um MySQL 8.4.13. Elas aparecem como exemplos no Postman. As variáveis necessárias estão incluídas no JSON.
 
 Para atualizar as evidências pelo Postman, execute as requisições, use **Save Response** e exporte a coleção em **Collection v2.1**, mantendo a opção **Share** das variáveis ativada. As credenciais exportadas devem continuar sendo apenas as contas didáticas da avaliação.
 
@@ -302,12 +305,12 @@ Os testes ficam em **[backend/src/test/java/br/edu/unifio/corteagil_backend/](ba
 
 | Arquivo                                                                                                            | Quantidade | Cobertura principal                                                                              |
 | ------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------------------------------------------------------------------------------------ |
-| [ApiAvaliacaoTest.java](backend/src/test/java/br/edu/unifio/corteagil_backend/ApiAvaliacaoTest.java)               | 4 testes   | HTTP Basic, 401/403, categoria/serviço, consultas personalizadas, validações, integridade e fila |
+| [ApiAvaliacaoTest.java](backend/src/test/java/br/edu/unifio/corteagil_backend/ApiAvaliacaoTest.java)               | 9 testes   | HTTP Basic, 401/403, categoria/serviço, consultas personalizadas, validações, integridade e fila |
 | [CadastrosIntegracaoTest.java](backend/src/test/java/br/edu/unifio/corteagil_backend/CadastrosIntegracaoTest.java) | 5 testes   | CRUD, perfis, pesquisa/paginação, vínculos, preservação do histórico e recuperação de acesso     |
 | [FilaIntegracaoTest.java](backend/src/test/java/br/edu/unifio/corteagil_backend/FilaIntegracaoTest.java)           | 7 testes   | Ordem da fila, ausência/retorno, pausa, emissão concorrente, avisos e eventos SSE                |
 | [SessoesNuvemTest.java](backend/src/test/java/br/edu/unifio/corteagil_backend/SessoesNuvemTest.java)               | 1 teste    | Persistência e encerramento de sessão                                                            |
 
-Para executar apenas os **17 testes Java**, com JDK 17+:
+Para executar apenas os **22 testes Java**, com JDK 17+:
 
 ```sh
 ./backend/mvnw -B -f backend/pom.xml test
@@ -350,12 +353,12 @@ O workflow [.github/workflows/verificar.yml](.github/workflows/verificar.yml) ex
 
 1. Instalação das dependências e build Angular.
 2. Três testes do service worker.
-3. Verificação de formatação e os 17 testes Java com Maven.
+3. Verificação de formatação e os 22 testes Java com Maven.
 4. Inicialização do backend com os perfis `mysql,avaliacao` e um serviço MySQL real.
-5. Coleta das 58 respostas HTTP e execução da coleção pelo Newman.
+5. Coleta das 65 respostas HTTP e execução da coleção pelo Newman.
 6. Publicação do artefato `avaliacao-mysql-postman`, com `aplicacao.log`, `colecao.json` e `newman.json`.
 
-Para conferir, abra [Actions — Verificar projeto](https://github.com/Hagnarok/Corte-Agil/actions/workflows/verificar.yml), selecione uma execução e examine as etapas e o artefato. A [execução da implementação da avaliação](https://github.com/Hagnarok/Corte-Agil/actions/runs/42920641678) foi concluída com sucesso.
+Para conferir, abra [Actions — Verificar projeto](https://github.com/Hagnarok/Corte-Agil/actions/workflows/verificar.yml), selecione uma execução e examine as etapas e o artefato. Selecione a execução correspondente ao commit entregue para conferir os resultados daquela versão.
 
 ## Roteiro para demonstração e entrega
 

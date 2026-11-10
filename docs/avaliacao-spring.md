@@ -51,8 +51,9 @@ Os exemplos da coleção foram capturados em requisições HTTP contra MySQL 8.4
 
 ## Verificação realizada
 
-- 17 testes Java aprovados, incluindo permissões, integridade e regras da fila.
-- 58 requisições HTTP executadas contra MySQL 8.4.13 e reproduzidas pelo Newman sem falhas.
+- 22 testes Java aprovados, incluindo permissões, integridade e regras da fila.
+- 65 requisições HTTP executadas contra MySQL 8.4.13 e reproduzidas pelo Newman sem falhas.
+- Parâmetro obrigatório ausente (400), JSON inválido (400), conteúdo incompatível (415), resposta não disponível (406) e mensagens por campo cobertos pelos testes.
 - Build Angular e três testes do service worker aprovados.
 - Interface conferida em computador e celular, com login por sessão, categorias, edição, exclusão e atendimento.
 

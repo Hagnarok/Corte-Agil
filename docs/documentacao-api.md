@@ -8,19 +8,36 @@ A API usa Spring Security e HTTP Basic com usuários persistidos em `Usuario`. A
 
 A interface continua utilizando `POST /login`, `GET /session` e `POST /logout`. O filtro de segurança reconhece sessões válidas e o contexto autenticado por Basic. Desativação de conta e mudança de senha invalidam sessões; senhas ficam em BCrypt. Pedidos de escrita vindos do navegador passam também pelo filtro de origem. Tentativas Basic inválidas são limitadas por endereço.
 
-| Código | Significado                               |
-| ------ | ----------------------------------------- |
-| 200    | Consulta ou atualização concluída         |
-| 201    | Cadastro ou senha criada                  |
-| 204    | Exclusão concluída, sem corpo             |
-| 400    | Dados, parâmetros ou serviço inválidos    |
-| 401    | Sem autenticação ou credenciais inválidas |
-| 403    | Autenticado sem o perfil exigido          |
-| 404    | Registro não encontrado                   |
-| 409    | Conflito de regra ou integridade          |
-| 429    | Limite de tentativas atingido             |
+| Código | Significado                                    |
+| ------ | ---------------------------------------------- |
+| 200    | Consulta ou atualização concluída              |
+| 201    | Cadastro ou senha criada                       |
+| 204    | Exclusão concluída, sem corpo                  |
+| 400    | Dados, parâmetros ou serviço inválidos         |
+| 401    | Sem autenticação ou credenciais inválidas      |
+| 403    | Autenticado sem o perfil exigido               |
+| 404    | Registro não encontrado                        |
+| 405    | Método HTTP não permitido                      |
+| 406    | Formato de resposta solicitado não disponível  |
+| 409    | Conflito de regra ou integridade               |
+| 415    | Content-Type incompatível com o corpo esperado |
+| 429    | Limite de tentativas atingido                  |
 
-Os erros usam `{ "message": "descrição do problema" }`. `RegraNegocioException` representa falhas de domínio; `TratadorExcecoes` centraliza os retornos com `@RestControllerAdvice`.
+Os erros mantêm o campo `message`, utilizado também pela interface. Nas falhas de Bean Validation e nos erros de parâmetros, a resposta inclui `errors`, com a orientação para cada campo. Exemplo de cadastro com nome vazio e e-mail inválido:
+
+```json
+{
+  "message": "Dados inválidos. Informe um e-mail válido. Informe o nome.",
+  "errors": {
+    "email": "Informe um e-mail válido.",
+    "nome": "Informe o nome."
+  }
+}
+```
+
+As mensagens não devolvem os valores rejeitados, senhas ou tokens. JSON ausente ou malformado retorna 400. Omitir o parâmetro obrigatório `status` na consulta por situação retorna 400 e identifica esse parâmetro. Enviar um cadastro com `Content-Type: text/plain` retorna 415 e orienta usar JSON; solicitar XML em `Accept` retorna 406. Esses cenários estão nas requisições 60 a 65 da coleção e nos testes Java.
+
+`RegraNegocioException` representa falhas de domínio; `TratadorExcecoes` centraliza os retornos com `@RestControllerAdvice`.
 
 ## Cadastros administrativos
 
@@ -113,4 +130,4 @@ A auditoria, o estado da fila e os tokens de redefinição são registros de inf
 
 ## Evidências reproduzíveis
 
-A coleção JSON contém 58 requisições com exemplos reais em `response`, variáveis e captura automática de IDs. A execução não exige alterar código JavaScript: importe, ajuste `baseUrl` e rode na ordem. As contas e senhas incluídas são exclusivamente didáticas. O coletor registra respostas reais; não inventa resultados esperados. Depois de executar pelo Postman, é possível usar Save Response para atualizar os exemplos e exportar a coleção.
+A coleção JSON contém 65 requisições com exemplos reais em `response`, variáveis e captura automática de IDs. A execução não exige alterar código JavaScript: importe, ajuste `baseUrl` e rode na ordem. As contas e senhas incluídas são exclusivamente didáticas. O coletor registra respostas reais; não inventa resultados esperados. Depois de executar pelo Postman, é possível usar Save Response para atualizar os exemplos e exportar a coleção.
