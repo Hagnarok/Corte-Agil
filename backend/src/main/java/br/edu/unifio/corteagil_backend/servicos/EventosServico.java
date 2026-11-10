@@ -8,10 +8,13 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @Service
 public class EventosServico {
+  @org.springframework.beans.factory.annotation.Value("${corte.sse.timeout:0}")
+  private long timeout;
+
   private final CopyOnWriteArraySet<SseEmitter> clients = new CopyOnWriteArraySet<>();
 
   public SseEmitter connect(Object snapshot) {
-    var client = new SseEmitter(0L);
+    var client = new SseEmitter(timeout);
     clients.add(client);
     client.onCompletion(() -> clients.remove(client));
     client.onTimeout(() -> clients.remove(client));

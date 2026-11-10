@@ -19,10 +19,15 @@ public class InicializadorBanco implements ApplicationRunner {
   private final SenhaRepositorio tickets;
   private final AuditoriaRepositorio audits;
   private final ObjectMapper mapper;
+  private final javax.sql.DataSource dataSource;
+  private final org.springframework.core.env.Environment env;
 
   @Override
   @Transactional
   public void run(ApplicationArguments args) throws Exception {
+    if (env.matchesProfiles("vercel"))
+      new org.springframework.jdbc.core.JdbcTemplate(dataSource)
+          .execute("SELECT pg_advisory_xact_lock(1945)");
     EstadoFila state = queues.findById(1L).orElseGet(() -> queues.save(new EstadoFila()));
     Path legacy = Path.of("data/legacy-queue.json");
     if (!state.isLegacyImported() && Files.exists(legacy)) {

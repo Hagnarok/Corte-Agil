@@ -27,7 +27,7 @@ export class FilaService {
     this.connect();
     const clock = setInterval(() => this.now.set(Date.now() + this.offset), 250);
     const fallback = setInterval(() => {
-      if (!this.streamConnected) void this.syncState();
+      if (document.visibilityState === 'visible' || !this.streamConnected) void this.syncState();
     }, 5000);
     const resume = () => {
       if (document.visibilityState === 'visible') void this.syncState();

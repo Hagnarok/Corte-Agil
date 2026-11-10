@@ -101,3 +101,7 @@ npm run backend:format
 ```
 
 `npm run check` compila o Angular e executa testes de service worker e testes Spring/H2 de fila, avisos, concorrência, perfis, CRUD, auditoria e redefinição de senha. O workflow do GitHub executa a compilação e os testes a cada push e pull request.
+
+## Vercel
+
+Use o preset Container, com `PORT=3000` e `SPRING_PROFILES_ACTIVE=vercel`. Vincule o Neon ao ambiente Production; o perfil utiliza `PGHOST`, `PGPORT` (padrão 5432), `PGDATABASE`, `PGUSER` e `PGPASSWORD`, sem expor credenciais ao Angular. Configure `ADMIN_PASSWORD`, `PUBLIC_BASE_URL` e `ALLOWED_ORIGINS` nas variáveis do projeto. As sessões ficam em tabelas Spring Session no PostgreSQL. A sincronização HTTP complementa SSE para atender múltiplas instâncias. O H2 local continua disponível sem o perfil vercel. A publicação não importa automaticamente dados do computador.

@@ -19,10 +19,14 @@ public class CadastrosIniciais implements ApplicationRunner {
   private final ServicoRepositorio servicos;
   private final BalcaoRepositorio balcoes;
   private final Environment env;
+  private final javax.sql.DataSource dataSource;
 
   @Override
   @Transactional
   public void run(ApplicationArguments args) {
+    if (env.matchesProfiles("vercel"))
+      new org.springframework.jdbc.core.JdbcTemplate(dataSource)
+          .execute("SELECT pg_advisory_xact_lock(1944)");
     if (usuarios.count() == 0) {
       String senha = env.getProperty("ADMIN_PASSWORD", "");
       if (senha.length() < 10
