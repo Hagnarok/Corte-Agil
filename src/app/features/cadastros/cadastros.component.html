@@ -1,7 +1,7 @@
 <div class="page-heading">
   <div>
     <h1>Cadastros</h1>
-    <p>Serviços, balcões, equipe e senhas do atendimento.</p>
+    <p>Categorias, serviços, balcões, equipe e senhas do atendimento.</p>
   </div>
 </div>
 <mat-card class="admin-card">
@@ -9,6 +9,7 @@
     <mat-form-field
       ><mat-label>Cadastro</mat-label
       ><mat-select [(ngModel)]="tipo" (selectionChange)="change()"
+        ><mat-option value="categorias">Categorias de serviço</mat-option
         ><mat-option value="servicos">Serviços</mat-option
         ><mat-option value="balcoes">Balcões</mat-option
         ><mat-option value="usuarios">Usuários</mat-option
@@ -65,6 +66,17 @@
           ><input matInput formControlName="nome" maxlength="80" /><mat-error
             >Informe um nome de até 80 caracteres.</mat-error
           ></mat-form-field
+        >
+      }
+      @if (tipo === 'servicos') {
+        <mat-form-field
+          ><mat-label>Categoria</mat-label
+          ><mat-select formControlName="categoriaId"
+            ><mat-option value="">Categoria padrão</mat-option>
+            @for (c of categorias(); track c.id) {
+              <mat-option [value]="c.id">{{ c.nome }}</mat-option>
+            }
+          </mat-select></mat-form-field
         >
       }
       @if (tipo === 'usuarios') {

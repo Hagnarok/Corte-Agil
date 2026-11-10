@@ -1,0 +1,34 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: corte_agil_avaliacao
+      MYSQL_USER: corte_avaliacao
+      MYSQL_PASSWORD: MySQL-Avaliacao123
+      MYSQL_ROOT_PASSWORD: Root-Avaliacao123
+    ports:
+      - '127.0.0.1:3307:3306'
+    volumes:
+      - mysql_avaliacao:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', '127.0.0.1', '--silent']
+      interval: 5s
+      timeout: 3s
+      retries: 30
+  aplicacao:
+    build: .
+    ports:
+      - '127.0.0.1:3000:3000'
+    environment:
+      SPRING_PROFILES_ACTIVE: mysql,avaliacao
+      DATABASE_URL: jdbc:mysql://mysql:3306/corte_agil_avaliacao?serverTimezone=America/Sao_Paulo&allowPublicKeyRetrieval=true&sslMode=DISABLED
+      DATABASE_USERNAME: corte_avaliacao
+      DATABASE_PASSWORD: MySQL-Avaliacao123
+      ADMIN_PASSWORD: Avaliacao-Admin123
+      PUBLIC_BASE_URL: http://localhost:3000
+      ALLOWED_ORIGINS: http://localhost:3000
+    depends_on:
+      mysql:
+        condition: service_healthy
+volumes:
+  mysql_avaliacao:

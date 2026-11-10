@@ -18,6 +18,7 @@ export class ApiService {
     } catch {
       throw Error('Sem conexão com o servidor. Verifique a rede local.');
     }
+    if (response.status === 204) return undefined as T;
     const data = await response.json();
     if (!response.ok) throw Error(data.message || 'Não foi possível concluir a operação.');
     return data;

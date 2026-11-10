@@ -12,6 +12,7 @@ interface Registro {
   label?: string;
   service?: string;
   status?: string;
+  categoria?: Registro;
 }
 @Component({
   selector: 'app-cadastros',
@@ -27,6 +28,7 @@ export class CadastrosComponent {
   readonly busy = signal(false);
   readonly editing = signal(false);
   readonly resetLink = signal('');
+  readonly categorias = signal<Registro[]>([]);
   tipo = 'servicos';
   q = '';
   status = '';
@@ -40,6 +42,7 @@ export class CadastrosComponent {
     senha: ['', [Validators.minLength(10), Validators.maxLength(72)]],
     perfil: ['ATENDENTE'],
     ativo: [true],
+    categoriaId: [''],
   });
   constructor() {
     void this.load();
@@ -65,6 +68,10 @@ export class CadastrosComponent {
           this.size,
       );
       this.items.set(d.items);
+      if (this.tipo === 'servicos') {
+        const c = await this.api.request<{ categorias: Registro[] }>('/catalogo');
+        this.categorias.set(c.categorias);
+      }
       this.total.set(d.total);
     } catch (e) {
       this.api.error(e);
@@ -87,6 +94,7 @@ export class CadastrosComponent {
       senha: '',
       perfil: row?.perfil || 'ATENDENTE',
       ativo: row?.ativo ?? true,
+      categoriaId: row?.categoria?.id || '',
     });
     this.editing.set(true);
   }

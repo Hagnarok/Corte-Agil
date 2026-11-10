@@ -36,6 +36,18 @@ public class AutenticacaoServico {
   }
 
   public Usuario atual(HttpServletRequest req) {
+    var authentication =
+        org.springframework.security.core.context.SecurityContextHolder.getContext()
+            .getAuthentication();
+    if (authentication != null
+        && authentication.isAuthenticated()
+        && authentication.getPrincipal()
+            instanceof org.springframework.security.core.userdetails.UserDetails principal) {
+      return usuarios
+          .findByUsername(principal.getUsername())
+          .filter(Usuario::isAtivo)
+          .orElseThrow(() -> new RegraNegocioException("Sessão expirada. Entre novamente.", 401));
+    }
     var s = req.getSession(false);
     if (s == null) throw new RegraNegocioException("Entre como funcionário para continuar.", 401);
     var u = usuarios.findById(String.valueOf(s.getAttribute("usuarioId"))).orElse(null);
@@ -59,6 +71,7 @@ public class AutenticacaoServico {
 
   public void logout(HttpServletRequest req) {
     require(req);
-    req.getSession(false).invalidate();
+    var session = req.getSession(false);
+    if (session != null) session.invalidate();
   }
 }

@@ -32,7 +32,7 @@ O bloqueio existe no backend e nas rotas da interface. Clientes usam o token pri
 
 ## Cadastros
 
-Entre como administrador e abra **Cadastros**. Selecione Serviços, Balcões, Usuários ou Senhas. Use pesquisa, situação e os botões Anterior/Próxima. A página mostra dez registros por vez.
+Entre como administrador e abra **Cadastros**. Selecione Categorias de serviço, Serviços, Balcões, Usuários ou Senhas. No serviço, escolha a categoria correspondente. Use pesquisa, situação e os botões Anterior/Próxima. A página mostra dez registros por vez.
 
 Use **Novo cadastro**, preencha os campos e salve. Em Usuários, selecione Administrador ou Atendente, informe uma senha de pelo menos dez caracteres e, se houver, o e-mail de recuperação. **Editar** altera os dados; deixar a senha vazia preserva a senha atual. **Excluir** remove registros sem vínculos. Se houver histórico, desative o cadastro: a API impede a exclusão que quebraria relacionamentos. A própria conta administradora não pode ser excluída ou perder seu perfil.
 

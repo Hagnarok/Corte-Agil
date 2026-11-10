@@ -67,7 +67,7 @@ public class FilaServico {
     event.setResponsavelNome("Cliente / Totem");
     try {
       var req = requests.getIfAvailable();
-      if (req != null && req.getSession(false) != null) {
+      if (req != null) {
         var u = auth.atual(req);
         event.setResponsavel(u);
         event.setResponsavelNome(u.getUsername());
@@ -286,6 +286,14 @@ public class FilaServico {
     result.put("position", index < 0 ? 0 : ahead + 1);
     result.put("estimatedMinutes", ahead * snap.stats().averageMinutes());
     return result;
+  }
+
+  @org.springframework.transaction.annotation.Transactional(readOnly = true)
+  public SenhaResposta buscarSenha(String id) {
+    return SenhaResposta.of(
+        tickets
+            .findById(id)
+            .orElseThrow(() -> new RegraNegocioException("Senha não encontrada.", 404)));
   }
 
   public List<EventoAuditoria> audit() {

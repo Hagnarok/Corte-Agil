@@ -3,6 +3,19 @@ on: [push, pull_request]
 jobs:
   verificar:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_DATABASE: corte_agil_avaliacao
+          MYSQL_USER: corte_avaliacao
+          MYSQL_PASSWORD: MySQL-Avaliacao123
+          MYSQL_ROOT_PASSWORD: Root-Avaliacao123
+        ports:
+          - 3307:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 --silent"
+          --health-interval=5s --health-timeout=3s --health-retries=30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -18,3 +31,30 @@ jobs:
       - run: npm run build
       - run: node --test scripts/notificacoes-sw.test.mjs
       - run: ./backend/mvnw -B -f backend/pom.xml spotless:check verify
+      - name: Testar a API com MySQL e Postman
+        env:
+          SPRING_PROFILES_ACTIVE: mysql,avaliacao
+          DATABASE_URL: jdbc:mysql://127.0.0.1:3307/corte_agil_avaliacao?serverTimezone=America/Sao_Paulo&allowPublicKeyRetrieval=true&sslMode=DISABLED
+          DATABASE_USERNAME: corte_avaliacao
+          DATABASE_PASSWORD: MySQL-Avaliacao123
+          ADMIN_PASSWORD: Avaliacao-Admin123
+        run: |
+          mkdir -p /tmp/corte-avaliacao
+          java -jar backend/target/corte-agil.jar > /tmp/corte-avaliacao/aplicacao.log 2>&1 &
+          api_pid=$!
+          trap 'kill "$api_pid" 2>/dev/null || true' EXIT
+          for tentativa in $(seq 1 60); do
+            if curl --fail --silent http://localhost:3000/api/state > /dev/null; then
+              break
+            fi
+            kill -0 "$api_pid" || { cat /tmp/corte-avaliacao/aplicacao.log; exit 1; }
+            sleep 2
+          done
+          python3 postman/coletar-evidencias.py --saida /tmp/corte-avaliacao/colecao.json
+          npx --yes newman@6.2.1 run /tmp/corte-avaliacao/colecao.json --reporters cli,json --reporter-json-export /tmp/corte-avaliacao/newman.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: avaliacao-mysql-postman
+          path: /tmp/corte-avaliacao/
+          if-no-files-found: ignore

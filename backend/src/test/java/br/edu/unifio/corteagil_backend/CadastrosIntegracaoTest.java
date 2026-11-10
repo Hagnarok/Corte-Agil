@@ -84,7 +84,7 @@ class CadastrosIntegracaoTest {
                     .session(admin)
                     .contentType("application/json")
                     .content(mapper.writeValueAsString(d)))
-            .andExpect(status().isOk())
+            .andExpect(status().isCreated())
             .andReturn());
   }
 
@@ -144,7 +144,8 @@ class CadastrosIntegracaoTest {
                 .content(mapper.writeValueAsString(alterado)))
         .andExpect(status().isOk());
     mvc.perform(get("/api/session").session(atendente)).andExpect(status().isUnauthorized());
-    mvc.perform(delete("/api/admin/usuarios/" + id).session(admin)).andExpect(status().isOk());
+    mvc.perform(delete("/api/admin/usuarios/" + id).session(admin))
+        .andExpect(status().isNoContent());
     String adminId = usuarios.findByUsername("admin").orElseThrow().getId();
     mvc.perform(delete("/api/admin/usuarios/" + adminId).session(admin))
         .andExpect(status().isConflict());
@@ -206,7 +207,8 @@ class CadastrosIntegracaoTest {
                 .contentType("application/json")
                 .content("{\"nome\":\"Balcão extra editado\",\"ativo\":false}"))
         .andExpect(status().isOk());
-    mvc.perform(delete("/api/admin/balcoes/" + bid).session(admin)).andExpect(status().isOk());
+    mvc.perform(delete("/api/admin/balcoes/" + bid).session(admin))
+        .andExpect(status().isNoContent());
     mvc.perform(delete("/api/admin/balcoes/inexistente").session(admin))
         .andExpect(status().isNotFound());
   }
@@ -236,7 +238,7 @@ class CadastrosIntegracaoTest {
         .andExpect(jsonPath("$.total").value(1))
         .andExpect(jsonPath("$.items[0].token").doesNotExist());
     mvc.perform(delete("/api/gestao/senhas/" + s.getId()).session(admin))
-        .andExpect(status().isOk());
+        .andExpect(status().isNoContent());
     mvc.perform(get("/api/tickets/" + emitida.path("token").asText()))
         .andExpect(status().isNotFound());
     mvc.perform(

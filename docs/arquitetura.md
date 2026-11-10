@@ -28,6 +28,11 @@ classDiagram
    String perfil
    boolean ativo
  }
+ class CategoriaServico {
+   String id
+   String nome
+   boolean ativo
+ }
  class Servico {
    String id
    String nome
@@ -52,13 +57,14 @@ classDiagram
    long at
    String responsavelNome
  }
+ CategoriaServico "0..1" <-- "0..*" Servico : categoria
  Usuario "0..1" <-- "0..*" Senha : atendente
  Servico "0..1" <-- "0..*" Senha : serviço
  Balcao "0..1" <-- "0..*" Senha : balcão
  Usuario "0..1" <-- "0..*" EventoAuditoria : responsável
 ```
 
-As relações são `ManyToOne`. Campos de relacionamento são omitidos do JSON público para evitar exposição de dados e ciclos. O texto do serviço fica na senha como retrato histórico, mesmo quando o catálogo é renomeado. As colunas aceitam nulos para permitir atualização de bancos antigos; o inicializador tenta relacionar as senhas antigas pelo nome do serviço e pelo balcão disponível. Novas senhas sempre recebem serviço e balcão ativos.
+As relações são `ManyToOne`. Os relacionamentos de usuário e senha são omitidos do JSON público para evitar exposição de dados e ciclos. A categoria é retornada no cadastro do serviço. O texto do serviço fica na senha como retrato histórico, mesmo quando o catálogo é renomeado. As colunas aceitam nulos para permitir atualização de bancos antigos; o inicializador tenta relacionar as senhas antigas pelo nome do serviço e pelo balcão disponível. Novas senhas sempre recebem serviço e balcão ativos.
 
 `EstadoFila` guarda a sequência global, a ordem de espera e a pausa. `Aviso` é um valor embutido da senha, persistido em uma coleção separada. `RedefinicaoSenha` relaciona um usuário ao hash de um token, à expiração e ao estado de uso. Senhas de acesso ficam em BCrypt; o link original não é guardado no banco.
 
@@ -83,20 +89,22 @@ Declare a rota filha no módulo gerado e adicione um `loadChildren` em `app.modu
 
 ## Situação dos requisitos
 
-| Requisito das imagens                | Implementação                                                                                          |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| Responsividade                       | Layout adaptável e tabela com rolagem local; validação em viewports de computador, tablet e celular    |
-| Autenticação e recuperação           | Conta persistente, sessão, reset com expiração e uso único; SMTP depende da configuração da instalação |
-| Dois perfis                          | ADMIN e ATENDENTE com autorização na API e nas rotas                                                   |
-| CRUD e quatro entidades relacionadas | Usuário, Serviço, Balcão e Senha; histórico protegido por regras e chaves estrangeiras                 |
-| Pesquisa, filtros e paginação        | Cadastros por nome/situação; senhas por número/serviço/status; página e tamanho validados              |
-| Pelo menos três KPIs                 | Aguardando, concluídos hoje, tempo médio e ausentes                                                    |
-| Fluxo pela interface                 | Emissão, acompanhamento, chamada, chegada, conclusão, ausência e retorno                               |
-| REST e banco relacional              | Spring MVC, JPA, H2 persistente ou MySQL                                                               |
-| Validação e erros                    | Formulários, Bean Validation, regras de serviço e mensagens HTTP padronizadas                          |
-| Auditoria                            | Data, ação e usuário responsável; histórico visível na operação                                        |
-| Testes de negócio                    | Fila, avisos, concorrência, perfis, CRUD, vínculos e recuperação                                       |
-| Git e documentação                   | Repositório GitHub, este diagrama e manual separado; README vazio                                      |
-| Publicação cloud                     | Publicado em https://corte-agil-rose.vercel.app, com PostgreSQL Neon e sessões persistidas no banco    |
+| Requisito das imagens               | Implementação                                                                                            |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Responsividade                      | Layout adaptável e tabela com rolagem local; validação em viewports de computador, tablet e celular      |
+| Autenticação e recuperação          | Conta persistente, sessão, reset com expiração e uso único; SMTP depende da configuração da instalação   |
+| Dois perfis                         | ADMIN e ATENDENTE com autorização na API e nas rotas                                                     |
+| CRUD e cinco entidades relacionadas | CategoriaServico, Usuário, Serviço, Balcão e Senha; histórico protegido por regras e chaves estrangeiras |
+| Pesquisa, filtros e paginação       | Cadastros por nome/situação; senhas por número/serviço/status; página e tamanho validados                |
+| Pelo menos três KPIs                | Aguardando, concluídos hoje, tempo médio e ausentes                                                      |
+| Fluxo pela interface                | Emissão, acompanhamento, chamada, chegada, conclusão, ausência e retorno                                 |
+| REST e banco relacional             | Spring MVC e JPA; MySQL na avaliação, H2 local e PostgreSQL na publicação                                |
+| Validação e erros                   | Formulários, Bean Validation, regras de serviço e mensagens HTTP padronizadas                            |
+| Auditoria                           | Data, ação e usuário responsável; histórico visível na operação                                          |
+| Testes de negócio                   | Fila, avisos, concorrência, perfis, CRUD, vínculos e recuperação                                         |
+| Git e documentação                  | Repositório GitHub, README, diagrama, documentação da API e manual                                       |
+| Publicação cloud                    | Publicado em https://corte-agil-rose.vercel.app, com PostgreSQL Neon e sessões persistidas no banco      |
 
 A publicação foi validada no navegador: login, sessão após recarga, CRUD no PostgreSQL, emissão e conclusão do atendimento, atualização do cliente e layout mobile. O envio SMTP e os equipamentos físicos ainda dependem de configuração e testes no ambiente de uso.
+
+A relação de categorias agrupa cortes e preparos, seguindo a adaptação do domínio do projeto-base do professor. A prova de backend também exige MySQL e HTTP Basic: a execução correspondente está no README e em documentacao-api.md.

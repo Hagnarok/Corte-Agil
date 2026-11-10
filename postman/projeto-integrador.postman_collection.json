@@ -1,0 +1,6168 @@
+{
+  "info": {
+    "name": "Corte Ágil — Projeto Integrador",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Requisições e respostas reais de uma execução local com MySQL. Contas exclusivamente didáticas do perfil avaliacao. Execute na ordem. Os scripts atualizam IDs e verificam o código HTTP. Os exemplos em response correspondem ao recurso Save Response do Postman."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "adminUsuario",
+      "value": "avaliador",
+      "type": "string"
+    },
+    {
+      "key": "adminSenha",
+      "value": "Avaliacao-Admin123",
+      "type": "string"
+    },
+    {
+      "key": "atendenteUsuario",
+      "value": "operador",
+      "type": "string"
+    },
+    {
+      "key": "atendenteSenha",
+      "value": "Avaliacao-Atendente123",
+      "type": "string"
+    },
+    {
+      "key": "categoriaId",
+      "value": "fa7b3180-2b09-4e3a-8d95-d2ec9d1b1475",
+      "type": "string"
+    },
+    {
+      "key": "servicoId",
+      "value": "68872c0f-2592-4d50-8bc5-33e2fc415748",
+      "type": "string"
+    },
+    {
+      "key": "servicoNome",
+      "value": "Carne em cubos b86edf51",
+      "type": "string"
+    },
+    {
+      "key": "balcaoId",
+      "value": "0369fa68-393a-47fc-97bf-301880974ec3",
+      "type": "string"
+    },
+    {
+      "key": "usuarioId",
+      "value": "538aeb5d-d256-476c-8f19-0d141bd7a27a",
+      "type": "string"
+    },
+    {
+      "key": "senhaToken",
+      "value": "fc970ac2-c449-4605-a417-372db4fbce855349e524-3675-40c8-8069-00062d4d0fda",
+      "type": "string"
+    },
+    {
+      "key": "senhaId",
+      "value": "aa15a288-4b13-4c6e-b35e-973c48b07bef",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 — Acesso protegido sem autenticação",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/servicos"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 401\", function () { pm.response.to.have.status(401); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "01 — Acesso protegido sem autenticação — 401",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/servicos"
+          },
+          "status": "",
+          "code": 401,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "WWW-Authenticate",
+              "value": "Basic realm=\"CorteAgil\""
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json;charset=UTF-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "53"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:03 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Entre como funcionário para continuar.\"}"
+        }
+      ]
+    },
+    {
+      "name": "02 — Credenciais inválidas",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "inexistente",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "incorreta",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/servicos"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 401\", function () { pm.response.to.have.status(401); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "02 — Credenciais inválidas — 401",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "inexistente",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "incorreta",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/servicos"
+          },
+          "status": "",
+          "code": 401,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "WWW-Authenticate",
+              "value": "Basic realm=\"CorteAgil\""
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json;charset=UTF-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "53"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:03 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Entre como funcionário para continuar.\"}"
+        }
+      ]
+    },
+    {
+      "name": "03 — Administrador autenticado",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/session"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "03 — Administrador autenticado — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/session"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:03 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"perfil\":\"ADMIN\",\"username\":\"avaliador\"}"
+        }
+      ]
+    },
+    {
+      "name": "04 — Atendente autenticado",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/session"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "04 — Atendente autenticado — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/session"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:03 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"perfil\":\"ATENDENTE\",\"username\":\"operador\"}"
+        }
+      ]
+    },
+    {
+      "name": "05 — Atendente sem autorização administrativa",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/servicos"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 403\", function () { pm.response.to.have.status(403); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "05 — Atendente sem autorização administrativa — 403",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/servicos"
+          },
+          "status": "",
+          "code": 403,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json;charset=UTF-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "61"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:03 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Você não tem permissão para esta operação.\"}"
+        }
+      ]
+    },
+    {
+      "name": "06 — Criar categoria de serviço",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/admin/categorias",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nome\": \"Cortes bovinos b86edf51\", \"ativo\": true}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "const dados = pm.response.json();",
+              "pm.collectionVariables.set(\"categoriaId\", dados[\"id\"]);"
+            ]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "06 — Criar categoria de serviço — 201",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/categorias",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nome\": \"Cortes bovinos b86edf51\", \"ativo\": true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:03 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"fa7b3180-2b09-4e3a-8d95-d2ec9d1b1475\",\"nome\":\"Cortes bovinos b86edf51\",\"ativo\":true}"
+        }
+      ]
+    },
+    {
+      "name": "07 — Consultar categoria individual",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/categorias/{{categoriaId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "07 — Consultar categoria individual — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/categorias/{{categoriaId}}"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:03 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"fa7b3180-2b09-4e3a-8d95-d2ec9d1b1475\",\"nome\":\"Cortes bovinos b86edf51\",\"ativo\":true}"
+        }
+      ]
+    },
+    {
+      "name": "08 — Listar categorias",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/categorias"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "08 — Listar categorias — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/categorias"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"total\":2,\"items\":[{\"id\":\"fa7b3180-2b09-4e3a-8d95-d2ec9d1b1475\",\"nome\":\"Cortes bovinos b86edf51\",\"ativo\":true},{\"id\":\"f3e270a4-ebf1-4d10-985d-930ecddf39df\",\"nome\":\"Cortes e preparos\",\"ativo\":true}]}"
+        }
+      ]
+    },
+    {
+      "name": "09 — Atualizar categoria",
+      "request": {
+        "method": "PUT",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/admin/categorias/{{categoriaId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nome\": \"Preparos especiais b86edf51\", \"ativo\": true}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "09 — Atualizar categoria — 200",
+          "originalRequest": {
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/categorias/{{categoriaId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nome\": \"Preparos especiais b86edf51\", \"ativo\": true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"fa7b3180-2b09-4e3a-8d95-d2ec9d1b1475\",\"nome\":\"Preparos especiais b86edf51\",\"ativo\":true}"
+        }
+      ]
+    },
+    {
+      "name": "10 — Categoria com nome vazio",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/admin/categorias",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nome\": \" \", \"ativo\": true}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "10 — Categoria com nome vazio — 400",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/categorias",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nome\": \" \", \"ativo\": true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Dados inválidos. Confira os campos enviados.\"}"
+        }
+      ]
+    },
+    {
+      "name": "11 — Criar serviço vinculado à categoria",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/admin/servicos",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nome\": \"Cubos para panela b86edf51\", \"ativo\": true, \"categoriaId\": \"{{categoriaId}}\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "const dados = pm.response.json();",
+              "pm.collectionVariables.set(\"servicoId\", dados[\"id\"]);",
+              "pm.collectionVariables.set(\"servicoNome\", dados[\"nome\"]);"
+            ]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "11 — Criar serviço vinculado à categoria — 201",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/servicos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nome\": \"Cubos para panela b86edf51\", \"ativo\": true, \"categoriaId\": \"{{categoriaId}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"68872c0f-2592-4d50-8bc5-33e2fc415748\",\"nome\":\"Cubos para panela b86edf51\",\"ativo\":true,\"categoria\":{\"id\":\"fa7b3180-2b09-4e3a-8d95-d2ec9d1b1475\",\"nome\":\"Preparos especiais b86edf51\",\"ativo\":true}}"
+        }
+      ]
+    },
+    {
+      "name": "12 — Consultar serviço individual",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/servicos/{{servicoId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "12 — Consultar serviço individual — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/servicos/{{servicoId}}"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"68872c0f-2592-4d50-8bc5-33e2fc415748\",\"nome\":\"Cubos para panela b86edf51\",\"ativo\":true,\"categoria\":{\"id\":\"fa7b3180-2b09-4e3a-8d95-d2ec9d1b1475\",\"nome\":\"Preparos especiais b86edf51\",\"ativo\":true}}"
+        }
+      ]
+    },
+    {
+      "name": "13 — Atualizar serviço",
+      "request": {
+        "method": "PUT",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/admin/servicos/{{servicoId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nome\": \"Carne em cubos b86edf51\", \"ativo\": true, \"categoriaId\": \"{{categoriaId}}\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "const dados = pm.response.json();",
+              "pm.collectionVariables.set(\"servicoNome\", dados[\"nome\"]);"
+            ]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "13 — Atualizar serviço — 200",
+          "originalRequest": {
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/servicos/{{servicoId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nome\": \"Carne em cubos b86edf51\", \"ativo\": true, \"categoriaId\": \"{{categoriaId}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"68872c0f-2592-4d50-8bc5-33e2fc415748\",\"nome\":\"Carne em cubos b86edf51\",\"ativo\":true,\"categoria\":{\"id\":\"fa7b3180-2b09-4e3a-8d95-d2ec9d1b1475\",\"nome\":\"Preparos especiais b86edf51\",\"ativo\":true}}"
+        }
+      ]
+    },
+    {
+      "name": "14 — Consulta JPA: serviços por categoria",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/consultas/servicos-por-categoria/{{categoriaId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "14 — Consulta JPA: serviços por categoria — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/consultas/servicos-por-categoria/{{categoriaId}}"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "[{\"id\":\"68872c0f-2592-4d50-8bc5-33e2fc415748\",\"nome\":\"Carne em cubos b86edf51\",\"ativo\":true,\"categoria\":{\"id\":\"fa7b3180-2b09-4e3a-8d95-d2ec9d1b1475\",\"nome\":\"Preparos especiais b86edf51\",\"ativo\":true}}]"
+        }
+      ]
+    },
+    {
+      "name": "15 — Impedir exclusão de categoria vinculada",
+      "request": {
+        "method": "DELETE",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/categorias/{{categoriaId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 409\", function () { pm.response.to.have.status(409); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "15 — Impedir exclusão de categoria vinculada — 409",
+          "originalRequest": {
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/categorias/{{categoriaId}}"
+          },
+          "status": "",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Registro duplicado ou vinculado a um histórico. Desative-o em vez de excluir.\"}"
+        }
+      ]
+    },
+    {
+      "name": "16 — Impedir nome de serviço duplicado",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/admin/servicos",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nome\": \"{{servicoNome}}\", \"ativo\": true, \"categoriaId\": \"{{categoriaId}}\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 409\", function () { pm.response.to.have.status(409); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "16 — Impedir nome de serviço duplicado — 409",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/servicos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nome\": \"{{servicoNome}}\", \"ativo\": true, \"categoriaId\": \"{{categoriaId}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Registro duplicado ou vinculado a um histórico. Desative-o em vez de excluir.\"}"
+        }
+      ]
+    },
+    {
+      "name": "17 — Rejeitar categoria inexistente",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/admin/servicos",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nome\": \"Categoria inválida\", \"ativo\": true, \"categoriaId\": \"inexistente\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 404\", function () { pm.response.to.have.status(404); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "17 — Rejeitar categoria inexistente — 404",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/servicos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nome\": \"Categoria inválida\", \"ativo\": true, \"categoriaId\": \"inexistente\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Categoria não encontrada.\"}"
+        }
+      ]
+    },
+    {
+      "name": "18 — Criar balcão",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/admin/balcoes",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nome\": \"Balcão de apoio b86edf51\", \"ativo\": false}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "const dados = pm.response.json();",
+              "pm.collectionVariables.set(\"balcaoId\", dados[\"id\"]);"
+            ]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "18 — Criar balcão — 201",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/balcoes",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nome\": \"Balcão de apoio b86edf51\", \"ativo\": false}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"0369fa68-393a-47fc-97bf-301880974ec3\",\"nome\":\"Balcão de apoio b86edf51\",\"ativo\":false}"
+        }
+      ]
+    },
+    {
+      "name": "19 — Consultar balcão individual",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/balcoes/{{balcaoId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "19 — Consultar balcão individual — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/balcoes/{{balcaoId}}"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"0369fa68-393a-47fc-97bf-301880974ec3\",\"nome\":\"Balcão de apoio b86edf51\",\"ativo\":false}"
+        }
+      ]
+    },
+    {
+      "name": "20 — Listar balcões",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/balcoes"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "20 — Listar balcões — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/balcoes"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"total\":2,\"items\":[{\"id\":\"7b27252e-d7a6-4ddb-b977-f714182d73d0\",\"nome\":\"Balcão 01\",\"ativo\":true},{\"id\":\"0369fa68-393a-47fc-97bf-301880974ec3\",\"nome\":\"Balcão de apoio b86edf51\",\"ativo\":false}]}"
+        }
+      ]
+    },
+    {
+      "name": "21 — Atualizar balcão",
+      "request": {
+        "method": "PUT",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/admin/balcoes/{{balcaoId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nome\": \"Balcão de retirada b86edf51\", \"ativo\": false}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "21 — Atualizar balcão — 200",
+          "originalRequest": {
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/balcoes/{{balcaoId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nome\": \"Balcão de retirada b86edf51\", \"ativo\": false}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"0369fa68-393a-47fc-97bf-301880974ec3\",\"nome\":\"Balcão de retirada b86edf51\",\"ativo\":false}"
+        }
+      ]
+    },
+    {
+      "name": "22 — Excluir balcão sem vínculo",
+      "request": {
+        "method": "DELETE",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/balcoes/{{balcaoId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "22 — Excluir balcão sem vínculo — 204",
+          "originalRequest": {
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/balcoes/{{balcaoId}}"
+          },
+          "status": "",
+          "code": 204,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "23 — Confirmar exclusão do balcão",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/balcoes/{{balcaoId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 404\", function () { pm.response.to.have.status(404); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "23 — Confirmar exclusão do balcão — 404",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/balcoes/{{balcaoId}}"
+          },
+          "status": "",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Balcão não encontrado.\"}"
+        }
+      ]
+    },
+    {
+      "name": "24 — Criar usuário de teste",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/admin/usuarios",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nome\": \"auxiliar-b86edf51\", \"email\": \"auxiliar-b86edf51@example.com\", \"senha\": \"Auxiliar-Test123\", \"perfil\": \"ATENDENTE\", \"ativo\": true}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "const dados = pm.response.json();",
+              "pm.collectionVariables.set(\"usuarioId\", dados[\"id\"]);"
+            ]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "24 — Criar usuário de teste — 201",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/usuarios",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nome\": \"auxiliar-b86edf51\", \"email\": \"auxiliar-b86edf51@example.com\", \"senha\": \"Auxiliar-Test123\", \"perfil\": \"ATENDENTE\", \"ativo\": true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"538aeb5d-d256-476c-8f19-0d141bd7a27a\",\"username\":\"auxiliar-b86edf51\",\"email\":\"auxiliar-b86edf51@example.com\",\"perfil\":\"ATENDENTE\",\"ativo\":true}"
+        }
+      ]
+    },
+    {
+      "name": "25 — Consultar usuário individual",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/usuarios/{{usuarioId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "25 — Consultar usuário individual — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/usuarios/{{usuarioId}}"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"538aeb5d-d256-476c-8f19-0d141bd7a27a\",\"username\":\"auxiliar-b86edf51\",\"email\":\"auxiliar-b86edf51@example.com\",\"perfil\":\"ATENDENTE\",\"ativo\":true}"
+        }
+      ]
+    },
+    {
+      "name": "26 — Listar usuários",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/usuarios"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "26 — Listar usuários — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/usuarios"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"total\":4,\"items\":[{\"id\":\"11005fb9-e1f5-4266-b8bc-6d6690a20978\",\"username\":\"admin\",\"email\":null,\"perfil\":\"ADMIN\",\"ativo\":true},{\"id\":\"538aeb5d-d256-476c-8f19-0d141bd7a27a\",\"username\":\"auxiliar-b86edf51\",\"email\":\"auxiliar-b86edf51@example.com\",\"perfil\":\"ATENDENTE\",\"ativo\":true},{\"id\":\"035aa9c7-e3ec-4941-be23-bf9f4c03cb6a\",\"username\":\"avaliador\",\"email\":null,\"perfil\":\"ADMIN\",\"ativo\":true},{\"id\":\"032bfec6-9831-4f4d-8d44-f252fb226e23\",\"username\":\"operador\",\"email\":null,\"perfil\":\"ATENDENTE\",\"ativo\":true}]}"
+        }
+      ]
+    },
+    {
+      "name": "27 — Atualizar usuário",
+      "request": {
+        "method": "PUT",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/admin/usuarios/{{usuarioId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nome\": \"apoio-b86edf51\", \"email\": \"apoio-b86edf51@example.com\", \"perfil\": \"ATENDENTE\", \"ativo\": false}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "27 — Atualizar usuário — 200",
+          "originalRequest": {
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/usuarios/{{usuarioId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nome\": \"apoio-b86edf51\", \"email\": \"apoio-b86edf51@example.com\", \"perfil\": \"ATENDENTE\", \"ativo\": false}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"538aeb5d-d256-476c-8f19-0d141bd7a27a\",\"username\":\"apoio-b86edf51\",\"email\":\"apoio-b86edf51@example.com\",\"perfil\":\"ATENDENTE\",\"ativo\":false}"
+        }
+      ]
+    },
+    {
+      "name": "28 — Rejeitar e-mail inválido",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/admin/usuarios",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nome\": \"invalid\", \"email\": \"email-invalido\", \"senha\": \"Auxiliar-Test123\", \"perfil\": \"ATENDENTE\", \"ativo\": true}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "28 — Rejeitar e-mail inválido — 400",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/admin/usuarios",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nome\": \"invalid\", \"email\": \"email-invalido\", \"senha\": \"Auxiliar-Test123\", \"perfil\": \"ATENDENTE\", \"ativo\": true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Dados inválidos. Confira os campos enviados.\"}"
+        }
+      ]
+    },
+    {
+      "name": "29 — Excluir usuário sem histórico",
+      "request": {
+        "method": "DELETE",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/usuarios/{{usuarioId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "29 — Excluir usuário sem histórico — 204",
+          "originalRequest": {
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/usuarios/{{usuarioId}}"
+          },
+          "status": "",
+          "code": 204,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "30 — Confirmar exclusão do usuário",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/usuarios/{{usuarioId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 404\", function () { pm.response.to.have.status(404); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "30 — Confirmar exclusão do usuário — 404",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/usuarios/{{usuarioId}}"
+          },
+          "status": "",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Usuário não encontrado.\"}"
+        }
+      ]
+    },
+    {
+      "name": "31 — Emitir senha pública",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/tickets",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"service\": \"{{servicoNome}}\", \"origin\": \"app\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "const dados = pm.response.json();",
+              "pm.collectionVariables.set(\"senhaToken\", dados[\"token\"]);"
+            ]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "31 — Emitir senha pública — 201",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "noauth"
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/tickets",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"service\": \"{{servicoNome}}\", \"origin\": \"app\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:05 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"token\":\"7ebef92b-6d84-48fa-8df9-bd8d302da820f7a295db-955a-4e32-900e-e42af5c9ce05\",\"label\":\"A001\"}"
+        }
+      ]
+    },
+    {
+      "name": "32 — Acompanhar a própria senha",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/tickets/{{senhaToken}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "const dados = pm.response.json();",
+              "pm.collectionVariables.set(\"senhaId\", dados[\"id\"]);"
+            ]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "32 — Acompanhar a própria senha — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/tickets/{{senhaToken}}"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"bbfada0c-e1ac-48ef-a0f6-b544c68255cc\",\"label\":\"A001\",\"service\":\"Carne em cubos b86edf51\",\"origin\":\"app\",\"status\":\"waiting\",\"createdAt\":1794351545957,\"order\":1,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null,\"token\":\"7ebef92b-6d84-48fa-8df9-bd8d302da820f7a295db-955a-4e32-900e-e42af5c9ce05\",\"notifications\":[],\"ahead\":0,\"position\":1,\"estimatedMinutes\":0}"
+        }
+      ]
+    },
+    {
+      "name": "33 — Consultar senha por ID",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/gestao/senhas/{{senhaId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "33 — Consultar senha por ID — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/gestao/senhas/{{senhaId}}"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"bbfada0c-e1ac-48ef-a0f6-b544c68255cc\",\"label\":\"A001\",\"service\":\"Carne em cubos b86edf51\",\"origin\":\"app\",\"status\":\"waiting\",\"createdAt\":1794351545957,\"order\":1,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null}"
+        }
+      ]
+    },
+    {
+      "name": "34 — Listar senhas",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/gestao/senhas"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "34 — Listar senhas — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/gestao/senhas"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"total\":1,\"items\":[{\"id\":\"bbfada0c-e1ac-48ef-a0f6-b544c68255cc\",\"label\":\"A001\",\"service\":\"Carne em cubos b86edf51\",\"origin\":\"app\",\"status\":\"waiting\",\"createdAt\":1794351545957,\"order\":1,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null}]}"
+        }
+      ]
+    },
+    {
+      "name": "35 — Editar serviço de senha aguardando",
+      "request": {
+        "method": "PUT",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/gestao/senhas/{{senhaId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"service\": \"Moído\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "35 — Editar serviço de senha aguardando — 200",
+          "originalRequest": {
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/gestao/senhas/{{senhaId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"service\": \"Moído\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"bbfada0c-e1ac-48ef-a0f6-b544c68255cc\",\"label\":\"A001\",\"service\":\"Moído\",\"origin\":\"app\",\"status\":\"waiting\",\"createdAt\":1794351545957,\"order\":1,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null}"
+        }
+      ]
+    },
+    {
+      "name": "36 — Excluir senha aguardando",
+      "request": {
+        "method": "DELETE",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/gestao/senhas/{{senhaId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "36 — Excluir senha aguardando — 204",
+          "originalRequest": {
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/gestao/senhas/{{senhaId}}"
+          },
+          "status": "",
+          "code": 204,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "37 — Confirmar exclusão da senha",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/gestao/senhas/{{senhaId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 404\", function () { pm.response.to.have.status(404); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "37 — Confirmar exclusão da senha — 404",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/gestao/senhas/{{senhaId}}"
+          },
+          "status": "",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Senha não encontrada.\"}"
+        }
+      ]
+    },
+    {
+      "name": "38 — Emitir senha para atendimento",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/tickets",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"service\": \"Moído\", \"origin\": \"totem\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "const dados = pm.response.json();",
+              "pm.collectionVariables.set(\"senhaToken\", dados[\"token\"]);"
+            ]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "38 — Emitir senha para atendimento — 201",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "noauth"
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/tickets",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"service\": \"Moído\", \"origin\": \"totem\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"token\":\"fc970ac2-c449-4605-a417-372db4fbce855349e524-3675-40c8-8069-00062d4d0fda\",\"label\":\"A002\"}"
+        }
+      ]
+    },
+    {
+      "name": "39 — Consultar senha emitida",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/tickets/{{senhaToken}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "const dados = pm.response.json();",
+              "pm.collectionVariables.set(\"senhaId\", dados[\"id\"]);"
+            ]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "39 — Consultar senha emitida — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/tickets/{{senhaToken}}"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"aa15a288-4b13-4c6e-b35e-973c48b07bef\",\"label\":\"A002\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"waiting\",\"createdAt\":1794351546451,\"order\":2,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null,\"token\":\"fc970ac2-c449-4605-a417-372db4fbce855349e524-3675-40c8-8069-00062d4d0fda\",\"notifications\":[],\"ahead\":0,\"position\":1,\"estimatedMinutes\":0}"
+        }
+      ]
+    },
+    {
+      "name": "40 — Consulta JPA: senhas aguardando",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/consultas/senhas-por-situacao?status=waiting"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "40 — Consulta JPA: senhas aguardando — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/consultas/senhas-por-situacao?status=waiting"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "[{\"id\":\"aa15a288-4b13-4c6e-b35e-973c48b07bef\",\"label\":\"A002\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"waiting\",\"createdAt\":1794351546451,\"order\":2,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null}]"
+        }
+      ]
+    },
+    {
+      "name": "41 — Pausar emissão",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/queue/pause"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "41 — Pausar emissão — 200",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/queue/pause"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"ok\":true}"
+        }
+      ]
+    },
+    {
+      "name": "42 — Bloquear emissão enquanto pausada",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/tickets",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"service\": \"Moído\", \"origin\": \"app\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 409\", function () { pm.response.to.have.status(409); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "42 — Bloquear emissão enquanto pausada — 409",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "noauth"
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/tickets",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"service\": \"Moído\", \"origin\": \"app\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"A retirada de senhas está pausada.\"}"
+        }
+      ]
+    },
+    {
+      "name": "43 — Retomar emissão",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/queue/pause"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "43 — Retomar emissão — 200",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/queue/pause"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"ok\":true}"
+        }
+      ]
+    },
+    {
+      "name": "44 — Não iniciar sem uma chamada",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/queue/start"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 409\", function () { pm.response.to.have.status(409); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "44 — Não iniciar sem uma chamada — 409",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/queue/start"
+          },
+          "status": "",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Não há atendimento ativo.\"}"
+        }
+      ]
+    },
+    {
+      "name": "45 — Chamar próxima senha",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/queue/call"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "45 — Chamar próxima senha — 200",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/queue/call"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:06 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"aa15a288-4b13-4c6e-b35e-973c48b07bef\",\"label\":\"A002\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"called\",\"createdAt\":1794351546451,\"order\":2,\"returns\":0,\"calledAt\":1794351546921,\"deadline\":1794351576921,\"startedAt\":null,\"finishedAt\":null}"
+        }
+      ]
+    },
+    {
+      "name": "46 — Não chamar dois clientes simultaneamente",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/queue/call"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 409\", function () { pm.response.to.have.status(409); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "46 — Não chamar dois clientes simultaneamente — 409",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/queue/call"
+          },
+          "status": "",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Finalize o atendimento atual antes de chamar o próximo.\"}"
+        }
+      ]
+    },
+    {
+      "name": "47 — Preservar senha chamada",
+      "request": {
+        "method": "DELETE",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/gestao/senhas/{{senhaId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 409\", function () { pm.response.to.have.status(409); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "47 — Preservar senha chamada — 409",
+          "originalRequest": {
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/gestao/senhas/{{senhaId}}"
+          },
+          "status": "",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Atendimentos iniciados e históricos não podem ser excluídos.\"}"
+        }
+      ]
+    },
+    {
+      "name": "48 — Repetir chamada",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/queue/recall"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "48 — Repetir chamada — 200",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/queue/recall"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"aa15a288-4b13-4c6e-b35e-973c48b07bef\",\"label\":\"A002\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"called\",\"createdAt\":1794351546451,\"order\":2,\"returns\":0,\"calledAt\":1794351547169,\"deadline\":1794351577169,\"startedAt\":null,\"finishedAt\":null}"
+        }
+      ]
+    },
+    {
+      "name": "49 — Iniciar atendimento após chegada",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/queue/start"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "49 — Iniciar atendimento após chegada — 200",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/queue/start"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"aa15a288-4b13-4c6e-b35e-973c48b07bef\",\"label\":\"A002\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"serving\",\"createdAt\":1794351546451,\"order\":2,\"returns\":0,\"calledAt\":1794351547169,\"deadline\":1794351577169,\"startedAt\":1794351547258,\"finishedAt\":null}"
+        }
+      ]
+    },
+    {
+      "name": "50 — Concluir atendimento",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/queue/finish"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "50 — Concluir atendimento — 200",
+          "originalRequest": {
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/queue/finish"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"id\":\"aa15a288-4b13-4c6e-b35e-973c48b07bef\",\"label\":\"A002\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794351546451,\"order\":2,\"returns\":0,\"calledAt\":1794351547169,\"deadline\":1794351577169,\"startedAt\":1794351547258,\"finishedAt\":1794351547344}"
+        }
+      ]
+    },
+    {
+      "name": "51 — Consulta JPA: senhas concluídas",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/consultas/senhas-por-situacao?status=done"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "51 — Consulta JPA: senhas concluídas — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/consultas/senhas-por-situacao?status=done"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "[{\"id\":\"aa15a288-4b13-4c6e-b35e-973c48b07bef\",\"label\":\"A002\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794351546451,\"order\":2,\"returns\":0,\"calledAt\":1794351547169,\"deadline\":1794351577169,\"startedAt\":1794351547258,\"finishedAt\":1794351547344}]"
+        }
+      ]
+    },
+    {
+      "name": "52 — Preservar histórico concluído",
+      "request": {
+        "method": "DELETE",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/gestao/senhas/{{senhaId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 409\", function () { pm.response.to.have.status(409); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "52 — Preservar histórico concluído — 409",
+          "originalRequest": {
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/gestao/senhas/{{senhaId}}"
+          },
+          "status": "",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Atendimentos iniciados e históricos não podem ser excluídos.\"}"
+        }
+      ]
+    },
+    {
+      "name": "53 — Consultar indicadores reais",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "noauth"
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/state"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "53 — Consultar indicadores reais — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/state"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"current\":null,\"waiting\":[],\"paused\":false,\"stats\":{\"completed\":1,\"absent\":0,\"averageMinutes\":1,\"estimated\":false},\"serverTime\":1794351547531}"
+        }
+      ]
+    },
+    {
+      "name": "54 — Consultar auditoria com responsável",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/audit"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "54 — Consultar auditoria com responsável — 200",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/audit"
+          },
+          "status": "",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "[{\"id\":\"67b67515-1afd-489b-bc8b-1ddc3defd630\",\"action\":\"Atendimento concluído\",\"label\":\"A002\",\"responsavelNome\":\"operador\",\"at\":1794351547344},{\"id\":\"5d0619ec-cd26-41d4-93af-dfa5a3f97349\",\"action\":\"Atendimento iniciado\",\"label\":\"A002\",\"responsavelNome\":\"operador\",\"at\":1794351547258},{\"id\":\"e46517c4-07bd-4e8c-8ca2-4b27e21548d8\",\"action\":\"Chamada repetida\",\"label\":\"A002\",\"responsavelNome\":\"operador\",\"at\":1794351547169},{\"id\":\"6ca8c159-3c39-43a7-a05c-26eba2bc228a\",\"action\":\"Senha chamada\",\"label\":\"A002\",\"responsavelNome\":\"operador\",\"at\":1794351546921},{\"id\":\"796fea99-68fe-4f62-bea6-1c4e03130cdc\",\"action\":\"Emissão retomada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1794351546751},{\"id\":\"0f0dd480-0721-4c09-9b85-a6117c8fb975\",\"action\":\"Emissão pausada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1794351546654},{\"id\":\"fa6ca60f-00ff-4936-9e2d-6f1d166525d7\",\"action\":\"Senha emitida\",\"label\":\"A002\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1794351546451},{\"id\":\"98e5f3d3-5d2f-4288-b1fb-a1251ff33c52\",\"action\":\"Senha cancelada\",\"label\":\"A001\",\"responsavelNome\":\"avaliador\",\"at\":1794351546355},{\"id\":\"a934dfd7-d532-4286-ada0-2fda12456261\",\"action\":\"Serviço da senha alterado\",\"label\":\"A001\",\"responsavelNome\":\"avaliador\",\"at\":1794351546262},{\"id\":\"5244ae90-edf4-4356-a1c5-071dd1de6093\",\"action\":\"Senha emitida\",\"label\":\"A001\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1794351545957},{\"id\":\"23ca32be-265f-401b-93e9-28ee07926a46\",\"action\":\"Cadastro excluído\",\"label\":\"usuarios / 538aeb5d-d256-476c-8f19-0d141bd7a27a\",\"responsavelNome\":\"avaliador\",\"at\":1794351545857},{\"id\":\"22f3d5a4-f73e-4561-9508-9dcaf04c42d7\",\"action\":\"Cadastro atualizado\",\"label\":\"apoio-b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351545704},{\"id\":\"c9041b34-d741-4ce2-b456-ef1bea5a7c29\",\"action\":\"Cadastro criado\",\"label\":\"auxiliar-b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351545467},{\"id\":\"32888a2b-6b2e-44ef-87cb-ddadc7584c2a\",\"action\":\"Cadastro excluído\",\"label\":\"balcoes / 0369fa68-393a-47fc-97bf-301880974ec3\",\"responsavelNome\":\"avaliador\",\"at\":1794351545225},{\"id\":\"8d51e913-5da6-47a0-862f-febea499000b\",\"action\":\"Cadastro atualizado\",\"label\":\"Balcão de retirada b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351545147},{\"id\":\"b62958a4-c100-4aef-a33c-d395ff8cb171\",\"action\":\"Cadastro criado\",\"label\":\"Balcão de apoio b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351544902},{\"id\":\"298f5e0c-55c7-4b0c-9d0b-b36e30b3de72\",\"action\":\"Cadastro atualizado\",\"label\":\"Carne em cubos b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351544472},{\"id\":\"74a26d6b-ddb4-4b73-a3d9-1b4c62b4f6a5\",\"action\":\"Cadastro criado\",\"label\":\"Cubos para panela b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351544299},{\"id\":\"94d3e95b-c1ad-41b3-b3cf-8512a7662bba\",\"action\":\"Cadastro atualizado\",\"label\":\"Preparos especiais b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351544096},{\"id\":\"1d2cbedf-80db-4504-b9ac-0fdb202e45bb\",\"action\":\"Cadastro criado\",\"label\":\"Cortes bovinos b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351543850}]"
+        }
+      ]
+    },
+    {
+      "name": "55 — Rejeitar situação inválida",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{atendenteUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{atendenteSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/consultas/senhas-por-situacao?status=invalido"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "55 — Rejeitar situação inválida — 400",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{atendenteUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{atendenteSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/consultas/senhas-por-situacao?status=invalido"
+          },
+          "status": "",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Situação inválida.\"}"
+        }
+      ]
+    },
+    {
+      "name": "56 — Recurso inexistente",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/servicos/inexistente"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 404\", function () { pm.response.to.have.status(404); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "56 — Recurso inexistente — 404",
+          "originalRequest": {
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/servicos/inexistente"
+          },
+          "status": "",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\"message\":\"Serviço não encontrado.\"}"
+        }
+      ]
+    },
+    {
+      "name": "57 — Excluir serviço sem vínculo",
+      "request": {
+        "method": "DELETE",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/servicos/{{servicoId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "57 — Excluir serviço sem vínculo — 204",
+          "originalRequest": {
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/servicos/{{servicoId}}"
+          },
+          "status": "",
+          "code": 204,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "58 — Excluir categoria sem vínculo",
+      "request": {
+        "method": "DELETE",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{adminUsuario}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{adminSenha}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [],
+        "url": "{{baseUrl}}/api/admin/categorias/{{categoriaId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });"]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "58 — Excluir categoria sem vínculo — 204",
+          "originalRequest": {
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{adminUsuario}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{adminSenha}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [],
+            "url": "{{baseUrl}}/api/admin/categorias/{{categoriaId}}"
+          },
+          "status": "",
+          "code": 204,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "0"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 10 Nov 2026 22:59:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    }
+  ]
+}

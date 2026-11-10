@@ -168,3 +168,5 @@ backend/target/
 *.class
 *.mv.db
 *.trace.db
+
+!.env.avaliacao.example
