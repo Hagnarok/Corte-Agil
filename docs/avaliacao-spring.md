@@ -45,16 +45,18 @@ O exemplo do professor separa entidades JPA, repositories Spring Data e recursos
 - HTTP Basic transporta usuário e senha no cabeçalho Authorization. Base64 não é criptografia: use HTTPS fora do computador local.
 - Autenticação verifica quem é o usuário; autorização verifica o que seu perfil pode fazer. Por isso 401 e 403 representam situações diferentes.
 - A transação e o bloqueio do estado da fila preservam ordem e numeração durante emissões simultâneas.
-- O perfil avaliacao cria contas de teste apenas no ambiente local. O perfil vercel continua usando PostgreSQL e as contas reais já existentes.
+- O perfil avaliacao cria as contas didáticas no ambiente MySQL local. A publicação usa PostgreSQL e possui as mesmas quatro contas de demonstração, cadastradas na aplicação.
 
-Os exemplos da coleção foram capturados em requisições HTTP contra MySQL 8.4.13 e reproduzidos pelo Newman, o executor de coleções do Postman. A interface Angular também foi testada nesse banco. Não foram utilizados dados de clientes nem credenciais de produção nas evidências.
+Os exemplos da coleção foram capturados em requisições HTTP contra MySQL 8.4.13 e reproduzidos pelo Newman, o executor de coleções do Postman. A interface Angular também foi testada nesse banco. As evidências usam dados e contas de demonstração do projeto, sem senhas pessoais de integrantes.
 
 ## Verificação realizada
 
-- 22 testes Java aprovados, incluindo permissões, integridade e regras da fila.
+- 24 testes Java aprovados, incluindo permissões, integridade e regras da fila.
 - 65 requisições HTTP executadas contra MySQL 8.4.13 e reproduzidas pelo Newman sem falhas.
 - Parâmetro obrigatório ausente (400), JSON inválido (400), conteúdo incompatível (415), resposta não disponível (406) e mensagens por campo cobertos pelos testes.
 - Build Angular e três testes do service worker aprovados.
 - Interface conferida em computador e celular, com login por sessão, categorias, edição, exclusão e atendimento.
 
 O workflow `verificar.yml` repete os testes Java, a compilação Angular e a coleção com um serviço MySQL. O relatório e as respostas dessa execução ficam no artefato `avaliacao-mysql-postman` do GitHub Actions.
+
+Os testes também verificam os quatro logins documentados e a atualização das senhas antigas de avaliação, preservando senhas personalizadas e evitando redefinições repetidas.

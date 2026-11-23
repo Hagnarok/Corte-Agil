@@ -25,7 +25,7 @@ import org.springframework.test.web.servlet.*;
 @SpringBootTest(
     properties = {
       "spring.datasource.url=jdbc:h2:mem:cadastros-test;DB_CLOSE_DELAY=-1",
-      "ADMIN_PASSWORD=TestOnly-StrongPass123",
+      "ADMIN_PASSWORD=admin@piunifio",
       "PUBLIC_BASE_URL=https://test.example.com",
       "MAIL_FROM=teste@example.com"
     })
@@ -54,9 +54,9 @@ class CadastrosIntegracaoTest {
     u.setUsername("admin");
     u.setPerfil("ADMIN");
     u.setEmail("admin@example.com");
-    u.setPasswordHash(new BCryptPasswordEncoder().encode("TestOnly-StrongPass123"));
+    u.setPasswordHash(new BCryptPasswordEncoder().encode("admin@piunifio"));
     usuarios.save(u);
-    admin = login("admin", "TestOnly-StrongPass123");
+    admin = login("admin", "admin@piunifio");
   }
 
   MockHttpSession login(String username, String password) throws Exception {
@@ -95,7 +95,7 @@ class CadastrosIntegracaoTest {
         "email",
         nome + "@example.com",
         "senha",
-        "Atendente-Test123",
+        "operador@piunifio",
         "perfil",
         "ATENDENTE",
         "ativo",
@@ -115,7 +115,7 @@ class CadastrosIntegracaoTest {
       String token) {
     return post("/api/password-reset/confirm")
         .contentType("application/json")
-        .content("{\"token\":\"" + token + "\",\"senha\":\"NovaSenha-Test123\"}");
+        .content("{\"token\":\"" + token + "\",\"senha\":\"nova@piunifio\"}");
   }
 
   @Test
@@ -124,7 +124,7 @@ class CadastrosIntegracaoTest {
     String id = u.path("id").asText();
     assertThat(u.has("passwordHash")).isFalse();
     assertThat(u.has("versaoSessao")).isFalse();
-    var atendente = login("operador", "Atendente-Test123");
+    var atendente = login("operador", "operador@piunifio");
     mvc.perform(get("/api/session").session(atendente))
         .andExpect(jsonPath("$.perfil").value("ATENDENTE"));
     mvc.perform(get("/api/admin/usuarios").session(atendente)).andExpect(status().isForbidden());
@@ -263,7 +263,7 @@ class CadastrosIntegracaoTest {
   @Test
   void recuperacaoPorEmailUsoUnicoESessaoRevogada() throws Exception {
     var u = criar("usuarios", usuario("recuperar"));
-    var sess = login("recuperar", "Atendente-Test123");
+    var sess = login("recuperar", "operador@piunifio");
     mvc.perform(
             post("/api/password-reset/request")
                 .contentType("application/json")
@@ -278,7 +278,7 @@ class CadastrosIntegracaoTest {
     mvc.perform(confirmar(token)).andExpect(status().isOk());
     mvc.perform(confirmar(token)).andExpect(status().isBadRequest());
     mvc.perform(get("/api/session").session(sess)).andExpect(status().isUnauthorized());
-    login("recuperar", "NovaSenha-Test123");
+    login("recuperar", "nova@piunifio");
     String expirado = gerarLink(u.path("id").asText());
     var r = redefinicoes.findAll().stream().filter(x -> !x.isUsado()).findFirst().orElseThrow();
     r.setExpiraEm(1);

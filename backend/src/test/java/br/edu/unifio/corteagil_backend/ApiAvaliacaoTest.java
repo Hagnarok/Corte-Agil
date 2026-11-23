@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest(
     properties = {
       "spring.datasource.url=jdbc:h2:mem:basic-test;DB_CLOSE_DELAY=-1",
-      "ADMIN_PASSWORD=TestOnly-StrongPass123"
+      "ADMIN_PASSWORD=admin@piunifio"
     })
 @ActiveProfiles("avaliacao")
 @AutoConfigureMockMvc
@@ -28,6 +28,9 @@ class ApiAvaliacaoTest {
   @Autowired SenhaRepositorio senhas;
   @Autowired AuditoriaRepositorio audit;
   @Autowired FilaRepositorio filas;
+  @Autowired UsuarioRepositorio usuarios;
+  @Autowired org.springframework.security.crypto.password.PasswordEncoder encoder;
+  @Autowired br.edu.unifio.corteagil_backend.configuracoes.DadosAvaliacao dadosAvaliacao;
 
   @BeforeEach
   void limpar() {
@@ -44,11 +47,11 @@ class ApiAvaliacaoTest {
   }
 
   String admin() {
-    return basic("avaliador", "Avaliacao-Admin123");
+    return basic("avaliador", "avaliador@piunifio");
   }
 
   String atendente() {
-    return basic("operador", "Avaliacao-Atendente123");
+    return basic("operador", "operador@piunifio");
   }
 
   JsonNode criar(String tipo, Map<String, Object> data) throws Exception {
@@ -79,6 +82,62 @@ class ApiAvaliacaoTest {
     mvc.perform(get("/api/session").header("Authorization", atendente()))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.perfil").value("ATENDENTE"));
+  }
+
+  @Test
+  void quatroContasDeAvaliacaoPossuemAcessoComAsSenhasDocumentadas() throws Exception {
+    for (var conta :
+        Map.of(
+                "admin",
+                "admin@piunifio",
+                "professor.pi",
+                "Professor@piunifio",
+                "avaliador",
+                "avaliador@piunifio",
+                "operador",
+                "operador@piunifio")
+            .entrySet()) {
+      mvc.perform(
+              get("/api/session").header("Authorization", basic(conta.getKey(), conta.getValue())))
+          .andExpect(status().isOk())
+          .andExpect(jsonPath("$.username").value(conta.getKey()));
+    }
+  }
+
+  @Test
+  void migraSenhasAntigasSemReverterSenhasPersonalizadas() {
+    var avaliador = usuarios.findByUsername("avaliador").orElseThrow();
+    var operador = usuarios.findByUsername("operador").orElseThrow();
+    String hashAvaliador = avaliador.getPasswordHash();
+    String hashOperador = operador.getPasswordHash();
+    long versaoAvaliador = avaliador.getVersaoSessao();
+    long versaoOperador = operador.getVersaoSessao();
+    try {
+      avaliador.setPasswordHash(encoder.encode("Avaliacao-Admin123"));
+      operador.setPasswordHash(encoder.encode("personalizada@piunifio"));
+      usuarios.save(avaliador);
+      usuarios.save(operador);
+      dadosAvaliacao.run(new org.springframework.boot.DefaultApplicationArguments());
+      var migrado = usuarios.findByUsername("avaliador").orElseThrow();
+      assertThat(encoder.matches("avaliador@piunifio", migrado.getPasswordHash())).isTrue();
+      assertThat(migrado.getVersaoSessao()).isEqualTo(versaoAvaliador + 1);
+      var personalizado = usuarios.findByUsername("operador").orElseThrow();
+      assertThat(encoder.matches("personalizada@piunifio", personalizado.getPasswordHash()))
+          .isTrue();
+      assertThat(personalizado.getVersaoSessao()).isEqualTo(versaoOperador);
+      dadosAvaliacao.run(new org.springframework.boot.DefaultApplicationArguments());
+      assertThat(usuarios.findByUsername("avaliador").orElseThrow().getVersaoSessao())
+          .isEqualTo(versaoAvaliador + 1);
+    } finally {
+      avaliador = usuarios.findByUsername("avaliador").orElseThrow();
+      operador = usuarios.findByUsername("operador").orElseThrow();
+      avaliador.setPasswordHash(hashAvaliador);
+      avaliador.setVersaoSessao(versaoAvaliador);
+      operador.setPasswordHash(hashOperador);
+      operador.setVersaoSessao(versaoOperador);
+      usuarios.save(avaliador);
+      usuarios.save(operador);
+    }
   }
 
   @Test

@@ -18,24 +18,35 @@ O **backend avaliado está na pasta [backend/](backend/)**. É um projeto **Java
 
 ## Avaliação da versão publicada
 
-A aplicação pode ser avaliada diretamente na nuvem. A conta abaixo foi criada no banco da publicação para que o professor consiga acessar a gestão e conferir os cadastros e o atendimento.
+A aplicação pode ser avaliada diretamente na nuvem. Os acessos abaixo são contas de demonstração do Projeto Integrador e usam as mesmas senhas no site e no ambiente local MySQL.
 
 | Informação           | Acesso                                                                                 |
 | -------------------- | -------------------------------------------------------------------------------------- |
 | Aplicação publicada  | [https://corte-agil-rose.vercel.app](https://corte-agil-rose.vercel.app)               |
 | Login da equipe      | [Abrir tela de acesso](https://corte-agil-rose.vercel.app/entrar)                      |
 | Usuário de avaliação | `professor.pi`                                                                         |
-| Senha                | Informada no texto da entrega no AVA; não é publicada neste repositório                |
+| Senha                | `Professor@piunifio`                                                                   |
 | Perfil               | ADMIN — acesso aos cadastros e à operação da fila                                      |
 | Cliente              | [Área pública do cliente](https://corte-agil-rose.vercel.app/cliente); não exige login |
 | Painel de chamadas   | [Painel público](https://corte-agil-rose.vercel.app/painel)                            |
 | Totem                | [Emissão e cupom com QR Code](https://corte-agil-rose.vercel.app/totem)                |
 
-A conta `professor.pi` é da versão publicada. As contas `avaliador` e `operador`, apresentadas na seção de MySQL, pertencem ao ambiente local da atividade de Spring Boot.
+### Contas de demonstração
+
+| Usuário        | Senha                | Perfil    | Ambiente                     |
+| -------------- | -------------------- | --------- | ---------------------------- |
+| `admin`        | `admin@piunifio`     | ADMIN     | Site publicado e MySQL local |
+| `professor.pi` | `Professor@piunifio` | ADMIN     | Site publicado e MySQL local |
+| `avaliador`    | `avaliador@piunifio` | ADMIN     | Site publicado e MySQL local |
+| `operador`     | `operador@piunifio`  | ATENDENTE | Site publicado e MySQL local |
+
+O perfil ADMIN mantém os cadastros e opera a fila. O ATENDENTE opera a fila e consulta o histórico, com bloqueio dos cadastros administrativos. Para demonstrar a diferença entre perfis, use `avaliador` e `operador`. Cliente e totem continuam públicos, sem cadastro de conta.
+
+As senhas publicadas são didáticas para a avaliação deste projeto. A configuração da Vercel continua com o perfil `vercel`; o perfil `avaliacao` é utilizado na execução MySQL local.
 
 ### Como demonstrar o fluxo pela interface publicada
 
-1. Abra a tela de acesso e entre com `professor.pi` e a senha recebida pelo AVA.
+1. Abra a tela de acesso e entre com `professor.pi` e a senha `Professor@piunifio`.
 2. Em **Cadastros**, selecione categoria, serviço, balcão, usuário ou senha para conferir listagem, pesquisa, criação, edição e exclusão permitida pelas regras de negócio.
 3. Abra a **Área do cliente** em uma janela anônima, mantendo a gestão aberta na outra janela. Escolha um serviço, retire uma senha e acompanhe a posição exibida.
 4. Na **Visão geral**, clique em **Chamar próxima senha**. A chamada aparece na janela do cliente e no **Painel de chamadas**.
@@ -46,15 +57,14 @@ A conta `professor.pi` é da versão publicada. As contas `avaliador` e `operado
 
 Em **23/11/2026**, o fluxo foi executado pelo navegador no endereço publicado, utilizando a conta de avaliação e um cliente anônimo em navegadores separados:
 
-- Login da conta `professor.pi` e manutenção da sessão após recarregar a página.
-- Conclusão da senha anterior A008 pela interface, preservando o histórico.
-- Emissão da senha **A010**, serviço **Moído**, pela área do cliente.
+- Login das quatro contas documentadas, recarga da sessão e saída; operador com acesso à fila e bloqueio dos cadastros administrativos.
+- Emissão da senha **A011**, serviço **Moído**, pela área do cliente.
 - Chamada exibida no cliente e no painel público, confirmação de chegada e conclusão do atendimento.
-- Resultado **Concluído** consultado na gestão; auditoria identificando `professor.pi` como responsável.
-- Indicadores atualizados a partir dos dados: aguardando variou de 0 para 1 e retornou a 0; atendidos hoje aumentou de 1 para 2.
+- Resultado **Concluído** consultado na gestão; auditoria identificando `operador` como responsável; resultado consultado pelo administrador `professor.pi`.
+- Indicadores atualizados a partir dos dados: aguardando variou de 0 para 1 e retornou a 0; atendidos hoje aumentou de 2 para 3.
 - Ao terminar a conferência, a fila ficou sem senhas aguardando, sem atendimento ativo e com a emissão liberada.
 
-O repositório é público e o diagrama está em [docs/arquitetura.md](docs/arquitetura.md#classes-de-negócio). Na entrega do AVA, informe os links do repositório, da aplicação e da documentação, além do usuário e da senha da conta de avaliação fornecidos ao grupo.
+O repositório é público e o diagrama está em [docs/arquitetura.md](docs/arquitetura.md#classes-de-negócio). Na entrega do AVA, informe os links do repositório, da aplicação e da documentação, além do usuário e da senha da conta de avaliação da tabela acima.
 
 ## Integrantes
 
@@ -124,16 +134,22 @@ docker compose -f compose.avaliacao.yml logs -f aplicacao
 | Base da API no Postman                     | `http://localhost:3000/api`                                        |
 | MySQL pelo computador local                | `127.0.0.1:3307`, banco `corte_agil_avaliacao`                     |
 
-As contas abaixo são criadas pelo perfil `avaliacao` e servem exclusivamente para os testes da atividade:
+Na execução local, `admin` é criado pela configuração inicial e as demais contas são criadas pelo perfil `avaliacao`. Todas as senhas estão na tabela de **Contas de demonstração**. Para os testes HTTP da atividade:
 
-| Usuário   | Senha de teste         | Perfil    | Permissão                                  |
-| --------- | ---------------------- | --------- | ------------------------------------------ |
-| avaliador | Avaliacao-Admin123     | ADMIN     | Mantém os cadastros e opera a fila         |
-| operador  | Avaliacao-Atendente123 | ATENDENTE | Consulta dados da operação e atende a fila |
+| Usuário   | Senha de teste     | Perfil    | Permissão                                  |
+| --------- | ------------------ | --------- | ------------------------------------------ |
+| avaliador | avaliador@piunifio | ADMIN     | Mantém os cadastros e opera a fila         |
+| operador  | operador@piunifio  | ATENDENTE | Consulta dados da operação e atende a fila |
 
 Acesse `/entrar` com uma dessas contas para usar a interface. No Postman, utilize **Basic Auth**. As credenciais do banco local também estão no [Compose](compose.avaliacao.yml): usuário `corte_avaliacao` e senha didática `MySQL-Avaliacao123`.
 
 A inicialização cadastra os serviços e o balcão usados na demonstração. As classes responsáveis estão em [CadastrosIniciais.java](backend/src/main/java/br/edu/unifio/corteagil_backend/configuracoes/CadastrosIniciais.java), [CategoriasIniciais.java](backend/src/main/java/br/edu/unifio/corteagil_backend/configuracoes/CategoriasIniciais.java) e [DadosAvaliacao.java](backend/src/main/java/br/edu/unifio/corteagil_backend/configuracoes/DadosAvaliacao.java).
+
+### Atualizar uma instalação local de avaliação já existente
+
+Atualize o código e reconstrua a aplicação com o mesmo comando do Compose. O volume do MySQL preserva os dados. O inicializador de avaliação converte as senhas antigas padrão de `admin`, `avaliador` e `operador` para o novo padrão e invalida as sessões antigas dessas contas. O processo é idempotente: senhas personalizadas não são sobrescritas em cada inicialização.
+
+A conta `professor.pi` também passa a ser criada no ambiente local. Se uma conta já teve a senha personalizada, um administrador pode ajustá-la em **Cadastros → Usuários → Editar → Nova senha**.
 
 ### 3. Encerrar e preservar os dados
 
@@ -152,7 +168,7 @@ O MySQL mantém os dados no volume `mysql_avaliacao`. Iniciar novamente utiliza 
 | Execução local padrão     | H2 persistente; [application.properties](backend/src/main/resources/application.properties)                                        | Desenvolvimento local                                      |
 | Site publicado            | PostgreSQL; perfil `vercel`; [application-vercel.properties](backend/src/main/resources/application-vercel.properties)             | Instalação na nuvem já existente                           |
 
-**Para avaliar o requisito MySQL, utilize o ambiente da atividade descrito acima.** A publicação em nuvem utiliza PostgreSQL. As contas didáticas do perfil `avaliacao` não ficam ativas nessa publicação.
+**Para avaliar o requisito MySQL, utilize o ambiente da atividade descrito acima.** A publicação em nuvem utiliza PostgreSQL. As contas de demonstração da publicação foram cadastradas na aplicação; o perfil `avaliacao` continua restrito à execução local.
 
 ## Como localizar e executar o backend Java
 
@@ -200,7 +216,7 @@ Para iniciar diretamente pelo Maven ou pela IDE, configure as variáveis de ambi
 | `DATABASE_URL`           | `jdbc:mysql://localhost:3307/corte_agil_avaliacao?serverTimezone=America/Sao_Paulo&allowPublicKeyRetrieval=true&sslMode=DISABLED` |
 | `DATABASE_USERNAME`      | `corte_avaliacao`                                                                                                                 |
 | `DATABASE_PASSWORD`      | `MySQL-Avaliacao123`                                                                                                              |
-| `ADMIN_PASSWORD`         | `Avaliacao-Admin123`                                                                                                              |
+| `ADMIN_PASSWORD`         | `admin@piunifio`                                                                                                                  |
 | `PUBLIC_BASE_URL`        | `http://localhost:3000`                                                                                                           |
 | `ALLOWED_ORIGINS`        | `http://localhost:3000`                                                                                                           |
 
@@ -345,12 +361,12 @@ Os testes ficam em **[backend/src/test/java/br/edu/unifio/corteagil_backend/](ba
 
 | Arquivo                                                                                                            | Quantidade | Cobertura principal                                                                              |
 | ------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------------------------------------------------------------------------------------ |
-| [ApiAvaliacaoTest.java](backend/src/test/java/br/edu/unifio/corteagil_backend/ApiAvaliacaoTest.java)               | 9 testes   | HTTP Basic, 401/403, categoria/serviço, consultas personalizadas, validações, integridade e fila |
+| [ApiAvaliacaoTest.java](backend/src/test/java/br/edu/unifio/corteagil_backend/ApiAvaliacaoTest.java)               | 11 testes  | HTTP Basic, 401/403, categoria/serviço, consultas personalizadas, validações, integridade e fila |
 | [CadastrosIntegracaoTest.java](backend/src/test/java/br/edu/unifio/corteagil_backend/CadastrosIntegracaoTest.java) | 5 testes   | CRUD, perfis, pesquisa/paginação, vínculos, preservação do histórico e recuperação de acesso     |
 | [FilaIntegracaoTest.java](backend/src/test/java/br/edu/unifio/corteagil_backend/FilaIntegracaoTest.java)           | 7 testes   | Ordem da fila, ausência/retorno, pausa, emissão concorrente, avisos e eventos SSE                |
 | [SessoesNuvemTest.java](backend/src/test/java/br/edu/unifio/corteagil_backend/SessoesNuvemTest.java)               | 1 teste    | Persistência e encerramento de sessão                                                            |
 
-Para executar apenas os **22 testes Java**, com JDK 17+:
+Para executar apenas os **24 testes Java**, com JDK 17+:
 
 ```sh
 ./backend/mvnw -B -f backend/pom.xml test
@@ -393,7 +409,7 @@ O workflow [.github/workflows/verificar.yml](.github/workflows/verificar.yml) ex
 
 1. Instalação das dependências e build Angular.
 2. Três testes do service worker.
-3. Verificação de formatação e os 22 testes Java com Maven.
+3. Verificação de formatação e os 24 testes Java com Maven.
 4. Inicialização do backend com os perfis `mysql,avaliacao` e um serviço MySQL real.
 5. Coleta das 65 respostas HTTP e execução da coleção pelo Newman.
 6. Publicação do artefato `avaliacao-mysql-postman`, com `aplicacao.log`, `colecao.json` e `newman.json`.
@@ -412,6 +428,6 @@ Para conferir, abra [Actions — Verificar projeto](https://github.com/Hagnarok/
 
 Materiais complementares: [documentação dos endpoints](docs/documentacao-api.md), [arquitetura e diagrama](docs/arquitetura.md), [manual da interface](docs/manual.md) e [roteiro de avaliação Spring Boot](docs/avaliacao-spring.md).
 
-A demonstração publicada está em [corte-agil-rose.vercel.app](https://corte-agil-rose.vercel.app). Para avaliar a publicação, utilize `professor.pi` e a senha informada na entrega do AVA, seguindo a seção **Avaliação da versão publicada**. As contas locais de MySQL são específicas da atividade de Spring Boot.
+A demonstração publicada está em [corte-agil-rose.vercel.app](https://corte-agil-rose.vercel.app). Para avaliar a publicação, utilize `professor.pi` e a senha `Professor@piunifio`, seguindo a seção **Avaliação da versão publicada**. O ambiente MySQL usa os mesmos acessos da tabela de contas de demonstração.
 
 Conforme o [enunciado](https://hackmd.io/@srdelfino/SyMXGnkAzg), um integrante deve entregar o link deste repositório no Ambiente Conhecer, na atividade **Projeto Integrador**. O código, o diagrama, a documentação e a coleção Postman estão incluídos no repositório. Todos os integrantes devem compreender a implementação e estar preparados para explicar as decisões e as regras do sistema.

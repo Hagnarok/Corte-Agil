@@ -10,8 +10,8 @@ base = args.base_url.rstrip('/')
 if parse.urlparse(base).hostname not in ('localhost', '127.0.0.1'):
     raise SystemExit('O coletor só pode executar contra uma instalação local de avaliação.')
 http = request.build_opener(request.ProxyHandler({}))
-variables = {'baseUrl': base, 'adminUsuario': 'avaliador', 'adminSenha': 'Avaliacao-Admin123',
-             'atendenteUsuario': 'operador', 'atendenteSenha': 'Avaliacao-Atendente123'}
+variables = {'baseUrl': base, 'adminUsuario': 'avaliador', 'adminSenha': 'avaliador@piunifio',
+             'atendenteUsuario': 'operador', 'atendenteSenha': 'operador@piunifio'}
 items = []
 
 def resolve(value):
@@ -105,11 +105,11 @@ run('20 — Listar balcões', 'GET', '/api/admin/balcoes')
 run('21 — Atualizar balcão', 'PUT', '/api/admin/balcoes/{{balcaoId}}', data={'nome': 'Balcão de retirada ' + suffix, 'ativo': False})
 run('22 — Excluir balcão sem vínculo', 'DELETE', '/api/admin/balcoes/{{balcaoId}}', 204)
 run('23 — Confirmar exclusão do balcão', 'GET', '/api/admin/balcoes/{{balcaoId}}', 404)
-run('24 — Criar usuário de teste', 'POST', '/api/admin/usuarios', 201, {'nome': 'auxiliar-' + suffix, 'email': 'auxiliar-' + suffix + '@example.com', 'senha': 'Auxiliar-Test123', 'perfil': 'ATENDENTE', 'ativo': True}, capture={'usuarioId': 'id'})
+run('24 — Criar usuário de teste', 'POST', '/api/admin/usuarios', 201, {'nome': 'auxiliar-' + suffix, 'email': 'auxiliar-' + suffix + '@example.com', 'senha': 'auxiliar@piunifio', 'perfil': 'ATENDENTE', 'ativo': True}, capture={'usuarioId': 'id'})
 run('25 — Consultar usuário individual', 'GET', '/api/admin/usuarios/{{usuarioId}}')
 run('26 — Listar usuários', 'GET', '/api/admin/usuarios')
 run('27 — Atualizar usuário', 'PUT', '/api/admin/usuarios/{{usuarioId}}', data={'nome': 'apoio-' + suffix, 'email': 'apoio-' + suffix + '@example.com', 'perfil': 'ATENDENTE', 'ativo': False})
-run('28 — Rejeitar e-mail inválido', 'POST', '/api/admin/usuarios', 400, {'nome': 'invalid', 'email': 'email-invalido', 'senha': 'Auxiliar-Test123', 'perfil': 'ATENDENTE', 'ativo': True})
+run('28 — Rejeitar e-mail inválido', 'POST', '/api/admin/usuarios', 400, {'nome': 'invalid', 'email': 'email-invalido', 'senha': 'auxiliar@piunifio', 'perfil': 'ATENDENTE', 'ativo': True})
 run('29 — Excluir usuário sem histórico', 'DELETE', '/api/admin/usuarios/{{usuarioId}}', 204)
 run('30 — Confirmar exclusão do usuário', 'GET', '/api/admin/usuarios/{{usuarioId}}', 404)
 run('31 — Emitir senha pública', 'POST', '/api/tickets', 201, {'service': '{{servicoNome}}', 'origin': 'app'}, role=None, capture={'senhaToken': 'token'})

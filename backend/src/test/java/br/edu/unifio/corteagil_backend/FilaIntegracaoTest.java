@@ -23,7 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest(
     properties = {
       "spring.datasource.url=jdbc:h2:mem:queue-test;DB_CLOSE_DELAY=-1",
-      "ADMIN_PASSWORD=TestOnly-StrongPass123",
+      "ADMIN_PASSWORD=admin@piunifio",
       "CODESPACE_NAME=test-space",
       "ALLOWED_ORIGINS=https://test.example.com"
     })
@@ -50,7 +50,7 @@ class FilaIntegracaoTest {
         mvc.perform(
                 post("/api/login")
                     .contentType("application/json")
-                    .content("{\"username\":\"admin\",\"password\":\"TestOnly-StrongPass123\"}"))
+                    .content("{\"username\":\"admin\",\"password\":\"admin@piunifio\"}"))
             .andExpect(status().isOk())
             .andReturn()
             .getRequest()

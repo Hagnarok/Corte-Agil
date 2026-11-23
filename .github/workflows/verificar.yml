@@ -37,7 +37,7 @@ jobs:
           DATABASE_URL: jdbc:mysql://127.0.0.1:3307/corte_agil_avaliacao?serverTimezone=America/Sao_Paulo&allowPublicKeyRetrieval=true&sslMode=DISABLED
           DATABASE_USERNAME: corte_avaliacao
           DATABASE_PASSWORD: MySQL-Avaliacao123
-          ADMIN_PASSWORD: Avaliacao-Admin123
+          ADMIN_PASSWORD: admin@piunifio
         run: |
           mkdir -p /tmp/corte-avaliacao
           java -jar backend/target/corte-agil.jar > /tmp/corte-avaliacao/aplicacao.log 2>&1 &

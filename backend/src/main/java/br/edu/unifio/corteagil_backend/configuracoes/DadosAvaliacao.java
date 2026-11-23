@@ -21,12 +21,23 @@ public class DadosAvaliacao implements ApplicationRunner {
   @Override
   @Transactional
   public void run(ApplicationArguments args) {
-    criar("avaliador", "Avaliacao-Admin123", "ADMIN");
-    criar("operador", "Avaliacao-Atendente123", "ATENDENTE");
+    criar("admin", "admin@piunifio", "ADMIN", "Avaliacao-Admin123");
+    criar("professor.pi", "Professor@piunifio", "ADMIN", null);
+    criar("avaliador", "avaliador@piunifio", "ADMIN", "Avaliacao-Admin123");
+    criar("operador", "operador@piunifio", "ATENDENTE", "Avaliacao-Atendente123");
   }
 
-  private void criar(String nome, String senha, String perfil) {
-    if (usuarios.findByUsername(nome).isPresent()) return;
+  private void criar(String nome, String senha, String perfil, String senhaAntiga) {
+    var existente = usuarios.findByUsername(nome);
+    if (existente.isPresent()) {
+      var u = existente.get();
+      if (senhaAntiga != null && encoder.matches(senhaAntiga, u.getPasswordHash())) {
+        u.setPasswordHash(encoder.encode(senha));
+        u.setVersaoSessao(u.getVersaoSessao() + 1);
+        usuarios.save(u);
+      }
+      return;
+    }
     var u = new Usuario();
     u.setId(java.util.UUID.randomUUID().toString());
     u.setUsername(nome);

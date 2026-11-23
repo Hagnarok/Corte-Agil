@@ -17,7 +17,7 @@
     },
     {
       "key": "adminSenha",
-      "value": "Avaliacao-Admin123",
+      "value": "avaliador@piunifio",
       "type": "string"
     },
     {
@@ -27,42 +27,42 @@
     },
     {
       "key": "atendenteSenha",
-      "value": "Avaliacao-Atendente123",
+      "value": "operador@piunifio",
       "type": "string"
     },
     {
       "key": "categoriaId",
-      "value": "3dfc3485-cd3d-4e19-b62a-7d964d9651f2",
+      "value": "f0310e45-8b1a-4148-8522-422781dc00ee",
       "type": "string"
     },
     {
       "key": "servicoId",
-      "value": "d2fbaf38-1a1e-4ccf-b02e-9bbff6231e4c",
+      "value": "df09e909-050a-4b39-8ed9-4efdef855796",
       "type": "string"
     },
     {
       "key": "servicoNome",
-      "value": "Carne em cubos 4921d791",
+      "value": "Carne em cubos 4b9df1ce",
       "type": "string"
     },
     {
       "key": "balcaoId",
-      "value": "7b5acc43-be0b-4eee-acc6-4a10aaee95e1",
+      "value": "89460269-bddc-4f35-be8f-320801912503",
       "type": "string"
     },
     {
       "key": "usuarioId",
-      "value": "04e99794-4cbe-42fe-8c4c-4831ce3140a6",
+      "value": "723a0a3f-cae1-40a3-b336-6de8c8ada60d",
       "type": "string"
     },
     {
       "key": "senhaToken",
-      "value": "6bd064fa-e45e-4ef9-958f-503c3c7dfb5a54c3554f-47ae-4ef3-8b2e-627a36ea1ffb",
+      "value": "787658f7-695e-446e-87d8-f11cb3664e7498cd922c-5835-4428-bddb-f49c9c1209ee",
       "type": "string"
     },
     {
       "key": "senhaId",
-      "value": "27c2439d-0b87-4dc4-b3ad-b24a933dc758",
+      "value": "8efed17b-7e72-4218-8b74-2a58d490b2b8",
       "type": "string"
     }
   ],
@@ -142,7 +142,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:10 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:49 GMT"
             },
             {
               "key": "Connection",
@@ -253,7 +253,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:10 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -353,7 +353,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:10 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -361,7 +361,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"username\":\"avaliador\",\"perfil\":\"ADMIN\"}"
+          "body": "{\"perfil\":\"ADMIN\",\"username\":\"avaliador\"}"
         }
       ]
     },
@@ -453,7 +453,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:10 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -461,7 +461,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"username\":\"operador\",\"perfil\":\"ATENDENTE\"}"
+          "body": "{\"perfil\":\"ATENDENTE\",\"username\":\"operador\"}"
         }
       ]
     },
@@ -560,7 +560,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:10 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -600,7 +600,7 @@
         "url": "{{baseUrl}}/api/admin/categorias",
         "body": {
           "mode": "raw",
-          "raw": "{\"nome\": \"Cortes bovinos 4921d791\", \"ativo\": true}",
+          "raw": "{\"nome\": \"Cortes bovinos 4b9df1ce\", \"ativo\": true}",
           "options": {
             "raw": {
               "language": "json"
@@ -650,7 +650,7 @@
             "url": "{{baseUrl}}/api/admin/categorias",
             "body": {
               "mode": "raw",
-              "raw": "{\"nome\": \"Cortes bovinos 4921d791\", \"ativo\": true}",
+              "raw": "{\"nome\": \"Cortes bovinos 4b9df1ce\", \"ativo\": true}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -692,7 +692,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:10 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -700,7 +700,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"3dfc3485-cd3d-4e19-b62a-7d964d9651f2\",\"nome\":\"Cortes bovinos 4921d791\",\"ativo\":true}"
+          "body": "{\"id\":\"f0310e45-8b1a-4148-8522-422781dc00ee\",\"nome\":\"Cortes bovinos 4b9df1ce\",\"ativo\":true}"
         }
       ]
     },
@@ -792,7 +792,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:10 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -800,7 +800,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"3dfc3485-cd3d-4e19-b62a-7d964d9651f2\",\"nome\":\"Cortes bovinos 4921d791\",\"ativo\":true}"
+          "body": "{\"id\":\"f0310e45-8b1a-4148-8522-422781dc00ee\",\"nome\":\"Cortes bovinos 4b9df1ce\",\"ativo\":true}"
         }
       ]
     },
@@ -892,7 +892,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:10 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -900,7 +900,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"total\":2,\"items\":[{\"id\":\"3dfc3485-cd3d-4e19-b62a-7d964d9651f2\",\"nome\":\"Cortes bovinos 4921d791\",\"ativo\":true},{\"id\":\"f3e270a4-ebf1-4d10-985d-930ecddf39df\",\"nome\":\"Cortes e preparos\",\"ativo\":true}]}"
+          "body": "{\"total\":2,\"items\":[{\"id\":\"f0310e45-8b1a-4148-8522-422781dc00ee\",\"nome\":\"Cortes bovinos 4b9df1ce\",\"ativo\":true},{\"id\":\"f3e270a4-ebf1-4d10-985d-930ecddf39df\",\"nome\":\"Cortes e preparos\",\"ativo\":true}]}"
         }
       ]
     },
@@ -932,7 +932,7 @@
         "url": "{{baseUrl}}/api/admin/categorias/{{categoriaId}}",
         "body": {
           "mode": "raw",
-          "raw": "{\"nome\": \"Preparos especiais 4921d791\", \"ativo\": true}",
+          "raw": "{\"nome\": \"Preparos especiais 4b9df1ce\", \"ativo\": true}",
           "options": {
             "raw": {
               "language": "json"
@@ -978,7 +978,7 @@
             "url": "{{baseUrl}}/api/admin/categorias/{{categoriaId}}",
             "body": {
               "mode": "raw",
-              "raw": "{\"nome\": \"Preparos especiais 4921d791\", \"ativo\": true}",
+              "raw": "{\"nome\": \"Preparos especiais 4b9df1ce\", \"ativo\": true}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1020,7 +1020,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:10 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -1028,7 +1028,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"3dfc3485-cd3d-4e19-b62a-7d964d9651f2\",\"nome\":\"Preparos especiais 4921d791\",\"ativo\":true}"
+          "body": "{\"id\":\"f0310e45-8b1a-4148-8522-422781dc00ee\",\"nome\":\"Preparos especiais 4b9df1ce\",\"ativo\":true}"
         }
       ]
     },
@@ -1151,7 +1151,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:11 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -1159,7 +1159,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"message\":\"Dados inválidos. Informe o nome.\",\"errors\":{\"nome\":\"Informe o nome.\"}}"
+          "body": "{\"errors\":{\"nome\":\"Informe o nome.\"},\"message\":\"Dados inválidos. Informe o nome.\"}"
         }
       ]
     },
@@ -1191,7 +1191,7 @@
         "url": "{{baseUrl}}/api/admin/servicos",
         "body": {
           "mode": "raw",
-          "raw": "{\"nome\": \"Cubos para panela 4921d791\", \"ativo\": true, \"categoriaId\": \"{{categoriaId}}\"}",
+          "raw": "{\"nome\": \"Cubos para panela 4b9df1ce\", \"ativo\": true, \"categoriaId\": \"{{categoriaId}}\"}",
           "options": {
             "raw": {
               "language": "json"
@@ -1242,7 +1242,7 @@
             "url": "{{baseUrl}}/api/admin/servicos",
             "body": {
               "mode": "raw",
-              "raw": "{\"nome\": \"Cubos para panela 4921d791\", \"ativo\": true, \"categoriaId\": \"{{categoriaId}}\"}",
+              "raw": "{\"nome\": \"Cubos para panela 4b9df1ce\", \"ativo\": true, \"categoriaId\": \"{{categoriaId}}\"}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1284,7 +1284,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:11 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -1292,7 +1292,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"d2fbaf38-1a1e-4ccf-b02e-9bbff6231e4c\",\"nome\":\"Cubos para panela 4921d791\",\"ativo\":true,\"categoria\":{\"id\":\"3dfc3485-cd3d-4e19-b62a-7d964d9651f2\",\"nome\":\"Preparos especiais 4921d791\",\"ativo\":true}}"
+          "body": "{\"id\":\"df09e909-050a-4b39-8ed9-4efdef855796\",\"nome\":\"Cubos para panela 4b9df1ce\",\"ativo\":true,\"categoria\":{\"id\":\"f0310e45-8b1a-4148-8522-422781dc00ee\",\"nome\":\"Preparos especiais 4b9df1ce\",\"ativo\":true}}"
         }
       ]
     },
@@ -1384,7 +1384,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:11 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -1392,7 +1392,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"d2fbaf38-1a1e-4ccf-b02e-9bbff6231e4c\",\"nome\":\"Cubos para panela 4921d791\",\"ativo\":true,\"categoria\":{\"id\":\"3dfc3485-cd3d-4e19-b62a-7d964d9651f2\",\"nome\":\"Preparos especiais 4921d791\",\"ativo\":true}}"
+          "body": "{\"id\":\"df09e909-050a-4b39-8ed9-4efdef855796\",\"nome\":\"Cubos para panela 4b9df1ce\",\"ativo\":true,\"categoria\":{\"id\":\"f0310e45-8b1a-4148-8522-422781dc00ee\",\"nome\":\"Preparos especiais 4b9df1ce\",\"ativo\":true}}"
         }
       ]
     },
@@ -1424,7 +1424,7 @@
         "url": "{{baseUrl}}/api/admin/servicos/{{servicoId}}",
         "body": {
           "mode": "raw",
-          "raw": "{\"nome\": \"Carne em cubos 4921d791\", \"ativo\": true, \"categoriaId\": \"{{categoriaId}}\"}",
+          "raw": "{\"nome\": \"Carne em cubos 4b9df1ce\", \"ativo\": true, \"categoriaId\": \"{{categoriaId}}\"}",
           "options": {
             "raw": {
               "language": "json"
@@ -1474,7 +1474,7 @@
             "url": "{{baseUrl}}/api/admin/servicos/{{servicoId}}",
             "body": {
               "mode": "raw",
-              "raw": "{\"nome\": \"Carne em cubos 4921d791\", \"ativo\": true, \"categoriaId\": \"{{categoriaId}}\"}",
+              "raw": "{\"nome\": \"Carne em cubos 4b9df1ce\", \"ativo\": true, \"categoriaId\": \"{{categoriaId}}\"}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1516,7 +1516,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:11 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -1524,7 +1524,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"d2fbaf38-1a1e-4ccf-b02e-9bbff6231e4c\",\"nome\":\"Carne em cubos 4921d791\",\"ativo\":true,\"categoria\":{\"id\":\"3dfc3485-cd3d-4e19-b62a-7d964d9651f2\",\"nome\":\"Preparos especiais 4921d791\",\"ativo\":true}}"
+          "body": "{\"id\":\"df09e909-050a-4b39-8ed9-4efdef855796\",\"nome\":\"Carne em cubos 4b9df1ce\",\"ativo\":true,\"categoria\":{\"id\":\"f0310e45-8b1a-4148-8522-422781dc00ee\",\"nome\":\"Preparos especiais 4b9df1ce\",\"ativo\":true}}"
         }
       ]
     },
@@ -1616,7 +1616,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:11 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -1624,7 +1624,7 @@
             }
           ],
           "cookie": [],
-          "body": "[{\"id\":\"d2fbaf38-1a1e-4ccf-b02e-9bbff6231e4c\",\"nome\":\"Carne em cubos 4921d791\",\"ativo\":true,\"categoria\":{\"id\":\"3dfc3485-cd3d-4e19-b62a-7d964d9651f2\",\"nome\":\"Preparos especiais 4921d791\",\"ativo\":true}}]"
+          "body": "[{\"id\":\"df09e909-050a-4b39-8ed9-4efdef855796\",\"nome\":\"Carne em cubos 4b9df1ce\",\"ativo\":true,\"categoria\":{\"id\":\"f0310e45-8b1a-4148-8522-422781dc00ee\",\"nome\":\"Preparos especiais 4b9df1ce\",\"ativo\":true}}]"
         }
       ]
     },
@@ -1719,7 +1719,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:11 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -1850,7 +1850,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:11 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:50 GMT"
             },
             {
               "key": "Connection",
@@ -1981,7 +1981,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:11 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -2021,7 +2021,7 @@
         "url": "{{baseUrl}}/api/admin/balcoes",
         "body": {
           "mode": "raw",
-          "raw": "{\"nome\": \"Balcão de apoio 4921d791\", \"ativo\": false}",
+          "raw": "{\"nome\": \"Balcão de apoio 4b9df1ce\", \"ativo\": false}",
           "options": {
             "raw": {
               "language": "json"
@@ -2071,7 +2071,7 @@
             "url": "{{baseUrl}}/api/admin/balcoes",
             "body": {
               "mode": "raw",
-              "raw": "{\"nome\": \"Balcão de apoio 4921d791\", \"ativo\": false}",
+              "raw": "{\"nome\": \"Balcão de apoio 4b9df1ce\", \"ativo\": false}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -2113,7 +2113,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:11 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -2121,7 +2121,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"7b5acc43-be0b-4eee-acc6-4a10aaee95e1\",\"nome\":\"Balcão de apoio 4921d791\",\"ativo\":false}"
+          "body": "{\"id\":\"89460269-bddc-4f35-be8f-320801912503\",\"nome\":\"Balcão de apoio 4b9df1ce\",\"ativo\":false}"
         }
       ]
     },
@@ -2213,7 +2213,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:11 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -2221,7 +2221,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"7b5acc43-be0b-4eee-acc6-4a10aaee95e1\",\"nome\":\"Balcão de apoio 4921d791\",\"ativo\":false}"
+          "body": "{\"id\":\"89460269-bddc-4f35-be8f-320801912503\",\"nome\":\"Balcão de apoio 4b9df1ce\",\"ativo\":false}"
         }
       ]
     },
@@ -2313,7 +2313,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:11 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -2321,7 +2321,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"total\":2,\"items\":[{\"id\":\"7b27252e-d7a6-4ddb-b977-f714182d73d0\",\"nome\":\"Balcão 01\",\"ativo\":true},{\"id\":\"7b5acc43-be0b-4eee-acc6-4a10aaee95e1\",\"nome\":\"Balcão de apoio 4921d791\",\"ativo\":false}]}"
+          "body": "{\"total\":2,\"items\":[{\"id\":\"7b27252e-d7a6-4ddb-b977-f714182d73d0\",\"nome\":\"Balcão 01\",\"ativo\":true},{\"id\":\"89460269-bddc-4f35-be8f-320801912503\",\"nome\":\"Balcão de apoio 4b9df1ce\",\"ativo\":false}]}"
         }
       ]
     },
@@ -2353,7 +2353,7 @@
         "url": "{{baseUrl}}/api/admin/balcoes/{{balcaoId}}",
         "body": {
           "mode": "raw",
-          "raw": "{\"nome\": \"Balcão de retirada 4921d791\", \"ativo\": false}",
+          "raw": "{\"nome\": \"Balcão de retirada 4b9df1ce\", \"ativo\": false}",
           "options": {
             "raw": {
               "language": "json"
@@ -2399,7 +2399,7 @@
             "url": "{{baseUrl}}/api/admin/balcoes/{{balcaoId}}",
             "body": {
               "mode": "raw",
-              "raw": "{\"nome\": \"Balcão de retirada 4921d791\", \"ativo\": false}",
+              "raw": "{\"nome\": \"Balcão de retirada 4b9df1ce\", \"ativo\": false}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -2441,7 +2441,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:12 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -2449,7 +2449,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"7b5acc43-be0b-4eee-acc6-4a10aaee95e1\",\"nome\":\"Balcão de retirada 4921d791\",\"ativo\":false}"
+          "body": "{\"id\":\"89460269-bddc-4f35-be8f-320801912503\",\"nome\":\"Balcão de retirada 4b9df1ce\",\"ativo\":false}"
         }
       ]
     },
@@ -2533,7 +2533,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:12 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -2636,7 +2636,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:12 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -2676,7 +2676,7 @@
         "url": "{{baseUrl}}/api/admin/usuarios",
         "body": {
           "mode": "raw",
-          "raw": "{\"nome\": \"auxiliar-4921d791\", \"email\": \"auxiliar-4921d791@example.com\", \"senha\": \"Auxiliar-Test123\", \"perfil\": \"ATENDENTE\", \"ativo\": true}",
+          "raw": "{\"nome\": \"auxiliar-4b9df1ce\", \"email\": \"auxiliar-4b9df1ce@example.com\", \"senha\": \"auxiliar@piunifio\", \"perfil\": \"ATENDENTE\", \"ativo\": true}",
           "options": {
             "raw": {
               "language": "json"
@@ -2726,7 +2726,7 @@
             "url": "{{baseUrl}}/api/admin/usuarios",
             "body": {
               "mode": "raw",
-              "raw": "{\"nome\": \"auxiliar-4921d791\", \"email\": \"auxiliar-4921d791@example.com\", \"senha\": \"Auxiliar-Test123\", \"perfil\": \"ATENDENTE\", \"ativo\": true}",
+              "raw": "{\"nome\": \"auxiliar-4b9df1ce\", \"email\": \"auxiliar-4b9df1ce@example.com\", \"senha\": \"auxiliar@piunifio\", \"perfil\": \"ATENDENTE\", \"ativo\": true}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -2768,7 +2768,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:12 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -2776,7 +2776,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"04e99794-4cbe-42fe-8c4c-4831ce3140a6\",\"username\":\"auxiliar-4921d791\",\"email\":\"auxiliar-4921d791@example.com\",\"perfil\":\"ATENDENTE\",\"ativo\":true}"
+          "body": "{\"id\":\"723a0a3f-cae1-40a3-b336-6de8c8ada60d\",\"username\":\"auxiliar-4b9df1ce\",\"email\":\"auxiliar-4b9df1ce@example.com\",\"perfil\":\"ATENDENTE\",\"ativo\":true}"
         }
       ]
     },
@@ -2868,7 +2868,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:12 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -2876,7 +2876,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"04e99794-4cbe-42fe-8c4c-4831ce3140a6\",\"username\":\"auxiliar-4921d791\",\"email\":\"auxiliar-4921d791@example.com\",\"perfil\":\"ATENDENTE\",\"ativo\":true}"
+          "body": "{\"id\":\"723a0a3f-cae1-40a3-b336-6de8c8ada60d\",\"username\":\"auxiliar-4b9df1ce\",\"email\":\"auxiliar-4b9df1ce@example.com\",\"perfil\":\"ATENDENTE\",\"ativo\":true}"
         }
       ]
     },
@@ -2968,7 +2968,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:12 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -2976,7 +2976,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"total\":4,\"items\":[{\"id\":\"11005fb9-e1f5-4266-b8bc-6d6690a20978\",\"username\":\"admin\",\"email\":null,\"perfil\":\"ADMIN\",\"ativo\":true},{\"id\":\"04e99794-4cbe-42fe-8c4c-4831ce3140a6\",\"username\":\"auxiliar-4921d791\",\"email\":\"auxiliar-4921d791@example.com\",\"perfil\":\"ATENDENTE\",\"ativo\":true},{\"id\":\"035aa9c7-e3ec-4941-be23-bf9f4c03cb6a\",\"username\":\"avaliador\",\"email\":null,\"perfil\":\"ADMIN\",\"ativo\":true},{\"id\":\"032bfec6-9831-4f4d-8d44-f252fb226e23\",\"username\":\"operador\",\"email\":null,\"perfil\":\"ATENDENTE\",\"ativo\":true}]}"
+          "body": "{\"total\":5,\"items\":[{\"id\":\"11005fb9-e1f5-4266-b8bc-6d6690a20978\",\"username\":\"admin\",\"email\":null,\"perfil\":\"ADMIN\",\"ativo\":true},{\"id\":\"723a0a3f-cae1-40a3-b336-6de8c8ada60d\",\"username\":\"auxiliar-4b9df1ce\",\"email\":\"auxiliar-4b9df1ce@example.com\",\"perfil\":\"ATENDENTE\",\"ativo\":true},{\"id\":\"035aa9c7-e3ec-4941-be23-bf9f4c03cb6a\",\"username\":\"avaliador\",\"email\":null,\"perfil\":\"ADMIN\",\"ativo\":true},{\"id\":\"032bfec6-9831-4f4d-8d44-f252fb226e23\",\"username\":\"operador\",\"email\":null,\"perfil\":\"ATENDENTE\",\"ativo\":true},{\"id\":\"a7ba0fe4-f136-4ccd-b196-25861ee0cabd\",\"username\":\"professor.pi\",\"email\":null,\"perfil\":\"ADMIN\",\"ativo\":true}]}"
         }
       ]
     },
@@ -3008,7 +3008,7 @@
         "url": "{{baseUrl}}/api/admin/usuarios/{{usuarioId}}",
         "body": {
           "mode": "raw",
-          "raw": "{\"nome\": \"apoio-4921d791\", \"email\": \"apoio-4921d791@example.com\", \"perfil\": \"ATENDENTE\", \"ativo\": false}",
+          "raw": "{\"nome\": \"apoio-4b9df1ce\", \"email\": \"apoio-4b9df1ce@example.com\", \"perfil\": \"ATENDENTE\", \"ativo\": false}",
           "options": {
             "raw": {
               "language": "json"
@@ -3054,7 +3054,7 @@
             "url": "{{baseUrl}}/api/admin/usuarios/{{usuarioId}}",
             "body": {
               "mode": "raw",
-              "raw": "{\"nome\": \"apoio-4921d791\", \"email\": \"apoio-4921d791@example.com\", \"perfil\": \"ATENDENTE\", \"ativo\": false}",
+              "raw": "{\"nome\": \"apoio-4b9df1ce\", \"email\": \"apoio-4b9df1ce@example.com\", \"perfil\": \"ATENDENTE\", \"ativo\": false}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -3096,7 +3096,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:12 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -3104,7 +3104,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"04e99794-4cbe-42fe-8c4c-4831ce3140a6\",\"username\":\"apoio-4921d791\",\"email\":\"apoio-4921d791@example.com\",\"perfil\":\"ATENDENTE\",\"ativo\":false}"
+          "body": "{\"id\":\"723a0a3f-cae1-40a3-b336-6de8c8ada60d\",\"username\":\"apoio-4b9df1ce\",\"email\":\"apoio-4b9df1ce@example.com\",\"perfil\":\"ATENDENTE\",\"ativo\":false}"
         }
       ]
     },
@@ -3136,7 +3136,7 @@
         "url": "{{baseUrl}}/api/admin/usuarios",
         "body": {
           "mode": "raw",
-          "raw": "{\"nome\": \"invalid\", \"email\": \"email-invalido\", \"senha\": \"Auxiliar-Test123\", \"perfil\": \"ATENDENTE\", \"ativo\": true}",
+          "raw": "{\"nome\": \"invalid\", \"email\": \"email-invalido\", \"senha\": \"auxiliar@piunifio\", \"perfil\": \"ATENDENTE\", \"ativo\": true}",
           "options": {
             "raw": {
               "language": "json"
@@ -3185,7 +3185,7 @@
             "url": "{{baseUrl}}/api/admin/usuarios",
             "body": {
               "mode": "raw",
-              "raw": "{\"nome\": \"invalid\", \"email\": \"email-invalido\", \"senha\": \"Auxiliar-Test123\", \"perfil\": \"ATENDENTE\", \"ativo\": true}",
+              "raw": "{\"nome\": \"invalid\", \"email\": \"email-invalido\", \"senha\": \"auxiliar@piunifio\", \"perfil\": \"ATENDENTE\", \"ativo\": true}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -3227,7 +3227,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:12 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -3235,7 +3235,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"message\":\"Dados inválidos. Informe um e-mail válido.\",\"errors\":{\"email\":\"Informe um e-mail válido.\"}}"
+          "body": "{\"errors\":{\"email\":\"Informe um e-mail válido.\"},\"message\":\"Dados inválidos. Informe um e-mail válido.\"}"
         }
       ]
     },
@@ -3319,7 +3319,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:12 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -3422,7 +3422,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:12 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -3530,7 +3530,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:12 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -3538,7 +3538,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"token\":\"fabbf7d8-9289-413f-9a73-dd4c6769c6e2db60855d-3808-455c-b63f-6058aff8fd95\",\"label\":\"A011\"}"
+          "body": "{\"token\":\"e982b5aa-6183-4739-984d-f17d308d264e35a649d3-0b8c-47c4-a695-6fcef2bdb1fb\",\"label\":\"A023\"}"
         }
       ]
     },
@@ -3610,7 +3610,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:13 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -3618,7 +3618,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"17280c9c-7ac8-44f6-81ae-7bd66a8616d9\",\"label\":\"A011\",\"service\":\"Carne em cubos 4921d791\",\"origin\":\"app\",\"status\":\"waiting\",\"createdAt\":1794353712963,\"order\":11,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null,\"token\":\"fabbf7d8-9289-413f-9a73-dd4c6769c6e2db60855d-3808-455c-b63f-6058aff8fd95\",\"notifications\":[],\"ahead\":0,\"position\":1,\"estimatedMinutes\":0}"
+          "body": "{\"id\":\"3dfc7081-9381-4cf5-9be7-a8a09a5a1baa\",\"label\":\"A023\",\"service\":\"Carne em cubos 4b9df1ce\",\"origin\":\"app\",\"status\":\"waiting\",\"createdAt\":1795454091855,\"order\":23,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null,\"token\":\"e982b5aa-6183-4739-984d-f17d308d264e35a649d3-0b8c-47c4-a695-6fcef2bdb1fb\",\"notifications\":[],\"ahead\":0,\"position\":1,\"estimatedMinutes\":0}"
         }
       ]
     },
@@ -3710,7 +3710,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:13 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:51 GMT"
             },
             {
               "key": "Connection",
@@ -3718,7 +3718,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"17280c9c-7ac8-44f6-81ae-7bd66a8616d9\",\"label\":\"A011\",\"service\":\"Carne em cubos 4921d791\",\"origin\":\"app\",\"status\":\"waiting\",\"createdAt\":1794353712963,\"order\":11,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null}"
+          "body": "{\"id\":\"3dfc7081-9381-4cf5-9be7-a8a09a5a1baa\",\"label\":\"A023\",\"service\":\"Carne em cubos 4b9df1ce\",\"origin\":\"app\",\"status\":\"waiting\",\"createdAt\":1795454091855,\"order\":23,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null}"
         }
       ]
     },
@@ -3810,7 +3810,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:13 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -3818,7 +3818,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"total\":6,\"items\":[{\"id\":\"17280c9c-7ac8-44f6-81ae-7bd66a8616d9\",\"label\":\"A011\",\"service\":\"Carne em cubos 4921d791\",\"origin\":\"app\",\"status\":\"waiting\",\"createdAt\":1794353712963,\"order\":11,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null},{\"id\":\"eb1c47d0-ea25-4ab5-80f8-366dce2949fb\",\"label\":\"A010\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794353266736,\"order\":10,\"returns\":0,\"calledAt\":1794353267564,\"deadline\":1794353297564,\"startedAt\":1794353267666,\"finishedAt\":1794353267764},{\"id\":\"ba205113-039f-423f-8c00-90bfaf84379a\",\"label\":\"A008\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794353253750,\"order\":8,\"returns\":0,\"calledAt\":1794353254475,\"deadline\":1794353284475,\"startedAt\":1794353254571,\"finishedAt\":1794353254662},{\"id\":\"59043c2b-a5d6-4f19-bbc1-f6d93930e243\",\"label\":\"A005\",\"service\":\"Não informado\",\"origin\":\"app\",\"status\":\"done\",\"createdAt\":1794351579749,\"order\":5,\"returns\":0,\"calledAt\":1794351580037,\"deadline\":1794351610037,\"startedAt\":1794351580123,\"finishedAt\":1794351580190},{\"id\":\"5a9607cd-82cc-4fde-92c9-e517090b5285\",\"label\":\"A004\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794351573871,\"order\":4,\"returns\":0,\"calledAt\":1794351574663,\"deadline\":1794351604663,\"startedAt\":1794351574757,\"finishedAt\":1794351574849},{\"id\":\"aa15a288-4b13-4c6e-b35e-973c48b07bef\",\"label\":\"A002\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794351546451,\"order\":2,\"returns\":0,\"calledAt\":1794351547169,\"deadline\":1794351577169,\"startedAt\":1794351547258,\"finishedAt\":1794351547344}]}"
+          "body": "{\"total\":12,\"items\":[{\"id\":\"3dfc7081-9381-4cf5-9be7-a8a09a5a1baa\",\"label\":\"A023\",\"service\":\"Carne em cubos 4b9df1ce\",\"origin\":\"app\",\"status\":\"waiting\",\"createdAt\":1795454091855,\"order\":23,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null},{\"id\":\"eeb4fc03-d28c-4bfc-9b76-3edb8f2c1195\",\"label\":\"A021\",\"service\":\"Não informado\",\"origin\":\"app\",\"status\":\"done\",\"createdAt\":1795449616729,\"order\":21,\"returns\":0,\"calledAt\":1795449617058,\"deadline\":1795449647058,\"startedAt\":1795449617161,\"finishedAt\":1795449617253},{\"id\":\"74be33a6-6477-4466-ac3f-263648cd38ac\",\"label\":\"A020\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1795449611828,\"order\":20,\"returns\":0,\"calledAt\":1795449612445,\"deadline\":1795449642445,\"startedAt\":1795449612518,\"finishedAt\":1795449612590},{\"id\":\"95107a10-6fa1-4c57-b629-f3c4cd4a4974\",\"label\":\"A018\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1795449600484,\"order\":18,\"returns\":0,\"calledAt\":1795449601088,\"deadline\":1795449631088,\"startedAt\":1795449601170,\"finishedAt\":1795449601244},{\"id\":\"02003faf-a3a0-4a3f-9507-b485fb4c24c4\",\"label\":\"A015\",\"service\":\"Não informado\",\"origin\":\"app\",\"status\":\"done\",\"createdAt\":1794353737979,\"order\":15,\"returns\":0,\"calledAt\":1794353738264,\"deadline\":1794353768264,\"startedAt\":1794353738369,\"finishedAt\":1794353738491},{\"id\":\"2a057408-5a0f-468a-9c91-4028fd0fcc2a\",\"label\":\"A014\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794353731684,\"order\":14,\"returns\":0,\"calledAt\":1794353732509,\"deadline\":1794353762509,\"startedAt\":1794353732608,\"finishedAt\":1794353732706},{\"id\":\"27c2439d-0b87-4dc4-b3ad-b24a933dc758\",\"label\":\"A012\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794353713515,\"order\":12,\"returns\":0,\"calledAt\":1794353714305,\"deadline\":1794353744305,\"startedAt\":1794353714413,\"finishedAt\":1794353714505},{\"id\":\"eb1c47d0-ea25-4ab5-80f8-366dce2949fb\",\"label\":\"A010\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794353266736,\"order\":10,\"returns\":0,\"calledAt\":1794353267564,\"deadline\":1794353297564,\"startedAt\":1794353267666,\"finishedAt\":1794353267764},{\"id\":\"ba205113-039f-423f-8c00-90bfaf84379a\",\"label\":\"A008\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794353253750,\"order\":8,\"returns\":0,\"calledAt\":1794353254475,\"deadline\":1794353284475,\"startedAt\":1794353254571,\"finishedAt\":1794353254662},{\"id\":\"59043c2b-a5d6-4f19-bbc1-f6d93930e243\",\"label\":\"A005\",\"service\":\"Não informado\",\"origin\":\"app\",\"status\":\"done\",\"createdAt\":1794351579749,\"order\":5,\"returns\":0,\"calledAt\":1794351580037,\"deadline\":1794351610037,\"startedAt\":1794351580123,\"finishedAt\":1794351580190}]}"
         }
       ]
     },
@@ -3938,7 +3938,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:13 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -3946,7 +3946,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"17280c9c-7ac8-44f6-81ae-7bd66a8616d9\",\"label\":\"A011\",\"service\":\"Moído\",\"origin\":\"app\",\"status\":\"waiting\",\"createdAt\":1794353712963,\"order\":11,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null}"
+          "body": "{\"id\":\"3dfc7081-9381-4cf5-9be7-a8a09a5a1baa\",\"label\":\"A023\",\"service\":\"Moído\",\"origin\":\"app\",\"status\":\"waiting\",\"createdAt\":1795454091855,\"order\":23,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null}"
         }
       ]
     },
@@ -4030,7 +4030,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:13 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -4133,7 +4133,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:13 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -4241,7 +4241,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:13 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -4249,7 +4249,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"token\":\"6bd064fa-e45e-4ef9-958f-503c3c7dfb5a54c3554f-47ae-4ef3-8b2e-627a36ea1ffb\",\"label\":\"A012\"}"
+          "body": "{\"token\":\"787658f7-695e-446e-87d8-f11cb3664e7498cd922c-5835-4428-bddb-f49c9c1209ee\",\"label\":\"A024\"}"
         }
       ]
     },
@@ -4321,7 +4321,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:13 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -4329,7 +4329,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"27c2439d-0b87-4dc4-b3ad-b24a933dc758\",\"label\":\"A012\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"waiting\",\"createdAt\":1794353713515,\"order\":12,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null,\"token\":\"6bd064fa-e45e-4ef9-958f-503c3c7dfb5a54c3554f-47ae-4ef3-8b2e-627a36ea1ffb\",\"notifications\":[],\"ahead\":0,\"position\":1,\"estimatedMinutes\":0}"
+          "body": "{\"id\":\"8efed17b-7e72-4218-8b74-2a58d490b2b8\",\"label\":\"A024\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"waiting\",\"createdAt\":1795454092228,\"order\":24,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null,\"token\":\"787658f7-695e-446e-87d8-f11cb3664e7498cd922c-5835-4428-bddb-f49c9c1209ee\",\"notifications\":[],\"ahead\":0,\"position\":1,\"estimatedMinutes\":0}"
         }
       ]
     },
@@ -4421,7 +4421,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:13 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -4429,7 +4429,7 @@
             }
           ],
           "cookie": [],
-          "body": "[{\"id\":\"27c2439d-0b87-4dc4-b3ad-b24a933dc758\",\"label\":\"A012\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"waiting\",\"createdAt\":1794353713515,\"order\":12,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null}]"
+          "body": "[{\"id\":\"8efed17b-7e72-4218-8b74-2a58d490b2b8\",\"label\":\"A024\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"waiting\",\"createdAt\":1795454092228,\"order\":24,\"returns\":0,\"calledAt\":null,\"deadline\":null,\"startedAt\":null,\"finishedAt\":null}]"
         }
       ]
     },
@@ -4521,7 +4521,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:13 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -4628,7 +4628,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:13 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -4728,7 +4728,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:13 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -4831,7 +4831,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:13 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -4931,7 +4931,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:14 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -4939,7 +4939,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"27c2439d-0b87-4dc4-b3ad-b24a933dc758\",\"label\":\"A012\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"called\",\"createdAt\":1794353713515,\"order\":12,\"returns\":0,\"calledAt\":1794353714032,\"deadline\":1794353744032,\"startedAt\":null,\"finishedAt\":null}"
+          "body": "{\"id\":\"8efed17b-7e72-4218-8b74-2a58d490b2b8\",\"label\":\"A024\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"called\",\"createdAt\":1795454092228,\"order\":24,\"returns\":0,\"calledAt\":1795454092565,\"deadline\":1795454122565,\"startedAt\":null,\"finishedAt\":null}"
         }
       ]
     },
@@ -5034,7 +5034,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:14 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -5137,7 +5137,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:14 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -5237,7 +5237,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:14 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -5245,7 +5245,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"27c2439d-0b87-4dc4-b3ad-b24a933dc758\",\"label\":\"A012\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"called\",\"createdAt\":1794353713515,\"order\":12,\"returns\":0,\"calledAt\":1794353714305,\"deadline\":1794353744305,\"startedAt\":null,\"finishedAt\":null}"
+          "body": "{\"id\":\"8efed17b-7e72-4218-8b74-2a58d490b2b8\",\"label\":\"A024\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"called\",\"createdAt\":1795454092228,\"order\":24,\"returns\":0,\"calledAt\":1795454092759,\"deadline\":1795454122759,\"startedAt\":null,\"finishedAt\":null}"
         }
       ]
     },
@@ -5337,7 +5337,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:14 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -5345,7 +5345,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"27c2439d-0b87-4dc4-b3ad-b24a933dc758\",\"label\":\"A012\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"serving\",\"createdAt\":1794353713515,\"order\":12,\"returns\":0,\"calledAt\":1794353714305,\"deadline\":1794353744305,\"startedAt\":1794353714413,\"finishedAt\":null}"
+          "body": "{\"id\":\"8efed17b-7e72-4218-8b74-2a58d490b2b8\",\"label\":\"A024\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"serving\",\"createdAt\":1795454092228,\"order\":24,\"returns\":0,\"calledAt\":1795454092759,\"deadline\":1795454122759,\"startedAt\":1795454092831,\"finishedAt\":null}"
         }
       ]
     },
@@ -5437,7 +5437,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:14 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -5445,7 +5445,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"id\":\"27c2439d-0b87-4dc4-b3ad-b24a933dc758\",\"label\":\"A012\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794353713515,\"order\":12,\"returns\":0,\"calledAt\":1794353714305,\"deadline\":1794353744305,\"startedAt\":1794353714413,\"finishedAt\":1794353714505}"
+          "body": "{\"id\":\"8efed17b-7e72-4218-8b74-2a58d490b2b8\",\"label\":\"A024\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1795454092228,\"order\":24,\"returns\":0,\"calledAt\":1795454092759,\"deadline\":1795454122759,\"startedAt\":1795454092831,\"finishedAt\":1795454092904}"
         }
       ]
     },
@@ -5537,7 +5537,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:14 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:52 GMT"
             },
             {
               "key": "Connection",
@@ -5545,7 +5545,7 @@
             }
           ],
           "cookie": [],
-          "body": "[{\"id\":\"aa15a288-4b13-4c6e-b35e-973c48b07bef\",\"label\":\"A002\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794351546451,\"order\":2,\"returns\":0,\"calledAt\":1794351547169,\"deadline\":1794351577169,\"startedAt\":1794351547258,\"finishedAt\":1794351547344},{\"id\":\"5a9607cd-82cc-4fde-92c9-e517090b5285\",\"label\":\"A004\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794351573871,\"order\":4,\"returns\":0,\"calledAt\":1794351574663,\"deadline\":1794351604663,\"startedAt\":1794351574757,\"finishedAt\":1794351574849},{\"id\":\"59043c2b-a5d6-4f19-bbc1-f6d93930e243\",\"label\":\"A005\",\"service\":\"Não informado\",\"origin\":\"app\",\"status\":\"done\",\"createdAt\":1794351579749,\"order\":5,\"returns\":0,\"calledAt\":1794351580037,\"deadline\":1794351610037,\"startedAt\":1794351580123,\"finishedAt\":1794351580190},{\"id\":\"ba205113-039f-423f-8c00-90bfaf84379a\",\"label\":\"A008\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794353253750,\"order\":8,\"returns\":0,\"calledAt\":1794353254475,\"deadline\":1794353284475,\"startedAt\":1794353254571,\"finishedAt\":1794353254662},{\"id\":\"eb1c47d0-ea25-4ab5-80f8-366dce2949fb\",\"label\":\"A010\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794353266736,\"order\":10,\"returns\":0,\"calledAt\":1794353267564,\"deadline\":1794353297564,\"startedAt\":1794353267666,\"finishedAt\":1794353267764},{\"id\":\"27c2439d-0b87-4dc4-b3ad-b24a933dc758\",\"label\":\"A012\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794353713515,\"order\":12,\"returns\":0,\"calledAt\":1794353714305,\"deadline\":1794353744305,\"startedAt\":1794353714413,\"finishedAt\":1794353714505}]"
+          "body": "[{\"id\":\"aa15a288-4b13-4c6e-b35e-973c48b07bef\",\"label\":\"A002\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794351546451,\"order\":2,\"returns\":0,\"calledAt\":1794351547169,\"deadline\":1794351577169,\"startedAt\":1794351547258,\"finishedAt\":1794351547344},{\"id\":\"5a9607cd-82cc-4fde-92c9-e517090b5285\",\"label\":\"A004\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794351573871,\"order\":4,\"returns\":0,\"calledAt\":1794351574663,\"deadline\":1794351604663,\"startedAt\":1794351574757,\"finishedAt\":1794351574849},{\"id\":\"59043c2b-a5d6-4f19-bbc1-f6d93930e243\",\"label\":\"A005\",\"service\":\"Não informado\",\"origin\":\"app\",\"status\":\"done\",\"createdAt\":1794351579749,\"order\":5,\"returns\":0,\"calledAt\":1794351580037,\"deadline\":1794351610037,\"startedAt\":1794351580123,\"finishedAt\":1794351580190},{\"id\":\"ba205113-039f-423f-8c00-90bfaf84379a\",\"label\":\"A008\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794353253750,\"order\":8,\"returns\":0,\"calledAt\":1794353254475,\"deadline\":1794353284475,\"startedAt\":1794353254571,\"finishedAt\":1794353254662},{\"id\":\"eb1c47d0-ea25-4ab5-80f8-366dce2949fb\",\"label\":\"A010\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794353266736,\"order\":10,\"returns\":0,\"calledAt\":1794353267564,\"deadline\":1794353297564,\"startedAt\":1794353267666,\"finishedAt\":1794353267764},{\"id\":\"27c2439d-0b87-4dc4-b3ad-b24a933dc758\",\"label\":\"A012\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794353713515,\"order\":12,\"returns\":0,\"calledAt\":1794353714305,\"deadline\":1794353744305,\"startedAt\":1794353714413,\"finishedAt\":1794353714505},{\"id\":\"2a057408-5a0f-468a-9c91-4028fd0fcc2a\",\"label\":\"A014\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1794353731684,\"order\":14,\"returns\":0,\"calledAt\":1794353732509,\"deadline\":1794353762509,\"startedAt\":1794353732608,\"finishedAt\":1794353732706},{\"id\":\"02003faf-a3a0-4a3f-9507-b485fb4c24c4\",\"label\":\"A015\",\"service\":\"Não informado\",\"origin\":\"app\",\"status\":\"done\",\"createdAt\":1794353737979,\"order\":15,\"returns\":0,\"calledAt\":1794353738264,\"deadline\":1794353768264,\"startedAt\":1794353738369,\"finishedAt\":1794353738491},{\"id\":\"95107a10-6fa1-4c57-b629-f3c4cd4a4974\",\"label\":\"A018\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1795449600484,\"order\":18,\"returns\":0,\"calledAt\":1795449601088,\"deadline\":1795449631088,\"startedAt\":1795449601170,\"finishedAt\":1795449601244},{\"id\":\"74be33a6-6477-4466-ac3f-263648cd38ac\",\"label\":\"A020\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1795449611828,\"order\":20,\"returns\":0,\"calledAt\":1795449612445,\"deadline\":1795449642445,\"startedAt\":1795449612518,\"finishedAt\":1795449612590},{\"id\":\"eeb4fc03-d28c-4bfc-9b76-3edb8f2c1195\",\"label\":\"A021\",\"service\":\"Não informado\",\"origin\":\"app\",\"status\":\"done\",\"createdAt\":1795449616729,\"order\":21,\"returns\":0,\"calledAt\":1795449617058,\"deadline\":1795449647058,\"startedAt\":1795449617161,\"finishedAt\":1795449617253},{\"id\":\"8efed17b-7e72-4218-8b74-2a58d490b2b8\",\"label\":\"A024\",\"service\":\"Moído\",\"origin\":\"totem\",\"status\":\"done\",\"createdAt\":1795454092228,\"order\":24,\"returns\":0,\"calledAt\":1795454092759,\"deadline\":1795454122759,\"startedAt\":1795454092831,\"finishedAt\":1795454092904}]"
         }
       ]
     },
@@ -5640,7 +5640,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:14 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:53 GMT"
             },
             {
               "key": "Connection",
@@ -5716,7 +5716,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:14 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:53 GMT"
             },
             {
               "key": "Connection",
@@ -5724,7 +5724,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"current\":null,\"waiting\":[],\"paused\":false,\"stats\":{\"completed\":6,\"absent\":0,\"averageMinutes\":1,\"estimated\":false},\"serverTime\":1794353714687}"
+          "body": "{\"current\":null,\"waiting\":[],\"paused\":false,\"stats\":{\"completed\":4,\"absent\":0,\"averageMinutes\":1,\"estimated\":false},\"serverTime\":1795454093056}"
         }
       ]
     },
@@ -5816,7 +5816,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:14 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:53 GMT"
             },
             {
               "key": "Connection",
@@ -5824,7 +5824,7 @@
             }
           ],
           "cookie": [],
-          "body": "[{\"id\":\"16387f34-7468-4248-8418-87819850b70e\",\"action\":\"Atendimento concluído\",\"label\":\"A012\",\"responsavelNome\":\"operador\",\"at\":1794353714505},{\"id\":\"18cdf89d-724c-42e3-a98c-00d759617c68\",\"action\":\"Atendimento iniciado\",\"label\":\"A012\",\"responsavelNome\":\"operador\",\"at\":1794353714413},{\"id\":\"861ebe97-a557-4865-a348-842eb6477321\",\"action\":\"Chamada repetida\",\"label\":\"A012\",\"responsavelNome\":\"operador\",\"at\":1794353714305},{\"id\":\"ef6afdf6-6f48-4aaf-9585-c5ddeca910ba\",\"action\":\"Senha chamada\",\"label\":\"A012\",\"responsavelNome\":\"operador\",\"at\":1794353714032},{\"id\":\"c091e91e-8209-42f6-9d7f-a630fce72ad0\",\"action\":\"Emissão retomada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1794353713857},{\"id\":\"da19da0e-90a5-4349-b62d-2dcc2adf43db\",\"action\":\"Emissão pausada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1794353713715},{\"id\":\"093874d2-9701-4fa8-9f25-21c68e5ed860\",\"action\":\"Senha emitida\",\"label\":\"A012\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1794353713515},{\"id\":\"73969a75-c613-42c4-83b8-fcf3826d3141\",\"action\":\"Senha cancelada\",\"label\":\"A011\",\"responsavelNome\":\"avaliador\",\"at\":1794353713410},{\"id\":\"302711d0-c968-49c7-bb29-a2c0c733408f\",\"action\":\"Serviço da senha alterado\",\"label\":\"A011\",\"responsavelNome\":\"avaliador\",\"at\":1794353713301},{\"id\":\"68faa227-67a5-4685-b323-2b40e0cf8943\",\"action\":\"Senha emitida\",\"label\":\"A011\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1794353712963},{\"id\":\"a132cd48-c694-474f-98a4-bbadddddeb4f\",\"action\":\"Cadastro excluído\",\"label\":\"usuarios / 04e99794-4cbe-42fe-8c4c-4831ce3140a6\",\"responsavelNome\":\"avaliador\",\"at\":1794353712860},{\"id\":\"a31c31e2-4402-498c-be68-459ecce2804d\",\"action\":\"Cadastro atualizado\",\"label\":\"apoio-4921d791\",\"responsavelNome\":\"avaliador\",\"at\":1794353712697},{\"id\":\"5d7ab28d-78a8-4ffe-b0e8-969467cbfca6\",\"action\":\"Cadastro criado\",\"label\":\"auxiliar-4921d791\",\"responsavelNome\":\"avaliador\",\"at\":1794353712416},{\"id\":\"095308bc-388a-41ab-adda-1ed345881bc3\",\"action\":\"Cadastro excluído\",\"label\":\"balcoes / 7b5acc43-be0b-4eee-acc6-4a10aaee95e1\",\"responsavelNome\":\"avaliador\",\"at\":1794353712152},{\"id\":\"dbb41774-c73a-48ac-a292-afb4899c2c9c\",\"action\":\"Cadastro atualizado\",\"label\":\"Balcão de retirada 4921d791\",\"responsavelNome\":\"avaliador\",\"at\":1794353712073},{\"id\":\"201006ce-5560-435b-b873-b1dc4b5f1108\",\"action\":\"Cadastro criado\",\"label\":\"Balcão de apoio 4921d791\",\"responsavelNome\":\"avaliador\",\"at\":1794353711829},{\"id\":\"e562aab1-80f5-41ae-80a7-c091adefcd99\",\"action\":\"Cadastro atualizado\",\"label\":\"Carne em cubos 4921d791\",\"responsavelNome\":\"avaliador\",\"at\":1794353711358},{\"id\":\"51f39754-c589-43c8-9188-cd412abd5bd3\",\"action\":\"Cadastro criado\",\"label\":\"Cubos para panela 4921d791\",\"responsavelNome\":\"avaliador\",\"at\":1794353711187},{\"id\":\"71dfc0a0-21bf-4cbb-82bb-7da856468fd2\",\"action\":\"Cadastro atualizado\",\"label\":\"Preparos especiais 4921d791\",\"responsavelNome\":\"avaliador\",\"at\":1794353710986},{\"id\":\"c9757320-a6e0-445d-9763-ca16f53a8384\",\"action\":\"Cadastro criado\",\"label\":\"Cortes bovinos 4921d791\",\"responsavelNome\":\"avaliador\",\"at\":1794353710709},{\"id\":\"0a336980-04a8-4721-9247-850bcc842ad9\",\"action\":\"Cadastro excluído\",\"label\":\"categorias / da25c499-9b7b-4340-8c5b-b9d44ad4b78b\",\"responsavelNome\":\"avaliador\",\"at\":1794353268429},{\"id\":\"7c8f9a6d-db89-4965-a8d8-80b56c330185\",\"action\":\"Cadastro excluído\",\"label\":\"servicos / a68aeabc-36c4-4d4f-bc4f-d4704f0d408f\",\"responsavelNome\":\"avaliador\",\"at\":1794353268340},{\"id\":\"a6a03ee8-d091-4aca-856d-74fdd9e15dbd\",\"action\":\"Atendimento concluído\",\"label\":\"A010\",\"responsavelNome\":\"operador\",\"at\":1794353267764},{\"id\":\"195dbabb-b7d0-4aca-8b2f-0adeebc99f45\",\"action\":\"Atendimento iniciado\",\"label\":\"A010\",\"responsavelNome\":\"operador\",\"at\":1794353267666},{\"id\":\"30d02f1a-d3af-47d6-9003-52827960213e\",\"action\":\"Chamada repetida\",\"label\":\"A010\",\"responsavelNome\":\"operador\",\"at\":1794353267564},{\"id\":\"082f45a7-daf7-4296-b9e2-0a8f06353dec\",\"action\":\"Senha chamada\",\"label\":\"A010\",\"responsavelNome\":\"operador\",\"at\":1794353267271},{\"id\":\"30535de6-6b94-40bd-ba9c-0dc5104745d3\",\"action\":\"Emissão retomada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1794353267075},{\"id\":\"7ae42271-1e58-43ad-98c2-367d856893bb\",\"action\":\"Emissão pausada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1794353266954},{\"id\":\"774b5730-f7be-4011-8251-82ef0c8af792\",\"action\":\"Senha emitida\",\"label\":\"A010\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1794353266736},{\"id\":\"a35f5cef-e0ba-42d8-a852-e4eeb9eda38f\",\"action\":\"Senha cancelada\",\"label\":\"A009\",\"responsavelNome\":\"avaliador\",\"at\":1794353266613},{\"id\":\"39f6bdd7-f0db-41f7-a56a-1544d7ac8637\",\"action\":\"Serviço da senha alterado\",\"label\":\"A009\",\"responsavelNome\":\"avaliador\",\"at\":1794353266512},{\"id\":\"dcf10ae2-33ef-4c47-8fd8-a75b04e246e3\",\"action\":\"Senha emitida\",\"label\":\"A009\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1794353266197},{\"id\":\"828f4a39-9b8b-436c-bdc4-5f6fe74fbfed\",\"action\":\"Cadastro excluído\",\"label\":\"usuarios / 1410946f-8b51-4a2c-bab2-f1e981a2f42d\",\"responsavelNome\":\"avaliador\",\"at\":1794353266078},{\"id\":\"b40154f1-cc12-4972-97c5-6c53f21e1878\",\"action\":\"Cadastro atualizado\",\"label\":\"apoio-6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353265905},{\"id\":\"847e32d0-bb1c-4f01-8982-9da7cf07c3ee\",\"action\":\"Cadastro criado\",\"label\":\"auxiliar-6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353265622},{\"id\":\"537e61e6-796f-437e-977d-15d8b500ff51\",\"action\":\"Cadastro excluído\",\"label\":\"balcoes / 652beea0-0760-4d26-a27c-5284ae668c2d\",\"responsavelNome\":\"avaliador\",\"at\":1794353265356},{\"id\":\"f7e69275-de06-4d24-9f8c-f870f0df54e9\",\"action\":\"Cadastro atualizado\",\"label\":\"Balcão de retirada 6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353265253},{\"id\":\"ee4b7af7-9d20-4785-ae96-ffe05b18fef6\",\"action\":\"Cadastro criado\",\"label\":\"Balcão de apoio 6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353264980},{\"id\":\"bc0d574b-3966-476e-acc8-9c0d1aaea530\",\"action\":\"Cadastro atualizado\",\"label\":\"Carne em cubos 6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353264521},{\"id\":\"e5ab036b-cbe7-4bb7-824d-10a7976d6de5\",\"action\":\"Cadastro criado\",\"label\":\"Cubos para panela 6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353264323},{\"id\":\"861fb633-6293-4fcc-96c0-c798895dd7da\",\"action\":\"Cadastro atualizado\",\"label\":\"Preparos especiais 6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353264124},{\"id\":\"3230cb9f-ec15-4b93-8dfb-ef5ce03ab5f1\",\"action\":\"Cadastro criado\",\"label\":\"Cortes bovinos 6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353263826},{\"id\":\"a14671ae-8d64-4578-ace7-110de9b8426a\",\"action\":\"Cadastro excluído\",\"label\":\"categorias / e68c7f15-7543-45b4-9437-9c5476c21a59\",\"responsavelNome\":\"avaliador\",\"at\":1794353255258},{\"id\":\"356ddcff-685a-441d-82ba-d4f0549b7839\",\"action\":\"Cadastro excluído\",\"label\":\"servicos / ca1e811b-203e-4a75-adcc-dd2cd6e8a19d\",\"responsavelNome\":\"avaliador\",\"at\":1794353255176},{\"id\":\"96873c2b-ced9-4975-bcfb-4a37f7df754a\",\"action\":\"Atendimento concluído\",\"label\":\"A008\",\"responsavelNome\":\"operador\",\"at\":1794353254662},{\"id\":\"7e65763f-c2cc-472f-b2af-86e097130d36\",\"action\":\"Atendimento iniciado\",\"label\":\"A008\",\"responsavelNome\":\"operador\",\"at\":1794353254571},{\"id\":\"98df0f87-8bf8-4aef-b00e-0d4f01fece44\",\"action\":\"Chamada repetida\",\"label\":\"A008\",\"responsavelNome\":\"operador\",\"at\":1794353254475},{\"id\":\"21e3b3aa-5449-486d-a81f-a91d5fd40c06\",\"action\":\"Senha chamada\",\"label\":\"A008\",\"responsavelNome\":\"operador\",\"at\":1794353254215},{\"id\":\"e48cf38f-0cd3-4b41-a6dd-1ec412767b9c\",\"action\":\"Emissão retomada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1794353254040},{\"id\":\"74e83a24-89de-49c7-b0ac-163a01bdad8d\",\"action\":\"Emissão pausada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1794353253940},{\"id\":\"d75d1717-52f7-4bc1-8200-ae641a164947\",\"action\":\"Senha emitida\",\"label\":\"A008\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1794353253750},{\"id\":\"a1f65fa9-e37f-4961-9682-aebfe27f453b\",\"action\":\"Senha cancelada\",\"label\":\"A007\",\"responsavelNome\":\"avaliador\",\"at\":1794353253650},{\"id\":\"9ef1c9ae-350b-4d78-9198-c6763302de77\",\"action\":\"Serviço da senha alterado\",\"label\":\"A007\",\"responsavelNome\":\"avaliador\",\"at\":1794353253555},{\"id\":\"292b094e-7560-4e6b-b168-0d368a677c94\",\"action\":\"Senha emitida\",\"label\":\"A007\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1794353253246},{\"id\":\"912e0161-b908-44b4-8f10-5c00fa1b7a13\",\"action\":\"Cadastro excluído\",\"label\":\"usuarios / 4ac38fc1-aeb4-4478-b2f0-ad8f7be2c8c5\",\"responsavelNome\":\"avaliador\",\"at\":1794353253140},{\"id\":\"5b39d90a-b386-49ed-b6ef-6ebc250516fd\",\"action\":\"Cadastro atualizado\",\"label\":\"apoio-6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353252982},{\"id\":\"9d66d7df-9b7c-48a8-b0f5-be3e39faf1fc\",\"action\":\"Cadastro criado\",\"label\":\"auxiliar-6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353252740},{\"id\":\"e6884b56-a916-440a-99eb-aee7e879a8ee\",\"action\":\"Cadastro excluído\",\"label\":\"balcoes / 02e368f7-f04f-4949-9859-0286c4c7d378\",\"responsavelNome\":\"avaliador\",\"at\":1794353252500},{\"id\":\"7661bb8f-fd8d-4265-9067-3b1ece3d1005\",\"action\":\"Cadastro atualizado\",\"label\":\"Balcão de retirada 6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353252420},{\"id\":\"c8a0c566-51a3-46c7-b340-0b541e523609\",\"action\":\"Cadastro criado\",\"label\":\"Balcão de apoio 6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353252174},{\"id\":\"47c7a906-0e6f-4a74-ac5f-e427f72558fa\",\"action\":\"Cadastro atualizado\",\"label\":\"Carne em cubos 6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353251709},{\"id\":\"9acaac75-1514-412c-8732-8f107e4f52e9\",\"action\":\"Cadastro criado\",\"label\":\"Cubos para panela 6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353251546},{\"id\":\"5fed2669-3271-4311-bbf0-b5ba034299bc\",\"action\":\"Cadastro atualizado\",\"label\":\"Preparos especiais 6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353251361},{\"id\":\"4f4ebe32-142a-47f2-9597-be6a57bed8e3\",\"action\":\"Cadastro criado\",\"label\":\"Cortes bovinos 6ce8ecb9\",\"responsavelNome\":\"avaliador\",\"at\":1794353251074},{\"id\":\"d361c3d2-22fa-4917-b1e9-a8b730a49cf7\",\"action\":\"Senha cancelada\",\"label\":\"A006\",\"responsavelNome\":\"admin\",\"at\":1794351581050},{\"id\":\"b63b5e7d-1d99-4318-9e81-74e3d5881ebe\",\"action\":\"Senha emitida\",\"label\":\"A006\",\"responsavelNome\":\"admin\",\"at\":1794351580434},{\"id\":\"1bae1fc1-fa2d-491b-973c-e08fcb3e54be\",\"action\":\"Atendimento concluído\",\"label\":\"A005\",\"responsavelNome\":\"admin\",\"at\":1794351580190},{\"id\":\"623a0b47-ef28-4286-8b02-ec42db5cc4f1\",\"action\":\"Atendimento iniciado\",\"label\":\"A005\",\"responsavelNome\":\"admin\",\"at\":1794351580123},{\"id\":\"69bd4cc6-d953-4c90-bbc2-64652c9d8527\",\"action\":\"Senha chamada\",\"label\":\"A005\",\"responsavelNome\":\"admin\",\"at\":1794351580037},{\"id\":\"075c43b5-9f67-4387-8bbc-bfeeeb371919\",\"action\":\"Senha emitida\",\"label\":\"A005\",\"responsavelNome\":\"admin\",\"at\":1794351579749},{\"id\":\"722b251d-0a41-4969-aa47-e94a81a5cd01\",\"action\":\"Cadastro excluído\",\"label\":\"categorias / c6b6372c-772b-4d21-8cdc-b0f002382cd3\",\"responsavelNome\":\"admin\",\"at\":1794351578347},{\"id\":\"fffaac3a-8f9b-420d-b7ba-c9d41b04327e\",\"action\":\"Cadastro atualizado\",\"label\":\"Churrasco e grelhados\",\"responsavelNome\":\"admin\",\"at\":1794351578266},{\"id\":\"24e4cfb0-be49-4549-8b7c-4e6a7db86411\",\"action\":\"Cadastro criado\",\"label\":\"Cortes para churrasco\",\"responsavelNome\":\"admin\",\"at\":1794351578110},{\"id\":\"7bdf5a42-3368-4e94-8a09-21a27d8740f3\",\"action\":\"Cadastro excluído\",\"label\":\"categorias / 1ec6f41e-51d2-42f2-9856-50114750ce6c\",\"responsavelNome\":\"avaliador\",\"at\":1794351575474},{\"id\":\"ed4eaca0-8659-4bfa-8f8e-2c212cb4e74b\",\"action\":\"Cadastro excluído\",\"label\":\"servicos / c49a58f5-a12e-434e-bd23-854d88726241\",\"responsavelNome\":\"avaliador\",\"at\":1794351575390},{\"id\":\"213c6a2a-2e91-4a8e-a5f1-6af881608dc2\",\"action\":\"Atendimento concluído\",\"label\":\"A004\",\"responsavelNome\":\"operador\",\"at\":1794351574849},{\"id\":\"cc111ad3-aecc-4154-8c98-0a1109b6ad0c\",\"action\":\"Atendimento iniciado\",\"label\":\"A004\",\"responsavelNome\":\"operador\",\"at\":1794351574757},{\"id\":\"6f9401f7-df35-4583-a8cc-0b94bf776a46\",\"action\":\"Chamada repetida\",\"label\":\"A004\",\"responsavelNome\":\"operador\",\"at\":1794351574663},{\"id\":\"4e7a6f4e-b8e5-4885-ac0a-7d64ab86a720\",\"action\":\"Senha chamada\",\"label\":\"A004\",\"responsavelNome\":\"operador\",\"at\":1794351574385},{\"id\":\"bdbef19c-e5e0-4ff1-92f5-1b85819f2143\",\"action\":\"Emissão retomada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1794351574195},{\"id\":\"aaec02aa-17bd-4313-9c1d-8ca49513ea60\",\"action\":\"Emissão pausada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1794351574080},{\"id\":\"e9fd9b4e-d780-4dc0-9497-8bd6751e3515\",\"action\":\"Senha emitida\",\"label\":\"A004\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1794351573871},{\"id\":\"6298ef64-ee24-4213-bfb1-da34163776d2\",\"action\":\"Senha cancelada\",\"label\":\"A003\",\"responsavelNome\":\"avaliador\",\"at\":1794351573758},{\"id\":\"2f564031-6c77-4d50-a89a-a688f7c895e8\",\"action\":\"Serviço da senha alterado\",\"label\":\"A003\",\"responsavelNome\":\"avaliador\",\"at\":1794351573657},{\"id\":\"1a746048-f797-4e0e-b4db-6d56e640d5ca\",\"action\":\"Senha emitida\",\"label\":\"A003\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1794351573360},{\"id\":\"54620d4e-91c4-40c1-a477-cf9c610ea00b\",\"action\":\"Cadastro excluído\",\"label\":\"usuarios / 8c347bd0-0f7e-4741-96b0-e824220b4c43\",\"responsavelNome\":\"avaliador\",\"at\":1794351573246},{\"id\":\"2fd8e1fc-5640-401e-bfb5-2e91e9646c5e\",\"action\":\"Cadastro atualizado\",\"label\":\"apoio-b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351573073},{\"id\":\"37921222-8343-491c-aa54-5ed262e73dd1\",\"action\":\"Cadastro criado\",\"label\":\"auxiliar-b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351572799},{\"id\":\"d0f94201-0bf2-4317-815a-621d0b2b2c26\",\"action\":\"Cadastro excluído\",\"label\":\"balcoes / 50ded675-0718-47f8-ac41-3eca29cc1423\",\"responsavelNome\":\"avaliador\",\"at\":1794351572553},{\"id\":\"299012fa-8077-4aad-8d6c-e9806acd3acb\",\"action\":\"Cadastro atualizado\",\"label\":\"Balcão de retirada b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351572463},{\"id\":\"5b7482e8-c0dd-4dec-acd3-54efdba7e9b9\",\"action\":\"Cadastro criado\",\"label\":\"Balcão de apoio b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351572188},{\"id\":\"e9bb2e08-59d8-4723-8182-6ae3936b3b83\",\"action\":\"Cadastro atualizado\",\"label\":\"Carne em cubos b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351571736},{\"id\":\"2b43a2f0-6b69-4867-9fcd-6856eea0bae8\",\"action\":\"Cadastro criado\",\"label\":\"Cubos para panela b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351571561},{\"id\":\"1ee0a729-12fa-456e-b2d5-fbafd051814e\",\"action\":\"Cadastro atualizado\",\"label\":\"Preparos especiais b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351571376},{\"id\":\"a8327de0-25cc-4e33-91c5-21a6e9dcf687\",\"action\":\"Cadastro criado\",\"label\":\"Cortes bovinos b86edf51\",\"responsavelNome\":\"avaliador\",\"at\":1794351571078},{\"id\":\"f11e0604-a264-4c69-802c-bd03bab46324\",\"action\":\"Cadastro excluído\",\"label\":\"categorias / fa7b3180-2b09-4e3a-8d95-d2ec9d1b1475\",\"responsavelNome\":\"avaliador\",\"at\":1794351547917},{\"id\":\"182436fa-5e7f-4bd8-8a0d-0f2a345e446c\",\"action\":\"Cadastro excluído\",\"label\":\"servicos / 68872c0f-2592-4d50-8bc5-33e2fc415748\",\"responsavelNome\":\"avaliador\",\"at\":1794351547841},{\"id\":\"67b67515-1afd-489b-bc8b-1ddc3defd630\",\"action\":\"Atendimento concluído\",\"label\":\"A002\",\"responsavelNome\":\"operador\",\"at\":1794351547344},{\"id\":\"5d0619ec-cd26-41d4-93af-dfa5a3f97349\",\"action\":\"Atendimento iniciado\",\"label\":\"A002\",\"responsavelNome\":\"operador\",\"at\":1794351547258},{\"id\":\"e46517c4-07bd-4e8c-8ca2-4b27e21548d8\",\"action\":\"Chamada repetida\",\"label\":\"A002\",\"responsavelNome\":\"operador\",\"at\":1794351547169}]"
+          "body": "[{\"id\":\"aea458b4-9c26-469a-80c2-3a68f52d8b0a\",\"action\":\"Atendimento concluído\",\"label\":\"A024\",\"responsavelNome\":\"operador\",\"at\":1795454092904},{\"id\":\"4e5888b3-5743-4bb2-8f3b-e2cdb30aad0c\",\"action\":\"Atendimento iniciado\",\"label\":\"A024\",\"responsavelNome\":\"operador\",\"at\":1795454092831},{\"id\":\"12d4be86-f9d9-43e0-982a-7ed32ff15227\",\"action\":\"Chamada repetida\",\"label\":\"A024\",\"responsavelNome\":\"operador\",\"at\":1795454092759},{\"id\":\"5d6d54ec-1c31-4b78-b5d9-a2b09e482c78\",\"action\":\"Senha chamada\",\"label\":\"A024\",\"responsavelNome\":\"operador\",\"at\":1795454092565},{\"id\":\"bd4dfcd6-4da8-4fc5-bd4b-1ca154d0f46f\",\"action\":\"Emissão retomada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1795454092440},{\"id\":\"1f0cc1bc-c82e-469a-949e-8e3199f70ed9\",\"action\":\"Emissão pausada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1795454092366},{\"id\":\"eb9eef9b-48bc-45af-870f-148743169cb2\",\"action\":\"Senha emitida\",\"label\":\"A024\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1795454092228},{\"id\":\"b677214f-2abc-4e07-9e2b-406ff3f81ef2\",\"action\":\"Senha cancelada\",\"label\":\"A023\",\"responsavelNome\":\"avaliador\",\"at\":1795454092150},{\"id\":\"23f4ef26-8232-4d4f-8c88-5fc4a098d749\",\"action\":\"Serviço da senha alterado\",\"label\":\"A023\",\"responsavelNome\":\"avaliador\",\"at\":1795454092080},{\"id\":\"25e85d12-5c28-4b66-98d0-1a7a98609a7a\",\"action\":\"Senha emitida\",\"label\":\"A023\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1795454091855},{\"id\":\"6c9d8da4-5c09-4e83-9b7e-62e81cff0c4e\",\"action\":\"Cadastro excluído\",\"label\":\"usuarios / 723a0a3f-cae1-40a3-b336-6de8c8ada60d\",\"responsavelNome\":\"avaliador\",\"at\":1795454091778},{\"id\":\"e8e729bf-cab2-4959-91de-e5f536f4e37b\",\"action\":\"Cadastro atualizado\",\"label\":\"apoio-4b9df1ce\",\"responsavelNome\":\"avaliador\",\"at\":1795454091665},{\"id\":\"7153ee0d-cbec-4535-a827-d8bd16cc8162\",\"action\":\"Cadastro criado\",\"label\":\"auxiliar-4b9df1ce\",\"responsavelNome\":\"avaliador\",\"at\":1795454091484},{\"id\":\"8e80706c-3438-4a3b-8479-53cf533689e8\",\"action\":\"Cadastro excluído\",\"label\":\"balcoes / 89460269-bddc-4f35-be8f-320801912503\",\"responsavelNome\":\"avaliador\",\"at\":1795454091299},{\"id\":\"992858cf-93b8-4cad-aed7-bdd0d0a06d0a\",\"action\":\"Cadastro atualizado\",\"label\":\"Balcão de retirada 4b9df1ce\",\"responsavelNome\":\"avaliador\",\"at\":1795454091235},{\"id\":\"24f43dd2-19fc-407b-981c-91f4b69bf3e8\",\"action\":\"Cadastro criado\",\"label\":\"Balcão de apoio 4b9df1ce\",\"responsavelNome\":\"avaliador\",\"at\":1795454091062},{\"id\":\"44486922-9136-41a9-8066-5679a33e0009\",\"action\":\"Cadastro atualizado\",\"label\":\"Carne em cubos 4b9df1ce\",\"responsavelNome\":\"avaliador\",\"at\":1795454090718},{\"id\":\"e7b7c44b-199e-46d8-b852-7ccef44ea648\",\"action\":\"Cadastro criado\",\"label\":\"Cubos para panela 4b9df1ce\",\"responsavelNome\":\"avaliador\",\"at\":1795454090599},{\"id\":\"bbdd7b5f-8010-44d6-b425-f4dd31a108fb\",\"action\":\"Cadastro atualizado\",\"label\":\"Preparos especiais 4b9df1ce\",\"responsavelNome\":\"avaliador\",\"at\":1795454090467},{\"id\":\"f2908654-3e40-45e9-9214-0d5c85cde735\",\"action\":\"Cadastro criado\",\"label\":\"Cortes bovinos 4b9df1ce\",\"responsavelNome\":\"avaliador\",\"at\":1795454090279},{\"id\":\"7eaad6b0-810d-4a50-bfd8-494dcbfadc4b\",\"action\":\"Senha cancelada\",\"label\":\"A022\",\"responsavelNome\":\"admin\",\"at\":1795449617893},{\"id\":\"203228b9-246a-4910-a59b-f3fa26b28be7\",\"action\":\"Senha emitida\",\"label\":\"A022\",\"responsavelNome\":\"admin\",\"at\":1795449617488},{\"id\":\"1e49ad22-5caf-4c26-a5be-555c8cb2634e\",\"action\":\"Atendimento concluído\",\"label\":\"A021\",\"responsavelNome\":\"admin\",\"at\":1795449617253},{\"id\":\"4c51c89a-8260-43c5-aa89-67c8e67d001f\",\"action\":\"Atendimento iniciado\",\"label\":\"A021\",\"responsavelNome\":\"admin\",\"at\":1795449617161},{\"id\":\"5488f01d-932a-4f19-a2b0-8b1e4e460121\",\"action\":\"Senha chamada\",\"label\":\"A021\",\"responsavelNome\":\"admin\",\"at\":1795449617058},{\"id\":\"8da5ea9f-5a4f-4321-b181-e16667f9e908\",\"action\":\"Senha emitida\",\"label\":\"A021\",\"responsavelNome\":\"admin\",\"at\":1795449616729},{\"id\":\"bcb34131-b2b1-4157-bb0e-067bca51dea6\",\"action\":\"Cadastro excluído\",\"label\":\"categorias / 1efd3017-0650-4598-ba91-2dc4afa0a5d9\",\"responsavelNome\":\"admin\",\"at\":1795449615472},{\"id\":\"35f188bf-633c-47ed-80a4-fc2d1c4499db\",\"action\":\"Cadastro atualizado\",\"label\":\"Churrasco e grelhados\",\"responsavelNome\":\"admin\",\"at\":1795449615371},{\"id\":\"5e789802-9aed-46c5-93ef-5a26671b45df\",\"action\":\"Cadastro criado\",\"label\":\"Cortes para churrasco\",\"responsavelNome\":\"admin\",\"at\":1795449614780},{\"id\":\"5203df70-fa8e-4811-84f6-0b1fdfa80e76\",\"action\":\"Cadastro excluído\",\"label\":\"categorias / 10255ab0-0269-48e0-9cd3-c3705ee2c7a2\",\"responsavelNome\":\"avaliador\",\"at\":1795449613092},{\"id\":\"446fd446-ea79-4bff-86a5-dfe0e62aa92f\",\"action\":\"Cadastro excluído\",\"label\":\"servicos / 0a583312-d020-4558-a072-1291ef382fbd\",\"responsavelNome\":\"avaliador\",\"at\":1795449613026},{\"id\":\"430ef7e7-654e-4653-9f1b-63a9defde3c6\",\"action\":\"Atendimento concluído\",\"label\":\"A020\",\"responsavelNome\":\"operador\",\"at\":1795449612590},{\"id\":\"332e343f-3d2a-400d-a21d-b460337e77af\",\"action\":\"Atendimento iniciado\",\"label\":\"A020\",\"responsavelNome\":\"operador\",\"at\":1795449612518},{\"id\":\"89f61d48-f31f-4084-a30f-fbc1303ac458\",\"action\":\"Chamada repetida\",\"label\":\"A020\",\"responsavelNome\":\"operador\",\"at\":1795449612445},{\"id\":\"0d26e547-e24d-4184-8f8b-7d10f9104638\",\"action\":\"Senha chamada\",\"label\":\"A020\",\"responsavelNome\":\"operador\",\"at\":1795449612237},{\"id\":\"8ec72d42-4a14-4fb2-842f-705241fad605\",\"action\":\"Emissão retomada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1795449612093},{\"id\":\"9c4d47f5-deb5-4097-befa-bd99ada224e7\",\"action\":\"Emissão pausada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1795449611990},{\"id\":\"5e3d22aa-c828-45a3-91f7-2a33fd2294c7\",\"action\":\"Senha emitida\",\"label\":\"A020\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1795449611828},{\"id\":\"eb133900-f8b7-48f0-8867-2617b5d8b265\",\"action\":\"Senha cancelada\",\"label\":\"A019\",\"responsavelNome\":\"avaliador\",\"at\":1795449611735},{\"id\":\"19af7efe-2ed1-4a9b-9833-89775b60d6da\",\"action\":\"Serviço da senha alterado\",\"label\":\"A019\",\"responsavelNome\":\"avaliador\",\"at\":1795449611658},{\"id\":\"407b3ba9-3b28-4508-833f-3d006a2165bb\",\"action\":\"Senha emitida\",\"label\":\"A019\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1795449611420},{\"id\":\"5228c99e-8650-48db-9f41-31d07287c4b2\",\"action\":\"Cadastro excluído\",\"label\":\"usuarios / b35d51f7-bedf-4fed-8475-d5f901bd756b\",\"responsavelNome\":\"avaliador\",\"at\":1795449611328},{\"id\":\"756eb310-2773-4de4-a85d-189e432c1f4b\",\"action\":\"Cadastro atualizado\",\"label\":\"apoio-22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449611190},{\"id\":\"c93ebdda-f9c1-4aca-9545-577d3a790bb6\",\"action\":\"Cadastro criado\",\"label\":\"auxiliar-22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449610982},{\"id\":\"47928992-2f9c-45fe-b765-7ab7d118b3e4\",\"action\":\"Cadastro excluído\",\"label\":\"balcoes / 6fe8137d-9332-447b-98b6-edf421ce4aec\",\"responsavelNome\":\"avaliador\",\"at\":1795449610790},{\"id\":\"269fb20b-e3a5-4438-b94b-7150a15636ed\",\"action\":\"Cadastro atualizado\",\"label\":\"Balcão de retirada 22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449610719},{\"id\":\"b66dd80d-0ecd-487d-8b9f-57780442d9c6\",\"action\":\"Cadastro criado\",\"label\":\"Balcão de apoio 22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449610517},{\"id\":\"437e7ca9-47da-4c3d-8cec-8c8e3af853e6\",\"action\":\"Cadastro atualizado\",\"label\":\"Carne em cubos 22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449610173},{\"id\":\"9dfbe221-be12-4d10-8e9e-fde0d87c7c05\",\"action\":\"Cadastro criado\",\"label\":\"Cubos para panela 22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449610036},{\"id\":\"d98b24ed-f4b1-4ba0-84ba-73186c9643e9\",\"action\":\"Cadastro atualizado\",\"label\":\"Preparos especiais 22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449609892},{\"id\":\"6600b91a-6873-439d-828e-8f14ba2f7fce\",\"action\":\"Cadastro criado\",\"label\":\"Cortes bovinos 22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449609677},{\"id\":\"b0b17f2a-0f3b-481e-a765-801c69c50781\",\"action\":\"Cadastro excluído\",\"label\":\"categorias / dd1e462b-33af-40f7-849e-f40057216fed\",\"responsavelNome\":\"avaliador\",\"at\":1795449601703},{\"id\":\"3962262e-2c8b-46e2-93cd-73055d4268c7\",\"action\":\"Cadastro excluído\",\"label\":\"servicos / bf72704a-d4e2-4cb2-ba84-4c87cf6fa10b\",\"responsavelNome\":\"avaliador\",\"at\":1795449601642},{\"id\":\"9553fefc-4b90-4bbf-ab4c-56b727966465\",\"action\":\"Atendimento concluído\",\"label\":\"A018\",\"responsavelNome\":\"operador\",\"at\":1795449601244},{\"id\":\"615c1fe5-51a7-4822-9798-30693a188763\",\"action\":\"Atendimento iniciado\",\"label\":\"A018\",\"responsavelNome\":\"operador\",\"at\":1795449601170},{\"id\":\"7bcb4da6-21e7-4324-b6de-35fbbda77dc0\",\"action\":\"Chamada repetida\",\"label\":\"A018\",\"responsavelNome\":\"operador\",\"at\":1795449601088},{\"id\":\"e54ade16-8f02-412c-a91b-aff4e38a0acd\",\"action\":\"Senha chamada\",\"label\":\"A018\",\"responsavelNome\":\"operador\",\"at\":1795449600867},{\"id\":\"0434992c-6a2f-45a0-a9d0-3cbcc885d18a\",\"action\":\"Emissão retomada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1795449600734},{\"id\":\"16366827-8869-4076-a3fc-6be2d16bec9a\",\"action\":\"Emissão pausada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1795449600657},{\"id\":\"4badbbb7-e809-4b97-bea8-9851b962c904\",\"action\":\"Senha emitida\",\"label\":\"A018\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1795449600484},{\"id\":\"5c8f72c4-1905-422f-8eda-8ecb9ffb77e3\",\"action\":\"Senha cancelada\",\"label\":\"A017\",\"responsavelNome\":\"avaliador\",\"at\":1795449600404},{\"id\":\"b4c5653a-dedd-4195-8bfd-4581910ba59a\",\"action\":\"Serviço da senha alterado\",\"label\":\"A017\",\"responsavelNome\":\"avaliador\",\"at\":1795449600327},{\"id\":\"0a252644-7239-43de-b800-4caee24c48ad\",\"action\":\"Senha emitida\",\"label\":\"A017\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1795449600084},{\"id\":\"d2a92ef5-1e18-4a2f-a168-da0861b23dfd\",\"action\":\"Cadastro excluído\",\"label\":\"usuarios / a2a4394c-e76d-4b09-90a6-4e1fa30e1f7d\",\"responsavelNome\":\"avaliador\",\"at\":1795449599993},{\"id\":\"209a8e13-96ea-4e08-92d1-1d470d5eed3f\",\"action\":\"Cadastro atualizado\",\"label\":\"apoio-22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449599878},{\"id\":\"440e2500-f945-4989-8af1-954b741bd105\",\"action\":\"Cadastro criado\",\"label\":\"auxiliar-22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449599685},{\"id\":\"335f2ce0-fee9-42b9-aaf9-4379f544c6ce\",\"action\":\"Cadastro excluído\",\"label\":\"balcoes / d3377c75-bdf8-4c7d-a659-f2f5cc0dcd89\",\"responsavelNome\":\"avaliador\",\"at\":1795449599492},{\"id\":\"727e872f-656e-42ee-bfc8-233350b9959c\",\"action\":\"Cadastro atualizado\",\"label\":\"Balcão de retirada 22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449599431},{\"id\":\"bbd14e65-df56-4e58-af6e-cbfe278e2084\",\"action\":\"Cadastro criado\",\"label\":\"Balcão de apoio 22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449599245},{\"id\":\"537f9a2b-f9f0-42de-b97b-a42b2605318f\",\"action\":\"Cadastro atualizado\",\"label\":\"Carne em cubos 22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449598880},{\"id\":\"0b7417d9-66e4-4880-bbb3-cd87db55d61b\",\"action\":\"Cadastro criado\",\"label\":\"Cubos para panela 22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449598751},{\"id\":\"1eb7de6a-e479-4a07-9cf9-b0db29876e8e\",\"action\":\"Cadastro atualizado\",\"label\":\"Preparos especiais 22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449598610},{\"id\":\"072ebff8-6cbc-4fe6-b976-9e6eec051823\",\"action\":\"Cadastro criado\",\"label\":\"Cortes bovinos 22ce6314\",\"responsavelNome\":\"avaliador\",\"at\":1795449598406},{\"id\":\"69e028cc-66bd-4a87-bb5a-8768458d7cf1\",\"action\":\"Senha cancelada\",\"label\":\"A016\",\"responsavelNome\":\"admin\",\"at\":1794353739380},{\"id\":\"c594461a-0fa2-49f1-849a-326b9a7280b8\",\"action\":\"Senha emitida\",\"label\":\"A016\",\"responsavelNome\":\"admin\",\"at\":1794353738747},{\"id\":\"3aaea6a0-f7e7-4893-a76f-eab83bfcd57c\",\"action\":\"Atendimento concluído\",\"label\":\"A015\",\"responsavelNome\":\"admin\",\"at\":1794353738491},{\"id\":\"fed75ebe-64e1-4c65-8e33-d6eae2f8952c\",\"action\":\"Atendimento iniciado\",\"label\":\"A015\",\"responsavelNome\":\"admin\",\"at\":1794353738369},{\"id\":\"9c54aa7a-f889-40b0-9ce9-d094285a2237\",\"action\":\"Senha chamada\",\"label\":\"A015\",\"responsavelNome\":\"admin\",\"at\":1794353738264},{\"id\":\"ec90ef7d-16f0-4d0d-a767-b7f3bbc302d4\",\"action\":\"Senha emitida\",\"label\":\"A015\",\"responsavelNome\":\"admin\",\"at\":1794353737979},{\"id\":\"a97c897d-e9d3-40bc-9568-b16a567b5ba0\",\"action\":\"Cadastro excluído\",\"label\":\"categorias / b09ebb5c-2c40-40e2-ad67-ef2268ff8031\",\"responsavelNome\":\"admin\",\"at\":1794353736546},{\"id\":\"af2192ee-e1e4-441d-b0fd-ecdbf09a9d64\",\"action\":\"Cadastro atualizado\",\"label\":\"Churrasco e grelhados\",\"responsavelNome\":\"admin\",\"at\":1794353736449},{\"id\":\"6b48ff5f-c392-4ca5-b565-6ca18ca32236\",\"action\":\"Cadastro criado\",\"label\":\"Cortes para churrasco\",\"responsavelNome\":\"admin\",\"at\":1794353736299},{\"id\":\"569df38d-d19b-42bc-b6f3-ac76ed754fe2\",\"action\":\"Cadastro excluído\",\"label\":\"categorias / 7a6f0697-f564-4591-a327-6c3676c761d1\",\"responsavelNome\":\"avaliador\",\"at\":1794353733361},{\"id\":\"ff132404-6f80-4d73-b992-9d396d3bb1b2\",\"action\":\"Cadastro excluído\",\"label\":\"servicos / 21fbedce-6f82-4efa-a5a1-ee45dbb7b7e2\",\"responsavelNome\":\"avaliador\",\"at\":1794353733271},{\"id\":\"e1e86452-a4cc-4197-bbcb-51fc8f93bd20\",\"action\":\"Atendimento concluído\",\"label\":\"A014\",\"responsavelNome\":\"operador\",\"at\":1794353732706},{\"id\":\"423b0529-0851-4e10-8255-34a38d741aed\",\"action\":\"Atendimento iniciado\",\"label\":\"A014\",\"responsavelNome\":\"operador\",\"at\":1794353732608},{\"id\":\"78beef2a-bfda-4adf-ad01-ed1eecde1781\",\"action\":\"Chamada repetida\",\"label\":\"A014\",\"responsavelNome\":\"operador\",\"at\":1794353732509},{\"id\":\"122f0591-db01-46f6-81df-e2bb3c77a24f\",\"action\":\"Senha chamada\",\"label\":\"A014\",\"responsavelNome\":\"operador\",\"at\":1794353732225},{\"id\":\"cf04e686-7dae-4432-a88f-2c6e7afc013a\",\"action\":\"Emissão retomada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1794353732033},{\"id\":\"6e8e1e80-530b-49b6-bf6f-13cadc758733\",\"action\":\"Emissão pausada\",\"label\":\"Fila\",\"responsavelNome\":\"operador\",\"at\":1794353731905},{\"id\":\"8d2754bb-3248-4180-a443-fb28531d7a52\",\"action\":\"Senha emitida\",\"label\":\"A014\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1794353731684},{\"id\":\"869a1cb0-bd41-4852-8592-8c4d55520ebe\",\"action\":\"Senha cancelada\",\"label\":\"A013\",\"responsavelNome\":\"avaliador\",\"at\":1794353731567},{\"id\":\"7f56051f-f046-46d4-b2d1-6aaf2636bd69\",\"action\":\"Serviço da senha alterado\",\"label\":\"A013\",\"responsavelNome\":\"avaliador\",\"at\":1794353731469},{\"id\":\"eca76f37-0903-4441-ba3a-0bfc7eaef22f\",\"action\":\"Senha emitida\",\"label\":\"A013\",\"responsavelNome\":\"Cliente / Totem\",\"at\":1794353731156},{\"id\":\"7b1e6f00-97a3-4b1c-8f59-2f0a3bc4f135\",\"action\":\"Cadastro excluído\",\"label\":\"usuarios / 1f7343dc-14bd-4f47-bc1b-36c5e0152e52\",\"responsavelNome\":\"avaliador\",\"at\":1794353731044},{\"id\":\"a4625903-53af-4e1d-9f57-9d2a49f70807\",\"action\":\"Cadastro atualizado\",\"label\":\"apoio-4921d791\",\"responsavelNome\":\"avaliador\",\"at\":1794353730858},{\"id\":\"5028e9ad-a47b-45d9-b56d-55c0fd16ead5\",\"action\":\"Cadastro criado\",\"label\":\"auxiliar-4921d791\",\"responsavelNome\":\"avaliador\",\"at\":1794353730577},{\"id\":\"1b4000d3-b5e3-46a1-808d-7fb446dcb757\",\"action\":\"Cadastro excluído\",\"label\":\"balcoes / 18c23080-ef92-4729-8e98-a46f3f2c6810\",\"responsavelNome\":\"avaliador\",\"at\":1794353730310},{\"id\":\"13e95b1a-dbc7-43ac-8377-84350f6ec1c8\",\"action\":\"Cadastro atualizado\",\"label\":\"Balcão de retirada 4921d791\",\"responsavelNome\":\"avaliador\",\"at\":1794353730212},{\"id\":\"373ea438-f6b5-43cb-8079-574cb9ac881a\",\"action\":\"Cadastro criado\",\"label\":\"Balcão de apoio 4921d791\",\"responsavelNome\":\"avaliador\",\"at\":1794353729940}]"
         }
       ]
     },
@@ -5919,7 +5919,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:14 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:53 GMT"
             },
             {
               "key": "Connection",
@@ -6022,7 +6022,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:14 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:53 GMT"
             },
             {
               "key": "Connection",
@@ -6114,7 +6114,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:15 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:53 GMT"
             },
             {
               "key": "Connection",
@@ -6206,7 +6206,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:15 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:53 GMT"
             },
             {
               "key": "Connection",
@@ -6306,7 +6306,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:15 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:53 GMT"
             },
             {
               "key": "Connection",
@@ -6411,7 +6411,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:15 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:53 GMT"
             },
             {
               "key": "Connection",
@@ -6419,7 +6419,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"message\":\"Informe o parâmetro obrigatório 'status'.\",\"errors\":{\"status\":\"Informe o parâmetro obrigatório 'status'.\"}}"
+          "body": "{\"errors\":{\"status\":\"Informe o parâmetro obrigatório 'status'.\"},\"message\":\"Informe o parâmetro obrigatório 'status'.\"}"
         }
       ]
     },
@@ -6544,7 +6544,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:15 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:53 GMT"
             },
             {
               "key": "Connection",
@@ -6680,7 +6680,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:15 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:53 GMT"
             },
             {
               "key": "Connection",
@@ -6688,7 +6688,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"message\":\"Dados inválidos. Informe um e-mail válido. Informe o nome. O perfil deve ser ADMIN ou ATENDENTE. A senha deve ter até 72 caracteres.\",\"errors\":{\"email\":\"Informe um e-mail válido.\",\"nome\":\"Informe o nome.\",\"perfil\":\"O perfil deve ser ADMIN ou ATENDENTE.\",\"senha\":\"A senha deve ter até 72 caracteres.\"}}"
+          "body": "{\"errors\":{\"email\":\"Informe um e-mail válido.\",\"nome\":\"Informe o nome.\",\"perfil\":\"O perfil deve ser ADMIN ou ATENDENTE.\",\"senha\":\"A senha deve ter até 72 caracteres.\"},\"message\":\"Dados inválidos. Informe um e-mail válido. Informe o nome. O perfil deve ser ADMIN ou ATENDENTE. A senha deve ter até 72 caracteres.\"}"
         }
       ]
     },
@@ -6813,7 +6813,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:15 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:53 GMT"
             },
             {
               "key": "Connection",
@@ -6918,7 +6918,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:15 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:53 GMT"
             },
             {
               "key": "Connection",
@@ -6926,7 +6926,7 @@
             }
           ],
           "cookie": [],
-          "body": "{\"message\":\"O parâmetro 'page' possui um valor inválido.\",\"errors\":{\"page\":\"O parâmetro 'page' possui um valor inválido.\"}}"
+          "body": "{\"errors\":{\"page\":\"O parâmetro 'page' possui um valor inválido.\"},\"message\":\"O parâmetro 'page' possui um valor inválido.\"}"
         }
       ]
     },
@@ -7033,7 +7033,7 @@
             },
             {
               "key": "Date",
-              "value": "Tue, 10 Nov 2026 23:35:15 GMT"
+              "value": "Mon, 23 Nov 2026 17:14:53 GMT"
             },
             {
               "key": "Connection",

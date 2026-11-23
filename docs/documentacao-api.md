@@ -4,7 +4,7 @@ Base local de avaliação: `http://localhost:3000/api`. Formato de dados: JSON. 
 
 ## Segurança
 
-A API usa Spring Security e HTTP Basic com usuários persistidos em `Usuario`. ADMIN mantém cadastros; ATENDENTE consulta e opera a fila. O perfil `avaliacao` cria duas contas didáticas para a atividade. O envio de Basic Auth é independente do login por cookie da interface; cada requisição Basic deve enviar suas credenciais. Em serviços publicados, utilize HTTPS.
+A API usa Spring Security e HTTP Basic com usuários persistidos em `Usuario`. ADMIN mantém cadastros; ATENDENTE consulta e opera a fila. O perfil `avaliacao` cria as contas didáticas no MySQL local. Os mesmos quatro acessos estão disponíveis na publicação. O envio de Basic Auth é independente do login por cookie da interface; cada requisição Basic deve enviar suas credenciais. Em serviços publicados, utilize HTTPS.
 
 A interface continua utilizando `POST /login`, `GET /session` e `POST /logout`. O filtro de segurança reconhece sessões válidas e o contexto autenticado por Basic. Desativação de conta e mudança de senha invalidam sessões; senhas ficam em BCrypt. Pedidos de escrita vindos do navegador passam também pelo filtro de origem. Tentativas Basic inválidas são limitadas por endereço.
 
@@ -38,6 +38,8 @@ Os erros mantêm o campo `message`, utilizado também pela interface. Nas falhas
 As mensagens não devolvem os valores rejeitados, senhas ou tokens. JSON ausente ou malformado retorna 400. Omitir o parâmetro obrigatório `status` na consulta por situação retorna 400 e identifica esse parâmetro. Enviar um cadastro com `Content-Type: text/plain` retorna 415 e orienta usar JSON; solicitar XML em `Accept` retorna 406. Esses cenários estão nas requisições 60 a 65 da coleção e nos testes Java.
 
 `RegraNegocioException` representa falhas de domínio; `TratadorExcecoes` centraliza os retornos com `@RestControllerAdvice`.
+
+As contas são `admin` / `admin@piunifio`, `professor.pi` / `Professor@piunifio`, `avaliador` / `avaliador@piunifio` (ADMIN) e `operador` / `operador@piunifio` (ATENDENTE). No Postman, a coleção utiliza `avaliador` e `operador` para demonstrar autenticação e restrição por perfil.
 
 ## Cadastros administrativos
 
@@ -73,7 +75,7 @@ Usuário de teste:
 {
   "nome": "auxiliar",
   "email": "auxiliar@example.com",
-  "senha": "Auxiliar-Test123",
+  "senha": "auxiliar@piunifio",
   "perfil": "ATENDENTE",
   "ativo": true
 }
