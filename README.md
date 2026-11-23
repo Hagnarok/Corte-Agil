@@ -16,6 +16,46 @@ O **backend avaliado está na pasta [backend/](backend/)**. É um projeto **Java
 | Documentação da API                       | [docs/documentacao-api.md](docs/documentacao-api.md)                                                             |
 | Execuções dos testes no GitHub            | [Actions — Verificar projeto](https://github.com/Hagnarok/Corte-Agil/actions/workflows/verificar.yml)            |
 
+## Avaliação da versão publicada
+
+A aplicação pode ser avaliada diretamente na nuvem. A conta abaixo foi criada no banco da publicação para que o professor consiga acessar a gestão e conferir os cadastros e o atendimento.
+
+| Informação           | Acesso                                                                                 |
+| -------------------- | -------------------------------------------------------------------------------------- |
+| Aplicação publicada  | [https://corte-agil-rose.vercel.app](https://corte-agil-rose.vercel.app)               |
+| Login da equipe      | [Abrir tela de acesso](https://corte-agil-rose.vercel.app/entrar)                      |
+| Usuário de avaliação | `professor.pi`                                                                         |
+| Senha                | Informada no texto da entrega no AVA; não é publicada neste repositório                |
+| Perfil               | ADMIN — acesso aos cadastros e à operação da fila                                      |
+| Cliente              | [Área pública do cliente](https://corte-agil-rose.vercel.app/cliente); não exige login |
+| Painel de chamadas   | [Painel público](https://corte-agil-rose.vercel.app/painel)                            |
+| Totem                | [Emissão e cupom com QR Code](https://corte-agil-rose.vercel.app/totem)                |
+
+A conta `professor.pi` é da versão publicada. As contas `avaliador` e `operador`, apresentadas na seção de MySQL, pertencem ao ambiente local da atividade de Spring Boot.
+
+### Como demonstrar o fluxo pela interface publicada
+
+1. Abra a tela de acesso e entre com `professor.pi` e a senha recebida pelo AVA.
+2. Em **Cadastros**, selecione categoria, serviço, balcão, usuário ou senha para conferir listagem, pesquisa, criação, edição e exclusão permitida pelas regras de negócio.
+3. Abra a **Área do cliente** em uma janela anônima, mantendo a gestão aberta na outra janela. Escolha um serviço, retire uma senha e acompanhe a posição exibida.
+4. Na **Visão geral**, clique em **Chamar próxima senha**. A chamada aparece na janela do cliente e no **Painel de chamadas**.
+5. Clique em **Cliente chegou · iniciar** e depois em **Concluir atendimento**.
+6. Confira a conclusão no cliente, o aumento de **Atendidos hoje** e o registro em **Histórico**. Em **Cadastros → Senhas**, pesquise o número para consultar o atendimento concluído.
+
+### Conferência realizada na publicação
+
+Em **23/11/2026**, o fluxo foi executado pelo navegador no endereço publicado, utilizando a conta de avaliação e um cliente anônimo em navegadores separados:
+
+- Login da conta `professor.pi` e manutenção da sessão após recarregar a página.
+- Conclusão da senha anterior A008 pela interface, preservando o histórico.
+- Emissão da senha **A010**, serviço **Moído**, pela área do cliente.
+- Chamada exibida no cliente e no painel público, confirmação de chegada e conclusão do atendimento.
+- Resultado **Concluído** consultado na gestão; auditoria identificando `professor.pi` como responsável.
+- Indicadores atualizados a partir dos dados: aguardando variou de 0 para 1 e retornou a 0; atendidos hoje aumentou de 1 para 2.
+- Ao terminar a conferência, a fila ficou sem senhas aguardando, sem atendimento ativo e com a emissão liberada.
+
+O repositório é público e o diagrama está em [docs/arquitetura.md](docs/arquitetura.md#classes-de-negócio). Na entrega do AVA, informe os links do repositório, da aplicação e da documentação, além do usuário e da senha da conta de avaliação fornecidos ao grupo.
+
 ## Integrantes
 
 | Nome completo                         | ID acadêmico |
@@ -372,6 +412,6 @@ Para conferir, abra [Actions — Verificar projeto](https://github.com/Hagnarok/
 
 Materiais complementares: [documentação dos endpoints](docs/documentacao-api.md), [arquitetura e diagrama](docs/arquitetura.md), [manual da interface](docs/manual.md) e [roteiro de avaliação Spring Boot](docs/avaliacao-spring.md).
 
-A demonstração publicada está em [corte-agil-rose.vercel.app](https://corte-agil-rose.vercel.app). As credenciais de produção devem ser fornecidas separadamente; as contas de avaliação são as indicadas neste README e usadas no ambiente MySQL local.
+A demonstração publicada está em [corte-agil-rose.vercel.app](https://corte-agil-rose.vercel.app). Para avaliar a publicação, utilize `professor.pi` e a senha informada na entrega do AVA, seguindo a seção **Avaliação da versão publicada**. As contas locais de MySQL são específicas da atividade de Spring Boot.
 
 Conforme o [enunciado](https://hackmd.io/@srdelfino/SyMXGnkAzg), um integrante deve entregar o link deste repositório no Ambiente Conhecer, na atividade **Projeto Integrador**. O código, o diagrama, a documentação e a coleção Postman estão incluídos no repositório. Todos os integrantes devem compreender a implementação e estar preparados para explicar as decisões e as regras do sistema.
