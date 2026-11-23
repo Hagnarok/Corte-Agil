@@ -33,12 +33,12 @@ A aplicação pode ser avaliada diretamente na nuvem. Os acessos abaixo são con
 
 ### Contas de demonstração
 
-| Usuário        | Senha                | Perfil    | Ambiente                     |
-| -------------- | -------------------- | --------- | ---------------------------- |
-| `admin`        | `admin@piunifio`     | ADMIN     | Site publicado e MySQL local |
-| `professor.pi` | `Professor@piunifio` | ADMIN     | Site publicado e MySQL local |
-| `avaliador`    | `avaliador@piunifio` | ADMIN     | Site publicado e MySQL local |
-| `operador`     | `operador@piunifio`  | ATENDENTE | Site publicado e MySQL local |
+| Usuário        | Senha                | Perfil    | Ambiente                               |
+| -------------- | -------------------- | --------- | -------------------------------------- |
+| `admin`        | `admin@piunifio`     | ADMIN     | Site, MySQL local e H2 de demonstração |
+| `professor.pi` | `Professor@piunifio` | ADMIN     | Site, MySQL local e H2 de demonstração |
+| `avaliador`    | `avaliador@piunifio` | ADMIN     | Site, MySQL local e H2 de demonstração |
+| `operador`     | `operador@piunifio`  | ATENDENTE | Site, MySQL local e H2 de demonstração |
 
 O perfil ADMIN mantém os cadastros e opera a fila. O ATENDENTE opera a fila e consulta o histórico, com bloqueio dos cadastros administrativos. Para demonstrar a diferença entre perfis, use `avaliador` e `operador`. Cliente e totem continuam públicos, sem cadastro de conta.
 
@@ -144,6 +144,8 @@ Na execução local, `admin` é criado pela configuração inicial e as demais c
 Acesse `/entrar` com uma dessas contas para usar a interface. No Postman, utilize **Basic Auth**. As credenciais do banco local também estão no [Compose](compose.avaliacao.yml): usuário `corte_avaliacao` e senha didática `MySQL-Avaliacao123`.
 
 A inicialização cadastra os serviços e o balcão usados na demonstração. As classes responsáveis estão em [CadastrosIniciais.java](backend/src/main/java/br/edu/unifio/corteagil_backend/configuracoes/CadastrosIniciais.java), [CategoriasIniciais.java](backend/src/main/java/br/edu/unifio/corteagil_backend/configuracoes/CategoriasIniciais.java) e [DadosAvaliacao.java](backend/src/main/java/br/edu/unifio/corteagil_backend/configuracoes/DadosAvaliacao.java).
+
+Para uma instalação de estudo com H2, `npm run setup` também cria a configuração com o perfil `avaliacao` e os mesmos quatro acessos. O arquivo `.env` existente é preservado. O MySQL continua sendo o ambiente utilizado para comprovar o requisito da atividade de Spring Boot.
 
 ### Atualizar uma instalação local de avaliação já existente
 

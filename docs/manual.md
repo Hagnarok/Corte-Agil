@@ -13,13 +13,13 @@ npm run build
 npm start
 ```
 
-Abra http://localhost:3000. O setup informa a senha inicial do usuário `admin` e guarda a configuração em `.env`. Não publique esse arquivo. O banco H2 relacional fica em `data/corte-agil.mv.db`; pare a aplicação antes de copiar esse arquivo para backup. Alterar `ADMIN_PASSWORD` depois da criação do banco não muda a senha de uma conta existente: use a redefinição na interface. A exceção é a atualização das senhas padrão antigas no perfil local `avaliacao`, descrita no README; senhas personalizadas são preservadas.
+Abra http://localhost:3000. O setup cria a configuração de demonstração com `admin` / `admin@piunifio`, ativa o perfil `avaliacao` e guarda a configuração em `.env`. Esse perfil disponibiliza também `professor.pi`, `avaliador` e `operador`, conforme a tabela abaixo. Se `.env` já existir, ele é preservado. Não publique esse arquivo. O banco H2 relacional fica em `data/corte-agil.mv.db`; pare a aplicação antes de copiar esse arquivo para backup. Alterar `ADMIN_PASSWORD` depois da criação do banco não muda a senha de uma conta existente: use a redefinição na interface. A exceção é a atualização das senhas padrão antigas no perfil local `avaliacao`, descrita no README; senhas personalizadas são preservadas.
 
 Para desenvolver a interface com recarga automática, mantenha `npm start` em um terminal e execute `npm run dev` em outro. A porta 4200 encaminha `/api` para a porta 3000.
 
 ## Acesso para avaliação
 
-Use os mesmos acessos no [site publicado](https://corte-agil-rose.vercel.app/entrar) ou no ambiente MySQL local com o perfil `avaliacao`:
+Use os mesmos acessos no [site publicado](https://corte-agil-rose.vercel.app/entrar) ou no ambiente local com o perfil `avaliacao` (MySQL da atividade ou H2 de demonstração):
 
 | Usuário      | Senha              | Perfil    |
 | ------------ | ------------------ | --------- |
